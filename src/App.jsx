@@ -1,0 +1,178 @@
+import React, { useContext } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Layout from "./components/Layout";
+import {
+  Login,
+  TampilTipe,
+  TambahTipe,
+  UbahTipe,
+  TampilWarna,
+  TambahWarna,
+  UbahWarna,
+  TampilAgama,
+  TambahAgama,
+  UbahAgama,
+  TampilWilayah,
+  TambahWilayah,
+  UbahWilayah
+} from "./pages/index";
+import { AuthContext } from "./contexts/AuthContext";
+
+const App = () => {
+  const USERRoute = ({ children }) => {
+    const { user } = useContext(AuthContext);
+
+    if (user) {
+      return children;
+    }
+
+    return <Navigate to="/unauthorized" />;
+  };
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={null} />
+          {/* Login */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/unauthorized" element={<Login />} />
+          {/* Tipe */}
+          <Route
+            path="/tipe"
+            element={
+              <USERRoute>
+                <TampilTipe />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/tipe/tambahTipe"
+            element={
+              <USERRoute>
+                <TambahTipe />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/tipe/:id"
+            element={
+              <USERRoute>
+                <TampilTipe />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/tipe/:id/edit"
+            element={
+              <USERRoute>
+                <UbahTipe />
+              </USERRoute>
+            }
+          />
+          {/* Warna */}
+          <Route
+            path="/warna"
+            element={
+              <USERRoute>
+                <TampilWarna />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/warna/:id"
+            element={
+              <USERRoute>
+                <TampilWarna />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/warna/tambahWarna"
+            element={
+              <USERRoute>
+                <TambahWarna />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/warna/:id/edit"
+            element={
+              <USERRoute>
+                <UbahWarna />
+              </USERRoute>
+            }
+          />
+          {/* Agama */}
+          <Route
+            path="/agama"
+            element={
+              <USERRoute>
+                <TampilAgama />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/agama/:id"
+            element={
+              <USERRoute>
+                <TampilAgama />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/agama/tambahAgama"
+            element={
+              <USERRoute>
+                <TambahAgama />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/agama/:id/edit"
+            element={
+              <USERRoute>
+                <UbahAgama />
+              </USERRoute>
+            }
+          />
+          {/* Wilayah */}
+          <Route
+            path="/wilayah"
+            element={
+              <USERRoute>
+                <TampilWilayah />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/wilayah/:id"
+            element={
+              <USERRoute>
+                <TampilWilayah />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/wilayah/tambahWilayah"
+            element={
+              <USERRoute>
+                <TambahWilayah />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/wilayah/:id/edit"
+            element={
+              <USERRoute>
+                <UbahWilayah />
+              </USERRoute>
+            }
+          />
+          <Route path="*" element={<p>Halaman tidak ditemukan!</p>} />
+        </Route>
+      </Routes>
+    </>
+  );
+};
+
+export default App;
