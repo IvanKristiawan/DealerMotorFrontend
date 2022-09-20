@@ -214,3 +214,59 @@ export function ShowTableWilayah({ currentPosts, searchTerm }) {
     </TableContainer>
   );
 }
+
+export function ShowTableKecamatan({ currentPosts, searchTerm }) {
+  let navigate = useNavigate();
+  return (
+    <TableContainer component={Paper} sx={{ width: "100%" }}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: "bold" }}>Kode Wilayah</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Kode Kecamatan</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Nama Kecamatan</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {currentPosts
+            .filter((val) => {
+              if (searchTerm === "") {
+                return val;
+              } else if (
+                val.kodeWilayah
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.kodeKecamatan
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.namaKecamatan
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase())
+              ) {
+                return val;
+              }
+            })
+            .map((user, index) => (
+              <TableRow
+                key={user._id}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  "&:hover": { bgcolor: "#eeeeee" },
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  navigate(`/kecamatan/${user._id}`);
+                }}
+              >
+                <TableCell component="th" scope="row">
+                  {user.kodeWilayah}
+                </TableCell>
+                <TableCell>{user.kodeKecamatan}</TableCell>
+                <TableCell>{user.namaKecamatan}</TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}

@@ -16,3 +16,7 @@ export { default as UbahAgama } from "./Agama/UbahAgama";
 export { default as TampilWilayah } from "./Wilayah/TampilWilayah";
 export { default as TambahWilayah } from "./Wilayah/TambahWilayah";
 export { default as UbahWilayah } from "./Wilayah/UbahWilayah";
+// Kecamatan Page
+export { default as TampilKecamatan } from "./Kecamatan/TampilKecamatan";
+export { default as TambahKecamatan } from "./Kecamatan/TambahKecamatan";
+export { default as UbahKecamatan } from "./Kecamatan/UbahKecamatan";

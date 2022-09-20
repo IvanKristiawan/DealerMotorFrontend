@@ -14,7 +14,10 @@ import {
   UbahAgama,
   TampilWilayah,
   TambahWilayah,
-  UbahWilayah
+  UbahWilayah,
+  TampilKecamatan,
+  TambahKecamatan,
+  UbahKecamatan
 } from "./pages/index";
 import { AuthContext } from "./contexts/AuthContext";
 
@@ -165,6 +168,39 @@ const App = () => {
             element={
               <USERRoute>
                 <UbahWilayah />
+              </USERRoute>
+            }
+          />
+          {/* Kecamatan */}
+          <Route
+            path="/kecamatan"
+            element={
+              <USERRoute>
+                <TampilKecamatan />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/kecamatan/:id"
+            element={
+              <USERRoute>
+                <TampilKecamatan />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/kecamatan/tambahKecamatan"
+            element={
+              <USERRoute>
+                <TambahKecamatan />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/kecamatan/:id/edit"
+            element={
+              <USERRoute>
+                <UbahKecamatan />
               </USERRoute>
             }
           />
