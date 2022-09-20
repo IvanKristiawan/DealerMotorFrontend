@@ -20,3 +20,7 @@ export { default as UbahWilayah } from "./Wilayah/UbahWilayah";
 export { default as TampilKecamatan } from "./Kecamatan/TampilKecamatan";
 export { default as TambahKecamatan } from "./Kecamatan/TambahKecamatan";
 export { default as UbahKecamatan } from "./Kecamatan/UbahKecamatan";
+// Dealer Page
+export { default as TampilDealer } from "./Dealer/TampilDealer";
+export { default as TambahDealer } from "./Dealer/TambahDealer";
+export { default as UbahDealer } from "./Dealer/UbahDealer";

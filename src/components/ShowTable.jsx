@@ -270,3 +270,67 @@ export function ShowTableKecamatan({ currentPosts, searchTerm }) {
     </TableContainer>
   );
 }
+
+export function ShowTableDealer({ currentPosts, searchTerm }) {
+  let navigate = useNavigate();
+  return (
+    <TableContainer component={Paper} sx={{ width: "100%" }}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: "bold" }}>Kode</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Nama Dealer</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Alamat</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Telepon</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>PIC</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {currentPosts
+            .filter((val) => {
+              if (searchTerm === "") {
+                return val;
+              } else if (
+                val.kodeDealer
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.namaDealer
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.alamatDealer
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.teleponDealer
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.PIC.toUpperCase().includes(searchTerm.toUpperCase())
+              ) {
+                return val;
+              }
+            })
+            .map((user, index) => (
+              <TableRow
+                key={user._id}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  "&:hover": { bgcolor: "#eeeeee" },
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  navigate(`/dealer/${user._id}`);
+                }}
+              >
+                <TableCell component="th" scope="row">
+                  {user.kodeDealer}
+                </TableCell>
+                <TableCell>{user.namaDealer}</TableCell>
+                <TableCell>{user.alamatDealer}</TableCell>
+                <TableCell>{user.teleponDealer}</TableCell>
+                <TableCell>{user.PICDealer}</TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}

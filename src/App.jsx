@@ -17,7 +17,10 @@ import {
   UbahWilayah,
   TampilKecamatan,
   TambahKecamatan,
-  UbahKecamatan
+  UbahKecamatan,
+  TampilDealer,
+  TambahDealer,
+  UbahDealer
 } from "./pages/index";
 import { AuthContext } from "./contexts/AuthContext";
 
@@ -201,6 +204,39 @@ const App = () => {
             element={
               <USERRoute>
                 <UbahKecamatan />
+              </USERRoute>
+            }
+          />
+          {/* Dealer */}
+          <Route
+            path="/dealer"
+            element={
+              <USERRoute>
+                <TampilDealer />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/dealer/:id"
+            element={
+              <USERRoute>
+                <TampilDealer />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/dealer/tambahDealer"
+            element={
+              <USERRoute>
+                <TambahDealer />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/dealer/:id/edit"
+            element={
+              <USERRoute>
+                <UbahDealer />
               </USERRoute>
             }
           />
