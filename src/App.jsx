@@ -23,7 +23,10 @@ import {
   UbahDealer,
   TampilMarketing,
   TambahMarketing,
-  UbahMarketing
+  UbahMarketing,
+  TampilSurveyor,
+  TambahSurveyor,
+  UbahSurveyor
 } from "./pages/index";
 import { AuthContext } from "./contexts/AuthContext";
 
@@ -273,6 +276,39 @@ const App = () => {
             element={
               <USERRoute>
                 <UbahMarketing />
+              </USERRoute>
+            }
+          />
+          {/* Surveyor */}
+          <Route
+            path="/surveyor"
+            element={
+              <USERRoute>
+                <TampilSurveyor />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/surveyor/:id"
+            element={
+              <USERRoute>
+                <TampilSurveyor />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/surveyor/tambahSurveyor"
+            element={
+              <USERRoute>
+                <TambahSurveyor />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/surveyor/:id/edit"
+            element={
+              <USERRoute>
+                <UbahSurveyor />
               </USERRoute>
             }
           />

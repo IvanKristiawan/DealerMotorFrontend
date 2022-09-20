@@ -28,3 +28,7 @@ export { default as UbahDealer } from "./Dealer/UbahDealer";
 export { default as TampilMarketing } from "./Marketing/TampilMarketing";
 export { default as TambahMarketing } from "./Marketing/TambahMarketing";
 export { default as UbahMarketing } from "./Marketing/UbahMarketing";
+// Surveyor Page
+export { default as TampilSurveyor } from "./Surveyor/TampilSurveyor";
+export { default as TambahSurveyor } from "./Surveyor/TambahSurveyor";
+export { default as UbahSurveyor } from "./Surveyor/UbahSurveyor";
