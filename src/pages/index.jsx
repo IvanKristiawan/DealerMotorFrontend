@@ -24,3 +24,7 @@ export { default as UbahKecamatan } from "./Kecamatan/UbahKecamatan";
 export { default as TampilDealer } from "./Dealer/TampilDealer";
 export { default as TambahDealer } from "./Dealer/TambahDealer";
 export { default as UbahDealer } from "./Dealer/UbahDealer";
+// Marketing Page
+export { default as TampilMarketing } from "./Marketing/TampilMarketing";
+export { default as TambahMarketing } from "./Marketing/TambahMarketing";
+export { default as UbahMarketing } from "./Marketing/UbahMarketing";

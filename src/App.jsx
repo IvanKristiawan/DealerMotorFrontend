@@ -20,7 +20,10 @@ import {
   UbahKecamatan,
   TampilDealer,
   TambahDealer,
-  UbahDealer
+  UbahDealer,
+  TampilMarketing,
+  TambahMarketing,
+  UbahMarketing
 } from "./pages/index";
 import { AuthContext } from "./contexts/AuthContext";
 
@@ -237,6 +240,39 @@ const App = () => {
             element={
               <USERRoute>
                 <UbahDealer />
+              </USERRoute>
+            }
+          />
+          {/* Marketing */}
+          <Route
+            path="/marketing"
+            element={
+              <USERRoute>
+                <TampilMarketing />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/marketing/:id"
+            element={
+              <USERRoute>
+                <TampilMarketing />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/marketing/tambahMarketing"
+            element={
+              <USERRoute>
+                <TambahMarketing />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/marketing/:id/edit"
+            element={
+              <USERRoute>
+                <UbahMarketing />
               </USERRoute>
             }
           />
