@@ -7,7 +7,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useStateContext } from "../contexts/ContextProvider";
 
 export function ShowTableTipe({ currentPosts, searchTerm }) {
   let navigate = useNavigate();
@@ -440,6 +439,64 @@ export function ShowTableSurveyor({ currentPosts, searchTerm }) {
                     ? "S - Surveyor"
                     : ""}
                 </TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
+
+export function ShowTableUser({ currentPosts, searchTerm }) {
+  let navigate = useNavigate();
+  return (
+    <TableContainer component={Paper} sx={{ width: "100%" }}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: "bold" }}>Username</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Tipe User</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Periode</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Kode Kwitansi</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>No Terakhir</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {currentPosts
+            .filter((val) => {
+              if (searchTerm === "") {
+                return val;
+              } else if (
+                val.username.toUpperCase().includes(searchTerm.toUpperCase()) ||
+                val.tipeUser.toUpperCase().includes(searchTerm.toUpperCase()) ||
+                val.periode.toUpperCase().includes(searchTerm.toUpperCase()) ||
+                val.kodeKwitansi
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.noTerakhir.toUpperCase().includes(searchTerm.toUpperCase())
+              ) {
+                return val;
+              }
+            })
+            .map((user, index) => (
+              <TableRow
+                key={user._id}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  "&:hover": { bgcolor: "#eeeeee" },
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  navigate(`/daftarUser/${user._id}`);
+                }}
+              >
+                <TableCell component="th" scope="row">
+                  {user.username}
+                </TableCell>
+                <TableCell>{user.tipeUser}</TableCell>
+                <TableCell>{user.periode}</TableCell>
+                <TableCell>{user.kodeKwitansi}</TableCell>
+                <TableCell>{user.noTerakhir}</TableCell>
               </TableRow>
             ))}
         </TableBody>

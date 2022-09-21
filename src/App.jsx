@@ -26,7 +26,12 @@ import {
   UbahMarketing,
   TampilSurveyor,
   TambahSurveyor,
-  UbahSurveyor
+  UbahSurveyor,
+  ProfilUser,
+  UbahProfilUser,
+  DaftarUser,
+  TambahUser,
+  UbahUser
 } from "./pages/index";
 import { AuthContext } from "./contexts/AuthContext";
 
@@ -35,6 +40,15 @@ const App = () => {
     const { user } = useContext(AuthContext);
 
     if (user) {
+      return children;
+    }
+
+    return <Navigate to="/unauthorized" />;
+  };
+  const MGRRoute = ({ children }) => {
+    const { user } = useContext(AuthContext);
+
+    if (user && user.tipeUser === "MGR") {
       return children;
     }
 
@@ -310,6 +324,56 @@ const App = () => {
               <USERRoute>
                 <UbahSurveyor />
               </USERRoute>
+            }
+          />
+          {/* Profil User */}
+          <Route
+            path="/profilUser"
+            element={
+              <USERRoute>
+                <ProfilUser />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/profilUser/:id/edit"
+            element={
+              <USERRoute>
+                <UbahProfilUser />
+              </USERRoute>
+            }
+          />
+          {/* Daftar User */}
+          <Route
+            path="/daftarUser"
+            element={
+              <MGRRoute>
+                <DaftarUser />
+              </MGRRoute>
+            }
+          />
+          <Route
+            path="/daftarUser/:id"
+            element={
+              <MGRRoute>
+                <DaftarUser />
+              </MGRRoute>
+            }
+          />
+          <Route
+            path="/daftarUser/:id/edit"
+            element={
+              <MGRRoute>
+                <UbahUser />
+              </MGRRoute>
+            }
+          />
+          <Route
+            path="/daftarUser/tambahUser"
+            element={
+              <MGRRoute>
+                <TambahUser />
+              </MGRRoute>
             }
           />
           <Route path="*" element={<p>Halaman tidak ditemukan!</p>} />

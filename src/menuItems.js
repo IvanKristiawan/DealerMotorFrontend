@@ -54,19 +54,19 @@ export const menuItems = [
         url: "surveyor"
       }
     ]
+  },
+  {
+    title: "Utility",
+    url: "/",
+    submenu: [
+      {
+        title: "Profil User",
+        url: "profilUser"
+      },
+      {
+        title: "Daftar User",
+        url: "daftarUser"
+      }
+    ]
   }
-  // {
-  //   title: "About",
-  //   url: "/about",
-  //   submenu: [
-  //     {
-  //       title: "Who we are",
-  //       url: "who-we-are"
-  //     },
-  //     {
-  //       title: "Our values",
-  //       url: "our-values"
-  //     }
-  //   ]
-  // }
 ];
