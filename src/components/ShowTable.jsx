@@ -502,3 +502,64 @@ export function ShowTableUser({ currentPosts, searchTerm }) {
     </TableContainer>
   );
 }
+
+export function ShowTableCabang({ currentPosts, searchTerm }) {
+  let navigate = useNavigate();
+  return (
+    <TableContainer component={Paper} sx={{ width: "100%" }}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: "bold" }}>Kode Cabang</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Nama Cabang</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Alamat Cabang</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Telepon Cabang</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {currentPosts
+            .filter((val) => {
+              if (searchTerm === "") {
+                return val;
+              } else if (
+                val.kodeCabang
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.namaCabang
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.alamatCabang
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.teleponCabang
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase())
+              ) {
+                return val;
+              }
+            })
+            .map((user, index) => (
+              <TableRow
+                key={user._id}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  "&:hover": { bgcolor: "#eeeeee" },
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  navigate(`/cabang/${user._id}`);
+                }}
+              >
+                <TableCell component="th" scope="row">
+                  {user.kodeCabang}
+                </TableCell>
+                <TableCell>{user.namaCabang}</TableCell>
+                <TableCell>{user.alamatCabang}</TableCell>
+                <TableCell>{user.teleponCabang}</TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}

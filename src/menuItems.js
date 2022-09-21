@@ -52,6 +52,14 @@ export const menuItems = [
       {
         title: "Surveyor",
         url: "surveyor"
+      },
+      {
+        title: "Cabang",
+        url: "cabang"
+      },
+      {
+        title: "Leasing",
+        url: "leasing"
       }
     ]
   },

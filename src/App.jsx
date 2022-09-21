@@ -27,6 +27,9 @@ import {
   TampilSurveyor,
   TambahSurveyor,
   UbahSurveyor,
+  TampilCabang,
+  TambahCabang,
+  UbahCabang,
   ProfilUser,
   UbahProfilUser,
   DaftarUser,
@@ -323,6 +326,39 @@ const App = () => {
             element={
               <USERRoute>
                 <UbahSurveyor />
+              </USERRoute>
+            }
+          />
+          {/* Cabang */}
+          <Route
+            path="/cabang"
+            element={
+              <USERRoute>
+                <TampilCabang />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/cabang/:id"
+            element={
+              <USERRoute>
+                <TampilCabang />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/cabang/tambahCabang"
+            element={
+              <USERRoute>
+                <TambahCabang />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/cabang/:id/edit"
+            element={
+              <USERRoute>
+                <UbahCabang />
               </USERRoute>
             }
           />

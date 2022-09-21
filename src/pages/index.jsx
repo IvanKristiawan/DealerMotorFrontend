@@ -39,3 +39,7 @@ export { default as UbahProfilUser } from "./Utility/ProfilUser/UbahProfilUser";
 export { default as DaftarUser } from "./Utility/DaftarUser/DaftarUser";
 export { default as TambahUser } from "./Utility/DaftarUser/TambahUser";
 export { default as UbahUser } from "./Utility/DaftarUser/UbahUser";
+// Cabang Page
+export { default as TampilCabang } from "./Master/Cabang/TampilCabang";
+export { default as TambahCabang } from "./Master/Cabang/TambahCabang";
+export { default as UbahCabang } from "./Master/Cabang/UbahCabang";
