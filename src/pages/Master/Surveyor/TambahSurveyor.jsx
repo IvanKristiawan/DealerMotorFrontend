@@ -12,7 +12,8 @@ import {
   Divider,
   Snackbar,
   Alert,
-  Autocomplete
+  Autocomplete,
+  Breadcrumbs
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -61,60 +62,79 @@ const TambahSurveyor = () => {
   }
 
   return (
-    <Box sx={container}>
-      <Typography color="#757575">Master</Typography>
-      <Typography variant="h4" sx={subTitleText}>
-        Tambah Surveyor
-      </Typography>
-      <Divider sx={dividerStyle} />
-      <Box sx={showDataContainer}>
-        <Box sx={showDataWrapper}>
-          <TextField
-            error={error && namaSurveyor.length === 0 && true}
-            helperText={
-              error && namaSurveyor.length === 0 && "Nama Surveyor harus diisi!"
-            }
-            id="outlined-basic"
-            label="Nama Surveyor"
-            variant="outlined"
-            value={namaSurveyor}
-            onChange={(e) => setNamaSurveyor(e.target.value)}
-          />
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={jenisSurveyorOption}
-            renderInput={(params) => (
-              <TextField
-                error={error && jenisSurveyor.length === 0 && true}
-                helperText={
-                  error && jenisSurveyor.length === 0 && "Jenis harus diisi!"
-                }
-                {...params}
-                label="Jenis Surveyor"
-              />
-            )}
-            sx={spacingTop}
-            onInputChange={(e, value) =>
-              setJenisSurveyor(value.split(" ", 1)[0])
-            }
-          />
+    <>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Typography
+          underline="hover"
+          color="inherit"
+          sx={beforeLink}
+          onClick={() => navigate("/surveyor")}
+        >
+          Surveyor
+        </Typography>
+        <Typography color="text.primary">Tambah Surveyor</Typography>
+      </Breadcrumbs>
+      <Box sx={container}>
+        <Typography color="#757575">Master</Typography>
+        <Typography variant="h4" sx={subTitleText}>
+          Tambah Surveyor
+        </Typography>
+        <Divider sx={dividerStyle} />
+        <Box sx={showDataContainer}>
+          <Box sx={showDataWrapper}>
+            <TextField
+              error={error && namaSurveyor.length === 0 && true}
+              helperText={
+                error &&
+                namaSurveyor.length === 0 &&
+                "Nama Surveyor harus diisi!"
+              }
+              id="outlined-basic"
+              label="Nama Surveyor"
+              variant="outlined"
+              value={namaSurveyor}
+              onChange={(e) => setNamaSurveyor(e.target.value)}
+            />
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={jenisSurveyorOption}
+              renderInput={(params) => (
+                <TextField
+                  error={error && jenisSurveyor.length === 0 && true}
+                  helperText={
+                    error && jenisSurveyor.length === 0 && "Jenis harus diisi!"
+                  }
+                  {...params}
+                  label="Jenis Surveyor"
+                />
+              )}
+              sx={spacingTop}
+              onInputChange={(e, value) =>
+                setJenisSurveyor(value.split(" ", 1)[0])
+              }
+            />
+          </Box>
         </Box>
+        <Box sx={spacingTop}>
+          <Button
+            variant="contained"
+            startIcon={<SaveIcon />}
+            onClick={saveUser}
+          >
+            Simpan
+          </Button>
+        </Box>
+        <Divider sx={spacingTop} />
+        {error && (
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error" sx={alertBox}>
+              Data belum terisi semua!
+            </Alert>
+          </Snackbar>
+        )}
       </Box>
-      <Box sx={spacingTop}>
-        <Button variant="contained" startIcon={<SaveIcon />} onClick={saveUser}>
-          Simpan
-        </Button>
-      </Box>
-      <Divider sx={spacingTop} />
-      {error && (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={alertBox}>
-            Data belum terisi semua!
-          </Alert>
-        </Snackbar>
-      )}
-    </Box>
+    </>
   );
 };
 
@@ -156,4 +176,9 @@ const spacingTop = {
 
 const alertBox = {
   width: "100%"
+};
+
+const beforeLink = {
+  cursor: "pointer",
+  "&:hover": { color: "blue" }
 };

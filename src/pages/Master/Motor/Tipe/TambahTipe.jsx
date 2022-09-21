@@ -11,7 +11,8 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert
+  Alert,
+  Breadcrumbs
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -66,86 +67,103 @@ const TambahTipe = () => {
   }
 
   return (
-    <Box sx={container}>
-      <Typography color="#757575">Master</Typography>
-      <Typography variant="h4" sx={subTitleText}>
-        Tambah Tipe
-      </Typography>
-      <Divider sx={dividerStyle} />
-      <Box sx={showDataContainer}>
-        <Box sx={showDataWrapper}>
-          <TextField
-            error={error && kodeTipe.length === 0 && true}
-            helperText={error && kodeTipe.length === 0 && "Kode harus diisi!"}
-            id="outlined-basic"
-            label="Kode"
-            variant="outlined"
-            value={kodeTipe}
-            onChange={(e) => setKodeTipe(e.target.value)}
-          />
-          <TextField
-            error={error && namaTipe.length === 0 && true}
-            helperText={
-              error && namaTipe.length === 0 && "Nama Tipe harus diisi!"
-            }
-            id="outlined-basic"
-            label="Nama Tipe"
-            variant="outlined"
-            sx={spacingTop}
-            value={namaTipe}
-            onChange={(e) => setNamaTipe(e.target.value)}
-          />
-          <TextField
-            id="outlined-basic"
-            label="No. Rangka"
-            variant="outlined"
-            sx={spacingTop}
-            value={noRangka}
-            onChange={(e) => setNoRangka(e.target.value)}
-          />
+    <>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Typography
+          underline="hover"
+          color="inherit"
+          sx={beforeLink}
+          onClick={() => navigate("/tipe")}
+        >
+          Tipe
+        </Typography>
+        <Typography color="text.primary">Tambah Tipe</Typography>
+      </Breadcrumbs>
+      <Box sx={container}>
+        <Typography color="#757575">Master</Typography>
+        <Typography variant="h4" sx={subTitleText}>
+          Tambah Tipe
+        </Typography>
+        <Divider sx={dividerStyle} />
+        <Box sx={showDataContainer}>
+          <Box sx={showDataWrapper}>
+            <TextField
+              error={error && kodeTipe.length === 0 && true}
+              helperText={error && kodeTipe.length === 0 && "Kode harus diisi!"}
+              id="outlined-basic"
+              label="Kode"
+              variant="outlined"
+              value={kodeTipe}
+              onChange={(e) => setKodeTipe(e.target.value)}
+            />
+            <TextField
+              error={error && namaTipe.length === 0 && true}
+              helperText={
+                error && namaTipe.length === 0 && "Nama Tipe harus diisi!"
+              }
+              id="outlined-basic"
+              label="Nama Tipe"
+              variant="outlined"
+              sx={spacingTop}
+              value={namaTipe}
+              onChange={(e) => setNamaTipe(e.target.value)}
+            />
+            <TextField
+              id="outlined-basic"
+              label="No. Rangka"
+              variant="outlined"
+              sx={spacingTop}
+              value={noRangka}
+              onChange={(e) => setNoRangka(e.target.value)}
+            />
+          </Box>
+          <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
+            <TextField
+              id="outlined-basic"
+              label="No. Mesin"
+              variant="outlined"
+              value={noMesin}
+              onChange={(e) => setNoMesin(e.target.value)}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Isi"
+              variant="outlined"
+              sx={spacingTop}
+              value={isi}
+              onChange={(e) => setIsi(e.target.value)}
+            />
+            <TextField
+              error={error && merk.length === 0 && true}
+              helperText={error && merk.length === 0 && "Merk harus diisi!"}
+              id="outlined-basic"
+              label="Merk"
+              variant="outlined"
+              sx={spacingTop}
+              value={merk}
+              onChange={(e) => setMerk(e.target.value)}
+            />
+          </Box>
         </Box>
-        <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
-          <TextField
-            id="outlined-basic"
-            label="No. Mesin"
-            variant="outlined"
-            value={noMesin}
-            onChange={(e) => setNoMesin(e.target.value)}
-          />
-          <TextField
-            id="outlined-basic"
-            label="Isi"
-            variant="outlined"
-            sx={spacingTop}
-            value={isi}
-            onChange={(e) => setIsi(e.target.value)}
-          />
-          <TextField
-            error={error && merk.length === 0 && true}
-            helperText={error && merk.length === 0 && "Merk harus diisi!"}
-            id="outlined-basic"
-            label="Merk"
-            variant="outlined"
-            sx={spacingTop}
-            value={merk}
-            onChange={(e) => setMerk(e.target.value)}
-          />
+        <Box sx={spacingTop}>
+          <Button
+            variant="contained"
+            startIcon={<SaveIcon />}
+            onClick={saveUser}
+          >
+            Simpan
+          </Button>
         </Box>
+        <Divider sx={spacingTop} />
+        {error && (
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error" sx={alertBox}>
+              Data belum terisi semua!
+            </Alert>
+          </Snackbar>
+        )}
       </Box>
-      <Box sx={spacingTop}>
-        <Button variant="contained" startIcon={<SaveIcon />} onClick={saveUser}>
-          Simpan
-        </Button>
-      </Box>
-      <Divider sx={spacingTop} />
-      {error && (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={alertBox}>
-            Data belum terisi semua!
-          </Alert>
-        </Snackbar>
-      )}
-    </Box>
+    </>
   );
 };
 
@@ -187,4 +205,9 @@ const spacingTop = {
 
 const alertBox = {
   width: "100%"
+};
+
+const beforeLink = {
+  cursor: "pointer",
+  "&:hover": { color: "blue" }
 };

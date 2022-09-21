@@ -74,7 +74,6 @@ export function ShowTableWarna({ currentPosts, searchTerm }) {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ fontWeight: "bold" }}>Kode</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Nama Warna</TableCell>
           </TableRow>
         </TableHead>
@@ -84,9 +83,6 @@ export function ShowTableWarna({ currentPosts, searchTerm }) {
               if (searchTerm === "") {
                 return val;
               } else if (
-                val.kodeWarna
-                  .toUpperCase()
-                  .includes(searchTerm.toUpperCase()) ||
                 val.namaWarna.toUpperCase().includes(searchTerm.toUpperCase())
               ) {
                 return val;
@@ -105,9 +101,8 @@ export function ShowTableWarna({ currentPosts, searchTerm }) {
                 }}
               >
                 <TableCell component="th" scope="row">
-                  {user.kodeWarna}
+                  {user.namaWarna}
                 </TableCell>
-                <TableCell>{user.namaWarna}</TableCell>
               </TableRow>
             ))}
         </TableBody>
@@ -221,9 +216,10 @@ export function ShowTableKecamatan({ currentPosts, searchTerm }) {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ fontWeight: "bold" }}>Kode Wilayah</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Kode Kecamatan</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Nama Kecamatan</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Kode Wilayah</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Nama Wilayah</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -240,7 +236,8 @@ export function ShowTableKecamatan({ currentPosts, searchTerm }) {
                   .includes(searchTerm.toUpperCase()) ||
                 val.namaKecamatan
                   .toUpperCase()
-                  .includes(searchTerm.toUpperCase())
+                  .includes(searchTerm.toUpperCase()) ||
+                val.namaWilayah.toUpperCase().includes(searchTerm.toUpperCase())
               ) {
                 return val;
               }
@@ -258,10 +255,11 @@ export function ShowTableKecamatan({ currentPosts, searchTerm }) {
                 }}
               >
                 <TableCell component="th" scope="row">
-                  {user.kodeWilayah}
+                  {user.kodeKecamatan}
                 </TableCell>
-                <TableCell>{user.kodeKecamatan}</TableCell>
                 <TableCell>{user.namaKecamatan}</TableCell>
+                <TableCell>{user.kodeWilayah}</TableCell>
+                <TableCell>{user.namaWilayah}</TableCell>
               </TableRow>
             ))}
         </TableBody>
@@ -302,7 +300,7 @@ export function ShowTableDealer({ currentPosts, searchTerm }) {
                 val.teleponDealer
                   .toUpperCase()
                   .includes(searchTerm.toUpperCase()) ||
-                val.PIC.toUpperCase().includes(searchTerm.toUpperCase())
+                val.PICDealer.toUpperCase().includes(searchTerm.toUpperCase())
               ) {
                 return val;
               }

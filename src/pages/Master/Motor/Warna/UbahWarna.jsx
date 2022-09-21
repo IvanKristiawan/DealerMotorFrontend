@@ -11,14 +11,14 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert
+  Alert,
+  Breadcrumbs
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
 const UbahWarna = () => {
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
-  const [kodeWarna, setKodeWarna] = useState("");
   const [namaWarna, setNamaWarna] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -43,7 +43,6 @@ const UbahWarna = () => {
       token: user.token
     });
     setNamaWarna(response.data.namaWarna);
-    setKodeWarna(response.data.kodeWarna);
     setLoading(false);
   };
 
@@ -73,58 +72,59 @@ const UbahWarna = () => {
   }
 
   return (
-    <Box sx={container}>
-      <Typography color="#757575">Master</Typography>
-      <Typography variant="h4" sx={subTitleText}>
-        Ubah Warna
-      </Typography>
-      <Divider sx={dividerStyle} />
-      <Box sx={showDataContainer}>
-        <Box sx={showDataWrapper}>
-          <TextField
-            error={error && kodeWarna.length === 0 && true}
-            helperText={error && kodeWarna.length === 0 && "Kode harus diisi!"}
-            id="outlined-basic"
-            label="Kode"
-            variant="outlined"
-            value={kodeWarna}
-            InputProps={{
-              readOnly: true
-            }}
-            onChange={(e) => setKodeWarna(e.target.value)}
-          />
-          <TextField
-            error={error && namaWarna.length === 0 && true}
-            helperText={
-              error && namaWarna.length === 0 && "Nama Warna harus diisi!"
-            }
-            id="outlined-basic"
-            label="Nama Warna"
-            variant="outlined"
-            sx={spacingTop}
-            value={namaWarna}
-            onChange={(e) => setNamaWarna(e.target.value)}
-          />
-        </Box>
-      </Box>
-      <Box sx={spacingTop}>
-        <Button
-          variant="contained"
-          startIcon={<EditIcon />}
-          onClick={updateUser}
+    <>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Typography
+          underline="hover"
+          color="inherit"
+          sx={beforeLink}
+          onClick={() => navigate("/warna")}
         >
-          Ubah
-        </Button>
+          Warna
+        </Typography>
+        <Typography color="text.primary">Ubah Warna</Typography>
+      </Breadcrumbs>
+      <Box sx={container}>
+        <Typography color="#757575">Master</Typography>
+        <Typography variant="h4" sx={subTitleText}>
+          Ubah Warna
+        </Typography>
+        <Divider sx={dividerStyle} />
+        <Box sx={showDataContainer}>
+          <Box sx={showDataWrapper}>
+            <TextField
+              error={error && namaWarna.length === 0 && true}
+              helperText={
+                error && namaWarna.length === 0 && "Nama Warna harus diisi!"
+              }
+              id="outlined-basic"
+              label="Nama Warna"
+              variant="outlined"
+              sx={spacingTop}
+              value={namaWarna}
+              onChange={(e) => setNamaWarna(e.target.value)}
+            />
+          </Box>
+        </Box>
+        <Box sx={spacingTop}>
+          <Button
+            variant="contained"
+            startIcon={<EditIcon />}
+            onClick={updateUser}
+          >
+            Ubah
+          </Button>
+        </Box>
+        <Divider sx={dividerStyle} />
+        {error && (
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error" sx={alertBox}>
+              Data belum terisi semua!
+            </Alert>
+          </Snackbar>
+        )}
       </Box>
-      <Divider sx={dividerStyle} />
-      {error && (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={alertBox}>
-            Data belum terisi semua!
-          </Alert>
-        </Snackbar>
-      )}
-    </Box>
+    </>
   );
 };
 
@@ -166,4 +166,9 @@ const spacingTop = {
 
 const alertBox = {
   width: "100%"
+};
+
+const beforeLink = {
+  cursor: "pointer",
+  "&:hover": { color: "blue" }
 };

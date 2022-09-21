@@ -11,7 +11,8 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert
+  Alert,
+  Breadcrumbs
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -95,99 +96,117 @@ const UbahUser = () => {
   }
 
   return (
-    <Box sx={container}>
-      <Typography color="#757575">User</Typography>
-      <Typography variant="h4" sx={subTitleText}>
-        Ubah User
-      </Typography>
-      <Divider sx={dividerStyle} />
-      <Box sx={showDataContainer}>
-        <Box sx={showDataWrapper}>
-          <TextField
-            error={error && username.length === 0 && true}
-            helperText={
-              error && username.length === 0 && "Username harus diisi!"
-            }
-            id="outlined-basic"
-            label="Username"
-            variant="outlined"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <TextField
-            error={error && tipeUser.length === 0 && true}
-            helperText={
-              error && tipeUser.length === 0 && "Tipe User harus diisi!"
-            }
-            id="outlined-basic"
-            label="Tipe User"
-            variant="outlined"
-            sx={spacingTop}
-            value={tipeUser}
-            onChange={(e) => setTipeUser(e.target.value)}
-          />
-          <TextField
-            error={error && periode.length === 0 && true}
-            helperText={error && periode.length === 0 && "Periode harus diisi!"}
-            id="outlined-basic"
-            label="Periode"
-            variant="outlined"
-            sx={spacingTop}
-            value={periode}
-            onChange={(e) => setPeriode(e.target.value)}
-          />
-          <TextField
-            error={error && kodeKwitansi.length === 0 && true}
-            helperText={
-              error && kodeKwitansi.length === 0 && "Kode Kwitansi harus diisi!"
-            }
-            id="outlined-basic"
-            label="Kode Kwitansi"
-            variant="outlined"
-            sx={spacingTop}
-            value={kodeKwitansi}
-            onChange={(e) => setKodeKwitansi(e.target.value)}
-          />
-          <TextField
-            id="outlined-basic"
-            label="No Terakhir"
-            variant="outlined"
-            sx={spacingTop}
-            value={noTerakhir}
-            onChange={(e) => setNoTerakhir(e.target.value)}
-          />
-          <TextField
-            id="outlined-basic"
-            label="Password (baru)"
-            variant="outlined"
-            type="password"
-            sx={spacingTop}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Typography>
-            *Kosongkan jika tidak ingin mengganti password
-          </Typography>
-        </Box>
-      </Box>
-      <Box sx={spacingTop}>
-        <Button
-          variant="contained"
-          startIcon={<EditIcon />}
-          onClick={updateUser}
+    <>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Typography
+          underline="hover"
+          color="inherit"
+          sx={beforeLink}
+          onClick={() => navigate("/daftarUser")}
         >
-          Ubah
-        </Button>
+          User
+        </Typography>
+        <Typography color="text.primary">Ubah User</Typography>
+      </Breadcrumbs>
+      <Box sx={container}>
+        <Typography color="#757575">User</Typography>
+        <Typography variant="h4" sx={subTitleText}>
+          Ubah User
+        </Typography>
+        <Divider sx={dividerStyle} />
+        <Box sx={showDataContainer}>
+          <Box sx={showDataWrapper}>
+            <TextField
+              error={error && username.length === 0 && true}
+              helperText={
+                error && username.length === 0 && "Username harus diisi!"
+              }
+              id="outlined-basic"
+              label="Username"
+              variant="outlined"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <TextField
+              error={error && tipeUser.length === 0 && true}
+              helperText={
+                error && tipeUser.length === 0 && "Tipe User harus diisi!"
+              }
+              id="outlined-basic"
+              label="Tipe User"
+              variant="outlined"
+              sx={spacingTop}
+              value={tipeUser}
+              onChange={(e) => setTipeUser(e.target.value)}
+            />
+            <TextField
+              error={error && periode.length === 0 && true}
+              helperText={
+                error && periode.length === 0 && "Periode harus diisi!"
+              }
+              id="outlined-basic"
+              label="Periode"
+              variant="outlined"
+              sx={spacingTop}
+              value={periode}
+              onChange={(e) => setPeriode(e.target.value)}
+            />
+          </Box>
+          <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
+            <TextField
+              error={error && kodeKwitansi.length === 0 && true}
+              helperText={
+                error &&
+                kodeKwitansi.length === 0 &&
+                "Kode Kwitansi harus diisi!"
+              }
+              id="outlined-basic"
+              label="Kode Kwitansi"
+              variant="outlined"
+              value={kodeKwitansi}
+              onChange={(e) => setKodeKwitansi(e.target.value)}
+            />
+            <TextField
+              id="outlined-basic"
+              label="No Terakhir"
+              variant="outlined"
+              sx={spacingTop}
+              value={noTerakhir}
+              onChange={(e) => setNoTerakhir(e.target.value)}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Password (baru)"
+              variant="outlined"
+              type="password"
+              sx={spacingTop}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Typography>
+              *Kosongkan jika tidak ingin mengganti password
+            </Typography>
+          </Box>
+        </Box>
+        <Box sx={spacingTop}>
+          <Button
+            variant="contained"
+            startIcon={<EditIcon />}
+            onClick={updateUser}
+          >
+            Ubah
+          </Button>
+        </Box>
+        <Divider sx={dividerStyle} />
+        {error && (
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error" sx={alertBox}>
+              Data belum terisi semua!
+            </Alert>
+          </Snackbar>
+        )}
       </Box>
-      <Divider sx={dividerStyle} />
-      {error && (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={alertBox}>
-            Data belum terisi semua!
-          </Alert>
-        </Snackbar>
-      )}
-    </Box>
+    </>
   );
 };
 
@@ -229,4 +248,9 @@ const spacingTop = {
 
 const alertBox = {
   width: "100%"
+};
+
+const beforeLink = {
+  cursor: "pointer",
+  "&:hover": { color: "blue" }
 };

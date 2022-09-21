@@ -19,7 +19,6 @@ const TampilWarna = () => {
   const id = location.pathname.split("/")[2];
   const { screenSize } = useStateContext();
 
-  const [kodeWarna, setKodeWarna] = useState("");
   const [namaWarna, setNamaWarna] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUser] = useState([]);
@@ -35,10 +34,7 @@ const TampilWarna = () => {
   const tempPosts = users.filter((val) => {
     if (searchTerm === "") {
       return val;
-    } else if (
-      val.kodeWarna.toUpperCase().includes(searchTerm.toUpperCase()) ||
-      val.namaWarna.toUpperCase().includes(searchTerm.toUpperCase())
-    ) {
+    } else if (val.namaWarna.toUpperCase().includes(searchTerm.toUpperCase())) {
       return val;
     }
   });
@@ -73,7 +69,6 @@ const TampilWarna = () => {
         id: user._id,
         token: user.token
       });
-      setKodeWarna(response.data.kodeWarna);
       setNamaWarna(response.data.namaWarna);
     }
   };
@@ -86,7 +81,6 @@ const TampilWarna = () => {
         token: user.token
       });
       getUsers();
-      setKodeWarna("");
       setNamaWarna("");
       setLoading(false);
       navigate("/warna");
@@ -108,7 +102,7 @@ const TampilWarna = () => {
       <Box sx={buttonModifierContainer}>
         <ButtonModifier
           id={id}
-          kode={kodeWarna}
+          kode={namaWarna}
           addLink={`/warna/tambahWarna`}
           editLink={`/warna/${id}/edit`}
           deleteUser={deleteUser}
@@ -117,16 +111,6 @@ const TampilWarna = () => {
       <Divider sx={dividerStyle} />
       <Box sx={showDataContainer}>
         <Box sx={showDataWrapper}>
-          <TextField
-            id="outlined-basic"
-            label="Kode"
-            variant="filled"
-            sx={textFieldStyle}
-            InputProps={{
-              readOnly: true
-            }}
-            value={kodeWarna}
-          />
           <TextField
             id="outlined-basic"
             label="Nama Warna"

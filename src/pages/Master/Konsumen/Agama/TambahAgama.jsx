@@ -11,7 +11,8 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert
+  Alert,
+  Breadcrumbs
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -58,51 +59,70 @@ const TambahAgama = () => {
   }
 
   return (
-    <Box sx={container}>
-      <Typography color="#757575">Master</Typography>
-      <Typography variant="h4" sx={subTitleText}>
-        Tambah Agama
-      </Typography>
-      <Divider sx={dividerStyle} />
-      <Box sx={showDataContainer}>
-        <Box sx={showDataWrapper}>
-          <TextField
-            error={error && kodeAgama.length === 0 && true}
-            helperText={error && kodeAgama.length === 0 && "Kode harus diisi!"}
-            id="outlined-basic"
-            label="Kode"
-            variant="outlined"
-            value={kodeAgama}
-            onChange={(e) => setKodeAgama(e.target.value)}
-          />
-          <TextField
-            error={error && namaAgama.length === 0 && true}
-            helperText={
-              error && namaAgama.length === 0 && "Nama Agama harus diisi!"
-            }
-            id="outlined-basic"
-            label="Nama Agama"
-            variant="outlined"
-            value={namaAgama}
-            sx={spacingTop}
-            onChange={(e) => setNamaAgama(e.target.value)}
-          />
+    <>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Typography
+          underline="hover"
+          color="inherit"
+          sx={beforeLink}
+          onClick={() => navigate("/agama")}
+        >
+          Agama
+        </Typography>
+        <Typography color="text.primary">Tambah Agama</Typography>
+      </Breadcrumbs>
+      <Box sx={container}>
+        <Typography color="#757575">Master</Typography>
+        <Typography variant="h4" sx={subTitleText}>
+          Tambah Agama
+        </Typography>
+        <Divider sx={dividerStyle} />
+        <Box sx={showDataContainer}>
+          <Box sx={showDataWrapper}>
+            <TextField
+              error={error && kodeAgama.length === 0 && true}
+              helperText={
+                error && kodeAgama.length === 0 && "Kode harus diisi!"
+              }
+              id="outlined-basic"
+              label="Kode"
+              variant="outlined"
+              value={kodeAgama}
+              onChange={(e) => setKodeAgama(e.target.value)}
+            />
+            <TextField
+              error={error && namaAgama.length === 0 && true}
+              helperText={
+                error && namaAgama.length === 0 && "Nama Agama harus diisi!"
+              }
+              id="outlined-basic"
+              label="Nama Agama"
+              variant="outlined"
+              value={namaAgama}
+              sx={spacingTop}
+              onChange={(e) => setNamaAgama(e.target.value)}
+            />
+          </Box>
         </Box>
+        <Box sx={spacingTop}>
+          <Button
+            variant="contained"
+            startIcon={<SaveIcon />}
+            onClick={saveUser}
+          >
+            Simpan
+          </Button>
+        </Box>
+        <Divider sx={spacingTop} />
+        {error && (
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error" sx={alertBox}>
+              Data belum terisi semua!
+            </Alert>
+          </Snackbar>
+        )}
       </Box>
-      <Box sx={spacingTop}>
-        <Button variant="contained" startIcon={<SaveIcon />} onClick={saveUser}>
-          Simpan
-        </Button>
-      </Box>
-      <Divider sx={spacingTop} />
-      {error && (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={alertBox}>
-            Data belum terisi semua!
-          </Alert>
-        </Snackbar>
-      )}
-    </Box>
+    </>
   );
 };
 
@@ -144,4 +164,9 @@ const spacingTop = {
 
 const alertBox = {
   width: "100%"
+};
+
+const beforeLink = {
+  cursor: "pointer",
+  "&:hover": { color: "blue" }
 };

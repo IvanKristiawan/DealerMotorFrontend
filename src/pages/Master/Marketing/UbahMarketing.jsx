@@ -11,7 +11,8 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert
+  Alert,
+  Breadcrumbs
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -71,45 +72,58 @@ const UbahMarketing = () => {
   }
 
   return (
-    <Box sx={container}>
-      <Typography color="#757575">Master</Typography>
-      <Typography variant="h4" sx={subTitleText}>
-        Ubah Marketing
-      </Typography>
-      <Divider sx={dividerStyle} />
-      <Box sx={showDataContainer}>
-        <Box sx={showDataWrapper}>
-          <TextField
-            error={error && namaMarketing.length === 0 && true}
-            helperText={
-              error && namaMarketing.length === 0 && "Nama harus diisi!"
-            }
-            id="outlined-basic"
-            label="Nama"
-            variant="outlined"
-            value={namaMarketing}
-            onChange={(e) => setNamaMarketing(e.target.value)}
-          />
-        </Box>
-      </Box>
-      <Box sx={spacingTop}>
-        <Button
-          variant="contained"
-          startIcon={<EditIcon />}
-          onClick={updateUser}
+    <>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Typography
+          underline="hover"
+          color="inherit"
+          sx={beforeLink}
+          onClick={() => navigate("/marketing")}
         >
-          Ubah
-        </Button>
+          Marketing
+        </Typography>
+        <Typography color="text.primary">Ubah Marketing</Typography>
+      </Breadcrumbs>
+      <Box sx={container}>
+        <Typography color="#757575">Master</Typography>
+        <Typography variant="h4" sx={subTitleText}>
+          Ubah Marketing
+        </Typography>
+        <Divider sx={dividerStyle} />
+        <Box sx={showDataContainer}>
+          <Box sx={showDataWrapper}>
+            <TextField
+              error={error && namaMarketing.length === 0 && true}
+              helperText={
+                error && namaMarketing.length === 0 && "Nama harus diisi!"
+              }
+              id="outlined-basic"
+              label="Nama"
+              variant="outlined"
+              value={namaMarketing}
+              onChange={(e) => setNamaMarketing(e.target.value)}
+            />
+          </Box>
+        </Box>
+        <Box sx={spacingTop}>
+          <Button
+            variant="contained"
+            startIcon={<EditIcon />}
+            onClick={updateUser}
+          >
+            Ubah
+          </Button>
+        </Box>
+        <Divider sx={dividerStyle} />
+        {error && (
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error" sx={alertBox}>
+              Data belum terisi semua!
+            </Alert>
+          </Snackbar>
+        )}
       </Box>
-      <Divider sx={dividerStyle} />
-      {error && (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={alertBox}>
-            Data belum terisi semua!
-          </Alert>
-        </Snackbar>
-      )}
-    </Box>
+    </>
   );
 };
 
@@ -151,4 +165,9 @@ const spacingTop = {
 
 const alertBox = {
   width: "100%"
+};
+
+const beforeLink = {
+  cursor: "pointer",
+  "&:hover": { color: "blue" }
 };

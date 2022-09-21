@@ -4,7 +4,14 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { tempUrl } from "../../../contexts/ContextProvider";
 import { Loader } from "../../../components";
-import { Box, Typography, TextField, Button, Divider } from "@mui/material";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Divider,
+  Breadcrumbs
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
 const UbahProfilUser = () => {
@@ -67,94 +74,107 @@ const UbahProfilUser = () => {
   }
 
   return (
-    <Box sx={container}>
-      <Typography color="#757575">User</Typography>
-      <Typography variant="h4" sx={subTitleText}>
-        Ubah Password User
-      </Typography>
-      <Divider sx={dividerStyle} />
-      <Box sx={showDataContainer}>
-        <Box sx={showDataWrapper}>
-          <TextField
-            id="outlined-basic"
-            label="Username"
-            variant="outlined"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            InputProps={{
-              readOnly: true
-            }}
-          />
-          <TextField
-            id="outlined-basic"
-            label="Tipe User"
-            variant="outlined"
-            sx={spacingTop}
-            value={tipeUser}
-            onChange={(e) => setTipeUser(e.target.value)}
-            InputProps={{
-              readOnly: true
-            }}
-          />
-          <TextField
-            id="outlined-basic"
-            label="Periode"
-            variant="outlined"
-            sx={spacingTop}
-            value={periode}
-            onChange={(e) => setPeriode(e.target.value)}
-            InputProps={{
-              readOnly: true
-            }}
-          />
-        </Box>
-        <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
-          <TextField
-            id="outlined-basic"
-            label="kodeKwitansi"
-            variant="outlined"
-            value={kodeKwitansi}
-            onChange={(e) => setKodeKwitansi(e.target.value)}
-            InputProps={{
-              readOnly: true
-            }}
-          />
-          <TextField
-            id="outlined-basic"
-            label="noTerakhir"
-            variant="outlined"
-            sx={spacingTop}
-            value={noTerakhir}
-            onChange={(e) => setNoTerakhir(e.target.value)}
-            InputProps={{
-              readOnly: true
-            }}
-          />
-          <TextField
-            id="outlined-basic"
-            label="Password (baru)"
-            variant="outlined"
-            type="password"
-            sx={spacingTop}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Typography>
-            *Kosongkan jika tidak ingin mengganti password
-          </Typography>
-        </Box>
-      </Box>
-      <Box sx={spacingTop}>
-        <Button
-          variant="contained"
-          startIcon={<EditIcon />}
-          onClick={updateUser}
+    <>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Typography
+          underline="hover"
+          color="inherit"
+          sx={beforeLink}
+          onClick={() => navigate("/profilUser")}
         >
-          Ubah
-        </Button>
+          Profil User
+        </Typography>
+        <Typography color="text.primary">Ubah Profil User</Typography>
+      </Breadcrumbs>
+      <Box sx={container}>
+        <Typography color="#757575">User</Typography>
+        <Typography variant="h4" sx={subTitleText}>
+          Ubah Password User
+        </Typography>
+        <Divider sx={dividerStyle} />
+        <Box sx={showDataContainer}>
+          <Box sx={showDataWrapper}>
+            <TextField
+              id="outlined-basic"
+              label="Username"
+              variant="outlined"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              InputProps={{
+                readOnly: true
+              }}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Tipe User"
+              variant="outlined"
+              sx={spacingTop}
+              value={tipeUser}
+              onChange={(e) => setTipeUser(e.target.value)}
+              InputProps={{
+                readOnly: true
+              }}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Periode"
+              variant="outlined"
+              sx={spacingTop}
+              value={periode}
+              onChange={(e) => setPeriode(e.target.value)}
+              InputProps={{
+                readOnly: true
+              }}
+            />
+          </Box>
+          <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
+            <TextField
+              id="outlined-basic"
+              label="kodeKwitansi"
+              variant="outlined"
+              value={kodeKwitansi}
+              onChange={(e) => setKodeKwitansi(e.target.value)}
+              InputProps={{
+                readOnly: true
+              }}
+            />
+            <TextField
+              id="outlined-basic"
+              label="noTerakhir"
+              variant="outlined"
+              sx={spacingTop}
+              value={noTerakhir}
+              onChange={(e) => setNoTerakhir(e.target.value)}
+              InputProps={{
+                readOnly: true
+              }}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Password (baru)"
+              variant="outlined"
+              type="password"
+              sx={spacingTop}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Typography>
+              *Kosongkan jika tidak ingin mengganti password
+            </Typography>
+          </Box>
+        </Box>
+        <Box sx={spacingTop}>
+          <Button
+            variant="contained"
+            startIcon={<EditIcon />}
+            onClick={updateUser}
+          >
+            Ubah
+          </Button>
+        </Box>
+        <Divider sx={dividerStyle} />
       </Box>
-      <Divider sx={dividerStyle} />
-    </Box>
+    </>
   );
 };
 
@@ -192,4 +212,9 @@ const showDataWrapper = {
 
 const spacingTop = {
   mt: 4
+};
+
+const beforeLink = {
+  cursor: "pointer",
+  "&:hover": { color: "blue" }
 };

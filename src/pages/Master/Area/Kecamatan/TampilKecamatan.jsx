@@ -20,6 +20,7 @@ const TampilKecamatan = () => {
   const { screenSize } = useStateContext();
 
   const [kodeWilayah, setKodeWilayah] = useState("");
+  const [namaWilayah, setNamaWilayah] = useState("");
   const [kodeKecamatan, setKodeKecamatan] = useState("");
   const [namaKecamatan, setNamaKecamatan] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,7 +40,8 @@ const TampilKecamatan = () => {
     } else if (
       val.kodeWilayah.toUpperCase().includes(searchTerm.toUpperCase()) ||
       val.kodeKecamatan.toUpperCase().includes(searchTerm.toUpperCase()) ||
-      val.namaKecamatan.toUpperCase().includes(searchTerm.toUpperCase())
+      val.namaKecamatan.toUpperCase().includes(searchTerm.toUpperCase()) ||
+      val.namaWilayah.toUpperCase().includes(searchTerm.toUpperCase())
     ) {
       return val;
     }
@@ -76,6 +78,7 @@ const TampilKecamatan = () => {
         token: user.token
       });
       setKodeWilayah(response.data.kodeWilayah);
+      setNamaWilayah(response.data.namaWilayah);
       setKodeKecamatan(response.data.kodeKecamatan);
       setNamaKecamatan(response.data.namaKecamatan);
     }
@@ -90,6 +93,7 @@ const TampilKecamatan = () => {
       });
       getUsers();
       setKodeWilayah("");
+      setNamaWilayah("");
       setKodeKecamatan("");
       setNamaKecamatan("");
       setLoading(false);
@@ -123,16 +127,6 @@ const TampilKecamatan = () => {
         <Box sx={showDataWrapper}>
           <TextField
             id="outlined-basic"
-            label="Kode Wilayah"
-            variant="filled"
-            sx={textFieldStyle}
-            InputProps={{
-              readOnly: true
-            }}
-            value={kodeWilayah}
-          />
-          <TextField
-            id="outlined-basic"
             label="Kode Kecamatan"
             variant="filled"
             sx={textFieldStyle}
@@ -150,6 +144,28 @@ const TampilKecamatan = () => {
               readOnly: true
             }}
             value={namaKecamatan}
+          />
+        </Box>
+        <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
+          <TextField
+            id="outlined-basic"
+            label="Kode Wilayah"
+            variant="filled"
+            sx={textFieldStyle}
+            InputProps={{
+              readOnly: true
+            }}
+            value={kodeWilayah}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Nama Wilayah"
+            variant="filled"
+            sx={textFieldStyle}
+            InputProps={{
+              readOnly: true
+            }}
+            value={namaWilayah}
           />
         </Box>
       </Box>

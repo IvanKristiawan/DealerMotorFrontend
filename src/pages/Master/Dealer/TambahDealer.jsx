@@ -11,7 +11,8 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert
+  Alert,
+  Breadcrumbs
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -67,65 +68,83 @@ const TambahDealer = () => {
   }
 
   return (
-    <Box sx={container}>
-      <Typography color="#757575">Master</Typography>
-      <Typography variant="h4" sx={subTitleText}>
-        Tambah Dealer
-      </Typography>
-      <Divider sx={dividerStyle} />
-      <Box sx={showDataContainer}>
-        <Box sx={showDataWrapper}>
-          <TextField
-            error={error && namaDealer.length === 0 && true}
-            helperText={
-              error && namaDealer.length === 0 && "Nama Dealer harus diisi!"
-            }
-            id="outlined-basic"
-            label="Nama Dealer"
-            variant="outlined"
-            value={namaDealer}
-            onChange={(e) => setNamaDealer(e.target.value)}
-          />
-          <TextField
-            id="outlined-basic"
-            label="Alamat"
-            variant="outlined"
-            value={alamatDealer}
-            sx={spacingTop}
-            onChange={(e) => setAlamatDealer(e.target.value)}
-          />
-          <TextField
-            id="outlined-basic"
-            label="Telepon"
-            variant="outlined"
-            value={teleponDealer}
-            sx={spacingTop}
-            onChange={(e) => setTeleponDealer(e.target.value)}
-          />
-          <TextField
-            id="outlined-basic"
-            label="PIC"
-            variant="outlined"
-            value={PICDealer}
-            sx={spacingTop}
-            onChange={(e) => setPICDealer(e.target.value)}
-          />
+    <>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Typography
+          underline="hover"
+          color="inherit"
+          sx={beforeLink}
+          onClick={() => navigate("/dealer")}
+        >
+          Dealer
+        </Typography>
+        <Typography color="text.primary">Tambah Dealer</Typography>
+      </Breadcrumbs>
+      <Box sx={container}>
+        <Typography color="#757575">Master</Typography>
+        <Typography variant="h4" sx={subTitleText}>
+          Tambah Dealer
+        </Typography>
+        <Divider sx={dividerStyle} />
+        <Box sx={showDataContainer}>
+          <Box sx={showDataWrapper}>
+            <TextField
+              error={error && namaDealer.length === 0 && true}
+              helperText={
+                error && namaDealer.length === 0 && "Nama Dealer harus diisi!"
+              }
+              id="outlined-basic"
+              label="Nama Dealer"
+              variant="outlined"
+              value={namaDealer}
+              onChange={(e) => setNamaDealer(e.target.value)}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Alamat"
+              variant="outlined"
+              value={alamatDealer}
+              sx={spacingTop}
+              onChange={(e) => setAlamatDealer(e.target.value)}
+            />
+          </Box>
+          <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
+            <TextField
+              id="outlined-basic"
+              label="Telepon"
+              variant="outlined"
+              value={teleponDealer}
+              onChange={(e) => setTeleponDealer(e.target.value)}
+            />
+            <TextField
+              id="outlined-basic"
+              label="PIC"
+              variant="outlined"
+              value={PICDealer}
+              sx={spacingTop}
+              onChange={(e) => setPICDealer(e.target.value)}
+            />
+          </Box>
         </Box>
+        <Box sx={spacingTop}>
+          <Button
+            variant="contained"
+            startIcon={<SaveIcon />}
+            onClick={saveUser}
+          >
+            Simpan
+          </Button>
+        </Box>
+        <Divider sx={spacingTop} />
+        {error && (
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error" sx={alertBox}>
+              Data belum terisi semua!
+            </Alert>
+          </Snackbar>
+        )}
       </Box>
-      <Box sx={spacingTop}>
-        <Button variant="contained" startIcon={<SaveIcon />} onClick={saveUser}>
-          Simpan
-        </Button>
-      </Box>
-      <Divider sx={spacingTop} />
-      {error && (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={alertBox}>
-            Data belum terisi semua!
-          </Alert>
-        </Snackbar>
-      )}
-    </Box>
+    </>
   );
 };
 
@@ -167,4 +186,9 @@ const spacingTop = {
 
 const alertBox = {
   width: "100%"
+};
+
+const beforeLink = {
+  cursor: "pointer",
+  "&:hover": { color: "blue" }
 };

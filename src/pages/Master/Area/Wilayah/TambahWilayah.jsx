@@ -11,7 +11,8 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert
+  Alert,
+  Breadcrumbs
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -56,41 +57,58 @@ const TambahWilayah = () => {
   }
 
   return (
-    <Box sx={container}>
-      <Typography color="#757575">Master</Typography>
-      <Typography variant="h4" sx={subTitleText}>
-        Tambah Wilayah
-      </Typography>
-      <Divider sx={dividerStyle} />
-      <Box sx={showDataContainer}>
-        <Box sx={showDataWrapper}>
-          <TextField
-            error={error && namaWilayah.length === 0 && true}
-            helperText={
-              error && namaWilayah.length === 0 && "Nama Wilayah harus diisi!"
-            }
-            id="outlined-basic"
-            label="Nama Wilayah"
-            variant="outlined"
-            value={namaWilayah}
-            onChange={(e) => setNamaWilayah(e.target.value)}
-          />
+    <>
+      <Breadcrumbs aria-label="breadcrumb">
+        <Typography
+          underline="hover"
+          color="inherit"
+          sx={beforeLink}
+          onClick={() => navigate("/wilayah")}
+        >
+          Wilayah
+        </Typography>
+        <Typography color="text.primary">Tambah Wilayah</Typography>
+      </Breadcrumbs>
+      <Box sx={container}>
+        <Typography color="#757575">Master</Typography>
+        <Typography variant="h4" sx={subTitleText}>
+          Tambah Wilayah
+        </Typography>
+        <Divider sx={dividerStyle} />
+        <Box sx={showDataContainer}>
+          <Box sx={showDataWrapper}>
+            <TextField
+              error={error && namaWilayah.length === 0 && true}
+              helperText={
+                error && namaWilayah.length === 0 && "Nama Wilayah harus diisi!"
+              }
+              id="outlined-basic"
+              label="Nama Wilayah"
+              variant="outlined"
+              value={namaWilayah}
+              onChange={(e) => setNamaWilayah(e.target.value)}
+            />
+          </Box>
         </Box>
-      </Box>
-      <Box sx={spacingTop}>
-        <Button variant="contained" startIcon={<SaveIcon />} onClick={saveUser}>
-          Simpan
-        </Button>
-      </Box>
-      <Divider sx={spacingTop} />
-      {error && (
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="error" sx={alertBox}>
-            Data belum terisi semua!
-          </Alert>
-        </Snackbar>
-      )}
-    </Box>
+        <Box sx={spacingTop}>
+          <Button
+            variant="contained"
+            startIcon={<SaveIcon />}
+            onClick={saveUser}
+          >
+            Simpan
+          </Button>
+        </Box>
+        <Divider sx={spacingTop} />
+        {error && (
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error" sx={alertBox}>
+              Data belum terisi semua!
+            </Alert>
+          </Snackbar>
+        )}
+      </Box>{" "}
+    </>
   );
 };
 
@@ -132,4 +150,9 @@ const spacingTop = {
 
 const alertBox = {
   width: "100%"
+};
+
+const beforeLink = {
+  cursor: "pointer",
+  "&:hover": { color: "blue" }
 };
