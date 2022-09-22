@@ -9,9 +9,6 @@ import {
   TampilWarna,
   TambahWarna,
   UbahWarna,
-  TampilAgama,
-  TambahAgama,
-  UbahAgama,
   TampilWilayah,
   TambahWilayah,
   UbahWilayah,
@@ -131,39 +128,6 @@ const App = () => {
             element={
               <USERRoute>
                 <UbahWarna />
-              </USERRoute>
-            }
-          />
-          {/* Agama */}
-          <Route
-            path="/agama"
-            element={
-              <USERRoute>
-                <TampilAgama />
-              </USERRoute>
-            }
-          />
-          <Route
-            path="/agama/:id"
-            element={
-              <USERRoute>
-                <TampilAgama />
-              </USERRoute>
-            }
-          />
-          <Route
-            path="/agama/tambahAgama"
-            element={
-              <USERRoute>
-                <TambahAgama />
-              </USERRoute>
-            }
-          />
-          <Route
-            path="/agama/:id/edit"
-            element={
-              <USERRoute>
-                <UbahAgama />
               </USERRoute>
             }
           />

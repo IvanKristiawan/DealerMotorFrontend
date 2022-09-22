@@ -18,16 +18,6 @@ export const menuItems = [
         ]
       },
       {
-        title: "Konsumen",
-        url: "konsumen",
-        submenu: [
-          {
-            title: "Agama",
-            url: "agama"
-          }
-        ]
-      },
-      {
         title: "Area",
         url: "area",
         submenu: [
