@@ -563,3 +563,64 @@ export function ShowTableCabang({ currentPosts, searchTerm }) {
     </TableContainer>
   );
 }
+
+export function ShowTableLeasing({ currentPosts, searchTerm }) {
+  let navigate = useNavigate();
+  return (
+    <TableContainer component={Paper} sx={{ width: "100%" }}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: "bold" }}>Kode Leasing</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Nama Leasing</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Alamat Leasing</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Telepon Leasing</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {currentPosts
+            .filter((val) => {
+              if (searchTerm === "") {
+                return val;
+              } else if (
+                val.kodeLeasing
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.namaLeasing
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.alamatLeasing
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.teleponLeasing
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase())
+              ) {
+                return val;
+              }
+            })
+            .map((user, index) => (
+              <TableRow
+                key={user._id}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  "&:hover": { bgcolor: "#eeeeee" },
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  navigate(`/leasing/${user._id}`);
+                }}
+              >
+                <TableCell component="th" scope="row">
+                  {user.kodeLeasing}
+                </TableCell>
+                <TableCell>{user.namaLeasing}</TableCell>
+                <TableCell>{user.alamatLeasing}</TableCell>
+                <TableCell>{user.teleponLeasing}</TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}

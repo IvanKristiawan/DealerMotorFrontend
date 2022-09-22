@@ -30,6 +30,9 @@ import {
   TampilCabang,
   TambahCabang,
   UbahCabang,
+  TampilLeasing,
+  TambahLeasing,
+  UbahLeasing,
   ProfilUser,
   UbahProfilUser,
   DaftarUser,
@@ -359,6 +362,39 @@ const App = () => {
             element={
               <USERRoute>
                 <UbahCabang />
+              </USERRoute>
+            }
+          />
+          {/* Leasing */}
+          <Route
+            path="/leasing"
+            element={
+              <USERRoute>
+                <TampilLeasing />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/leasing/:id"
+            element={
+              <USERRoute>
+                <TampilLeasing />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/leasing/tambahLeasing"
+            element={
+              <USERRoute>
+                <TambahLeasing />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/leasing/:id/edit"
+            element={
+              <USERRoute>
+                <UbahLeasing />
               </USERRoute>
             }
           />
