@@ -126,11 +126,11 @@ const TampilWilayah = () => {
     doc.text(
       `Dicetak Oleh: ${user.username} | Tanggal : ${current_date} | Jam : ${current_time}`,
       15,
-      45
+      280
     );
     doc.setFontSize(12);
     doc.autoTable({
-      margin: { top: 50 },
+      margin: { top: 45 },
       columns: columns.map((col) => ({ ...col, dataKey: col.field })),
       body: users,
       headStyles: {
