@@ -11,8 +11,7 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert,
-  Breadcrumbs
+  Alert
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -63,87 +62,78 @@ const TambahLeasing = () => {
   }
 
   return (
-    <>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Typography
-          underline="hover"
-          color="inherit"
-          sx={beforeLink}
-          onClick={() => navigate("/cabang")}
-        >
-          Leasing
-        </Typography>
-        <Typography color="text.primary">Tambah Leasing</Typography>
-      </Breadcrumbs>
-      <Box sx={container}>
-        <Typography color="#757575">Master</Typography>
-        <Typography variant="h4" sx={subTitleText}>
-          Tambah Leasing
-        </Typography>
-        <Divider sx={dividerStyle} />
-        <Box sx={showDataContainer}>
-          <Box sx={showDataWrapper}>
-            <TextField
-              error={error && namaLeasing.length === 0 && true}
-              helperText={
-                error && namaLeasing.length === 0 && "Nama Leasing harus diisi!"
-              }
-              id="outlined-basic"
-              label="Nama Leasing"
-              variant="outlined"
-              value={namaLeasing}
-              onChange={(e) => setNamaLeasing(e.target.value)}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Alamat"
-              variant="outlined"
-              value={alamatLeasing}
-              sx={spacingTop}
-              onChange={(e) => setAlamatLeasing(e.target.value)}
-            />
-          </Box>
-          <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
-            <TextField
-              id="outlined-basic"
-              label="Telepon"
-              variant="outlined"
-              value={teleponLeasing}
-              onChange={(e) => setTeleponLeasing(e.target.value)}
-            />
-            <TextField
-              error={error && picLeasing.length === 0 && true}
-              helperText={
-                error && picLeasing.length === 0 && "PIC Cabang harus diisi!"
-              }
-              id="outlined-basic"
-              label="PIC"
-              variant="outlined"
-              value={picLeasing}
-              sx={spacingTop}
-              onChange={(e) => setPicLeasing(e.target.value)}
-            />
-          </Box>
+    <Box sx={container}>
+      <Typography color="#757575">Master</Typography>
+      <Typography variant="h4" sx={subTitleText}>
+        Tambah Leasing
+      </Typography>
+      <Divider sx={dividerStyle} />
+      <Box sx={showDataContainer}>
+        <Box sx={showDataWrapper}>
+          <TextField
+            error={error && namaLeasing.length === 0 && true}
+            helperText={
+              error && namaLeasing.length === 0 && "Nama Leasing harus diisi!"
+            }
+            id="outlined-basic"
+            label="Nama Leasing"
+            variant="outlined"
+            value={namaLeasing}
+            onChange={(e) => setNamaLeasing(e.target.value)}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Alamat"
+            variant="outlined"
+            value={alamatLeasing}
+            sx={spacingTop}
+            onChange={(e) => setAlamatLeasing(e.target.value)}
+          />
         </Box>
-        <Box sx={spacingTop}>
-          <Button
-            variant="contained"
-            startIcon={<SaveIcon />}
-            onClick={saveUser}
-          >
-            Simpan
-          </Button>
+        <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
+          <TextField
+            id="outlined-basic"
+            label="Telepon"
+            variant="outlined"
+            value={teleponLeasing}
+            onChange={(e) => setTeleponLeasing(e.target.value)}
+          />
+          <TextField
+            error={error && picLeasing.length === 0 && true}
+            helperText={
+              error && picLeasing.length === 0 && "PIC Cabang harus diisi!"
+            }
+            id="outlined-basic"
+            label="PIC"
+            variant="outlined"
+            value={picLeasing}
+            sx={spacingTop}
+            onChange={(e) => setPicLeasing(e.target.value)}
+          />
         </Box>
-        <Divider sx={spacingTop} />
-        {error && (
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error" sx={alertBox}>
-              Data belum terisi semua!
-            </Alert>
-          </Snackbar>
-        )}
       </Box>
-    </>
+      <Box sx={spacingTop}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={() => navigate("/leasing")}
+          sx={{ marginRight: 2 }}
+        >
+          {"< Kembali"}
+        </Button>
+        <Button variant="contained" startIcon={<SaveIcon />} onClick={saveUser}>
+          Simpan
+        </Button>
+      </Box>
+      <Divider sx={spacingTop} />
+      {error && (
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={alertBox}>
+            Data belum terisi semua!
+          </Alert>
+        </Snackbar>
+      )}
+    </Box>
   );
 };
 

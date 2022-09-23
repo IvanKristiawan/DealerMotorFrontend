@@ -11,8 +11,7 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert,
-  Breadcrumbs
+  Alert
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -63,87 +62,78 @@ const TambahCabang = () => {
   }
 
   return (
-    <>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Typography
-          underline="hover"
-          color="inherit"
-          sx={beforeLink}
-          onClick={() => navigate("/cabang")}
-        >
-          Cabang
-        </Typography>
-        <Typography color="text.primary">Tambah Cabang</Typography>
-      </Breadcrumbs>
-      <Box sx={container}>
-        <Typography color="#757575">Master</Typography>
-        <Typography variant="h4" sx={subTitleText}>
-          Tambah Cabang
-        </Typography>
-        <Divider sx={dividerStyle} />
-        <Box sx={showDataContainer}>
-          <Box sx={showDataWrapper}>
-            <TextField
-              error={error && namaCabang.length === 0 && true}
-              helperText={
-                error && namaCabang.length === 0 && "Nama Cabang harus diisi!"
-              }
-              id="outlined-basic"
-              label="Nama Cabang"
-              variant="outlined"
-              value={namaCabang}
-              onChange={(e) => setNamaCabang(e.target.value)}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Alamat"
-              variant="outlined"
-              value={alamatCabang}
-              sx={spacingTop}
-              onChange={(e) => setAlamatCabang(e.target.value)}
-            />
-          </Box>
-          <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
-            <TextField
-              id="outlined-basic"
-              label="Telepon"
-              variant="outlined"
-              value={teleponCabang}
-              onChange={(e) => setTeleponCabang(e.target.value)}
-            />
-            <TextField
-              error={error && picCabang.length === 0 && true}
-              helperText={
-                error && picCabang.length === 0 && "PIC Cabang harus diisi!"
-              }
-              id="outlined-basic"
-              label="PIC"
-              variant="outlined"
-              value={picCabang}
-              sx={spacingTop}
-              onChange={(e) => setPicCabang(e.target.value)}
-            />
-          </Box>
+    <Box sx={container}>
+      <Typography color="#757575">Master</Typography>
+      <Typography variant="h4" sx={subTitleText}>
+        Tambah Cabang
+      </Typography>
+      <Divider sx={dividerStyle} />
+      <Box sx={showDataContainer}>
+        <Box sx={showDataWrapper}>
+          <TextField
+            error={error && namaCabang.length === 0 && true}
+            helperText={
+              error && namaCabang.length === 0 && "Nama Cabang harus diisi!"
+            }
+            id="outlined-basic"
+            label="Nama Cabang"
+            variant="outlined"
+            value={namaCabang}
+            onChange={(e) => setNamaCabang(e.target.value)}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Alamat"
+            variant="outlined"
+            value={alamatCabang}
+            sx={spacingTop}
+            onChange={(e) => setAlamatCabang(e.target.value)}
+          />
         </Box>
-        <Box sx={spacingTop}>
-          <Button
-            variant="contained"
-            startIcon={<SaveIcon />}
-            onClick={saveUser}
-          >
-            Simpan
-          </Button>
+        <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
+          <TextField
+            id="outlined-basic"
+            label="Telepon"
+            variant="outlined"
+            value={teleponCabang}
+            onChange={(e) => setTeleponCabang(e.target.value)}
+          />
+          <TextField
+            error={error && picCabang.length === 0 && true}
+            helperText={
+              error && picCabang.length === 0 && "PIC Cabang harus diisi!"
+            }
+            id="outlined-basic"
+            label="PIC"
+            variant="outlined"
+            value={picCabang}
+            sx={spacingTop}
+            onChange={(e) => setPicCabang(e.target.value)}
+          />
         </Box>
-        <Divider sx={spacingTop} />
-        {error && (
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error" sx={alertBox}>
-              Data belum terisi semua!
-            </Alert>
-          </Snackbar>
-        )}
       </Box>
-    </>
+      <Box sx={spacingTop}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={() => navigate("/cabang")}
+          sx={{ marginRight: 2 }}
+        >
+          {"< Kembali"}
+        </Button>
+        <Button variant="contained" startIcon={<SaveIcon />} onClick={saveUser}>
+          Simpan
+        </Button>
+      </Box>
+      <Divider sx={spacingTop} />
+      {error && (
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={alertBox}>
+            Data belum terisi semua!
+          </Alert>
+        </Snackbar>
+      )}
+    </Box>
   );
 };
 

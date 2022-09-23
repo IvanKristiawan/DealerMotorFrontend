@@ -11,8 +11,7 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert,
-  Breadcrumbs
+  Alert
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -59,74 +58,65 @@ const TambahMarketing = () => {
   }
 
   return (
-    <>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Typography
-          underline="hover"
-          color="inherit"
-          sx={beforeLink}
-          onClick={() => navigate("/marketing")}
-        >
-          Marketing
-        </Typography>
-        <Typography color="text.primary">Tambah Marketing</Typography>
-      </Breadcrumbs>
-      <Box sx={container}>
-        <Typography color="#757575">Master</Typography>
-        <Typography variant="h4" sx={subTitleText}>
-          Tambah Marketing
-        </Typography>
-        <Divider sx={dividerStyle} />
-        <Box sx={showDataContainer}>
-          <Box sx={showDataWrapper}>
-            <TextField
-              error={error && namaMarketing.length === 0 && true}
-              helperText={
-                error &&
-                namaMarketing.length === 0 &&
-                "Nama Marketing harus diisi!"
-              }
-              id="outlined-basic"
-              label="Nama Marketing"
-              variant="outlined"
-              value={namaMarketing}
-              onChange={(e) => setNamaMarketing(e.target.value)}
-            />
-            <TextField
-              error={error && teleponMarketing.length === 0 && true}
-              helperText={
-                error &&
-                teleponMarketing.length === 0 &&
-                "Telepon Marketing harus diisi!"
-              }
-              id="outlined-basic"
-              label="Telepon Marketing"
-              variant="outlined"
-              value={teleponMarketing}
-              sx={spacingTop}
-              onChange={(e) => setTeleponMarketing(e.target.value)}
-            />
-          </Box>
+    <Box sx={container}>
+      <Typography color="#757575">Master</Typography>
+      <Typography variant="h4" sx={subTitleText}>
+        Tambah Marketing
+      </Typography>
+      <Divider sx={dividerStyle} />
+      <Box sx={showDataContainer}>
+        <Box sx={showDataWrapper}>
+          <TextField
+            error={error && namaMarketing.length === 0 && true}
+            helperText={
+              error &&
+              namaMarketing.length === 0 &&
+              "Nama Marketing harus diisi!"
+            }
+            id="outlined-basic"
+            label="Nama Marketing"
+            variant="outlined"
+            value={namaMarketing}
+            onChange={(e) => setNamaMarketing(e.target.value)}
+          />
+          <TextField
+            error={error && teleponMarketing.length === 0 && true}
+            helperText={
+              error &&
+              teleponMarketing.length === 0 &&
+              "Telepon Marketing harus diisi!"
+            }
+            id="outlined-basic"
+            label="Telepon Marketing"
+            variant="outlined"
+            value={teleponMarketing}
+            sx={spacingTop}
+            onChange={(e) => setTeleponMarketing(e.target.value)}
+          />
         </Box>
-        <Box sx={spacingTop}>
-          <Button
-            variant="contained"
-            startIcon={<SaveIcon />}
-            onClick={saveUser}
-          >
-            Simpan
-          </Button>
-        </Box>
-        <Divider sx={spacingTop} />
-        {error && (
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error" sx={alertBox}>
-              Data belum terisi semua!
-            </Alert>
-          </Snackbar>
-        )}
       </Box>
-    </>
+      <Box sx={spacingTop}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={() => navigate("/marketing")}
+          sx={{ marginRight: 2 }}
+        >
+          {"< Kembali"}
+        </Button>
+        <Button variant="contained" startIcon={<SaveIcon />} onClick={saveUser}>
+          Simpan
+        </Button>
+      </Box>
+      <Divider sx={spacingTop} />
+      {error && (
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={alertBox}>
+            Data belum terisi semua!
+          </Alert>
+        </Snackbar>
+      )}
+    </Box>
   );
 };
 

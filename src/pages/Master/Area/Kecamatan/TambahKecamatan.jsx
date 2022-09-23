@@ -12,8 +12,7 @@ import {
   Divider,
   Snackbar,
   Alert,
-  Autocomplete,
-  Breadcrumbs
+  Autocomplete
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -81,82 +80,73 @@ const TambahKecamatan = () => {
   }
 
   return (
-    <>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Typography
-          underline="hover"
-          color="inherit"
-          sx={beforeLink}
+    <Box sx={container}>
+      <Typography color="#757575">Master</Typography>
+      <Typography variant="h4" sx={subTitleText}>
+        Tambah Kecamatan
+      </Typography>
+      <Divider sx={dividerStyle} />
+      <Box sx={showDataContainer}>
+        <Box sx={showDataWrapper}>
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={wilayahOptions}
+            renderInput={(params) => (
+              <TextField
+                error={error && kodeWilayah.length === 0 && true}
+                helperText={
+                  error &&
+                  kodeWilayah.length === 0 &&
+                  "Kode Wilayah harus diisi!"
+                }
+                {...params}
+                label="Kode Wilayah"
+              />
+            )}
+            onInputChange={(e, value) => {
+              setKodeWilayah(value.split(" ", 1)[0]);
+              setNamaWilayah(value.split("- ")[1]);
+            }}
+          />
+          <TextField
+            error={error && namaKecamatan.length === 0 && true}
+            helperText={
+              error &&
+              namaKecamatan.length === 0 &&
+              "Nama Kecamatan harus diisi!"
+            }
+            id="outlined-basic"
+            label="Nama Kecamatan"
+            variant="outlined"
+            value={namaKecamatan}
+            sx={spacingTop}
+            onChange={(e) => setNamaKecamatan(e.target.value)}
+          />
+        </Box>
+      </Box>
+      <Box sx={spacingTop}>
+        <Button
+          variant="outlined"
+          color="secondary"
           onClick={() => navigate("/kecamatan")}
+          sx={{ marginRight: 2 }}
         >
-          Kecamatan
-        </Typography>
-        <Typography color="text.primary">Tambah Kecamatan</Typography>
-      </Breadcrumbs>
-      <Box sx={container}>
-        <Typography color="#757575">Master</Typography>
-        <Typography variant="h4" sx={subTitleText}>
-          Tambah Kecamatan
-        </Typography>
-        <Divider sx={dividerStyle} />
-        <Box sx={showDataContainer}>
-          <Box sx={showDataWrapper}>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={wilayahOptions}
-              renderInput={(params) => (
-                <TextField
-                  error={error && kodeWilayah.length === 0 && true}
-                  helperText={
-                    error &&
-                    kodeWilayah.length === 0 &&
-                    "Kode Wilayah harus diisi!"
-                  }
-                  {...params}
-                  label="Kode Wilayah"
-                />
-              )}
-              onInputChange={(e, value) => {
-                setKodeWilayah(value.split(" ", 1)[0]);
-                setNamaWilayah(value.split("- ")[1]);
-              }}
-            />
-            <TextField
-              error={error && namaKecamatan.length === 0 && true}
-              helperText={
-                error &&
-                namaKecamatan.length === 0 &&
-                "Nama Kecamatan harus diisi!"
-              }
-              id="outlined-basic"
-              label="Nama Kecamatan"
-              variant="outlined"
-              value={namaKecamatan}
-              sx={spacingTop}
-              onChange={(e) => setNamaKecamatan(e.target.value)}
-            />
-          </Box>
-        </Box>
-        <Box sx={spacingTop}>
-          <Button
-            variant="contained"
-            startIcon={<SaveIcon />}
-            onClick={saveUser}
-          >
-            Simpan
-          </Button>
-        </Box>
-        <Divider sx={spacingTop} />
-        {error && (
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error" sx={alertBox}>
-              Data belum terisi semua!
-            </Alert>
-          </Snackbar>
-        )}
-      </Box>{" "}
-    </>
+          {"< Kembali"}
+        </Button>
+        <Button variant="contained" startIcon={<SaveIcon />} onClick={saveUser}>
+          Simpan
+        </Button>
+      </Box>
+      <Divider sx={spacingTop} />
+      {error && (
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={alertBox}>
+            Data belum terisi semua!
+          </Alert>
+        </Snackbar>
+      )}
+    </Box>
   );
 };
 

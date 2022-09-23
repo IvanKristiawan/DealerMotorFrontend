@@ -11,8 +11,7 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert,
-  Breadcrumbs
+  Alert
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -83,102 +82,97 @@ const UbahLeasing = () => {
   }
 
   return (
-    <>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Typography
-          underline="hover"
-          color="inherit"
-          sx={beforeLink}
-          onClick={() => navigate("/leasing")}
-        >
-          Leasing
-        </Typography>
-        <Typography color="text.primary">Ubah Leasing</Typography>
-      </Breadcrumbs>
-      <Box sx={container}>
-        <Typography color="#757575">Master</Typography>
-        <Typography variant="h4" sx={subTitleText}>
-          Ubah Leasing
-        </Typography>
-        <Divider sx={dividerStyle} />
-        <Box sx={showDataContainer}>
-          <Box sx={showDataWrapper}>
-            <TextField
-              error={error && kodeLeasing.length === 0 && true}
-              helperText={
-                error && kodeLeasing.length === 0 && "Kode harus diisi!"
-              }
-              id="outlined-basic"
-              label="Kode"
-              variant="outlined"
-              value={kodeLeasing}
-              InputProps={{
-                readOnly: true
-              }}
-              onChange={(e) => setKodeLeasing(e.target.value)}
-            />
-            <TextField
-              error={error && namaLeasing.length === 0 && true}
-              helperText={
-                error && namaLeasing.length === 0 && "Nama Leasing harus diisi!"
-              }
-              id="outlined-basic"
-              label="Nama Leasing"
-              variant="outlined"
-              sx={spacingTop}
-              value={namaLeasing}
-              onChange={(e) => setNamaLeasing(e.target.value)}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Alamat"
-              variant="outlined"
-              sx={spacingTop}
-              value={alamatLeasing}
-              onChange={(e) => setAlamatLeasing(e.target.value)}
-            />
-          </Box>
-          <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
-            <TextField
-              id="outlined-basic"
-              label="Telepon"
-              variant="outlined"
-              value={teleponLeasing}
-              onChange={(e) => setTeleponLeasing(e.target.value)}
-            />
-            <TextField
-              error={error && picLeasing.length === 0 && true}
-              helperText={
-                error && picLeasing.length === 0 && "PIC Leasing harus diisi!"
-              }
-              id="outlined-basic"
-              label="PIC"
-              variant="outlined"
-              sx={spacingTop}
-              value={picLeasing}
-              onChange={(e) => setPicLeasing(e.target.value)}
-            />
-          </Box>
+    <Box sx={container}>
+      <Typography color="#757575">Master</Typography>
+      <Typography variant="h4" sx={subTitleText}>
+        Ubah Leasing
+      </Typography>
+      <Divider sx={dividerStyle} />
+      <Box sx={showDataContainer}>
+        <Box sx={showDataWrapper}>
+          <TextField
+            error={error && kodeLeasing.length === 0 && true}
+            helperText={
+              error && kodeLeasing.length === 0 && "Kode harus diisi!"
+            }
+            id="outlined-basic"
+            label="Kode"
+            variant="outlined"
+            value={kodeLeasing}
+            InputProps={{
+              readOnly: true
+            }}
+            onChange={(e) => setKodeLeasing(e.target.value)}
+          />
+          <TextField
+            error={error && namaLeasing.length === 0 && true}
+            helperText={
+              error && namaLeasing.length === 0 && "Nama Leasing harus diisi!"
+            }
+            id="outlined-basic"
+            label="Nama Leasing"
+            variant="outlined"
+            sx={spacingTop}
+            value={namaLeasing}
+            onChange={(e) => setNamaLeasing(e.target.value)}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Alamat"
+            variant="outlined"
+            sx={spacingTop}
+            value={alamatLeasing}
+            onChange={(e) => setAlamatLeasing(e.target.value)}
+          />
         </Box>
-        <Box sx={spacingTop}>
-          <Button
-            variant="contained"
-            startIcon={<EditIcon />}
-            onClick={updateUser}
-          >
-            Ubah
-          </Button>
+        <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
+          <TextField
+            id="outlined-basic"
+            label="Telepon"
+            variant="outlined"
+            value={teleponLeasing}
+            onChange={(e) => setTeleponLeasing(e.target.value)}
+          />
+          <TextField
+            error={error && picLeasing.length === 0 && true}
+            helperText={
+              error && picLeasing.length === 0 && "PIC Leasing harus diisi!"
+            }
+            id="outlined-basic"
+            label="PIC"
+            variant="outlined"
+            sx={spacingTop}
+            value={picLeasing}
+            onChange={(e) => setPicLeasing(e.target.value)}
+          />
         </Box>
-        <Divider sx={dividerStyle} />
-        {error && (
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error" sx={alertBox}>
-              Data belum terisi semua!
-            </Alert>
-          </Snackbar>
-        )}
       </Box>
-    </>
+      <Box sx={spacingTop}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={() => navigate("/leasing")}
+          sx={{ marginRight: 2 }}
+        >
+          {"< Kembali"}
+        </Button>
+        <Button
+          variant="contained"
+          startIcon={<EditIcon />}
+          onClick={updateUser}
+        >
+          Ubah
+        </Button>
+      </Box>
+      <Divider sx={dividerStyle} />
+      {error && (
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={alertBox}>
+            Data belum terisi semua!
+          </Alert>
+        </Snackbar>
+      )}
+    </Box>
   );
 };
 

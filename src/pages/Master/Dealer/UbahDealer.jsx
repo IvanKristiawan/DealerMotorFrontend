@@ -11,8 +11,7 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert,
-  Breadcrumbs
+  Alert
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -83,102 +82,95 @@ const UbahDealer = () => {
   }
 
   return (
-    <>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Typography
-          underline="hover"
-          color="inherit"
-          sx={beforeLink}
-          onClick={() => navigate("/dealer")}
-        >
-          Dealer
-        </Typography>
-        <Typography color="text.primary">Ubah Dealer</Typography>
-      </Breadcrumbs>
-      <Box sx={container}>
-        <Typography color="#757575">Master</Typography>
-        <Typography variant="h4" sx={subTitleText}>
-          Ubah Dealer
-        </Typography>
-        <Divider sx={dividerStyle} />
-        <Box sx={showDataContainer}>
-          <Box sx={showDataWrapper}>
-            <TextField
-              error={error && kodeDealer.length === 0 && true}
-              helperText={
-                error && kodeDealer.length === 0 && "Kode harus diisi!"
-              }
-              id="outlined-basic"
-              label="Kode"
-              variant="outlined"
-              value={kodeDealer}
-              InputProps={{
-                readOnly: true
-              }}
-              onChange={(e) => setKodeDealer(e.target.value)}
-            />
-            <TextField
-              error={error && namaDealer.length === 0 && true}
-              helperText={
-                error && namaDealer.length === 0 && "Nama Dealer harus diisi!"
-              }
-              id="outlined-basic"
-              label="Nama Dealer"
-              variant="outlined"
-              sx={spacingTop}
-              value={namaDealer}
-              onChange={(e) => setNamaDealer(e.target.value)}
-            />
-            <TextField
-              id="outlined-basic"
-              label="Alamat"
-              variant="outlined"
-              sx={spacingTop}
-              value={alamatDealer}
-              onChange={(e) => setAlamatDealer(e.target.value)}
-            />
-          </Box>
-          <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
-            <TextField
-              id="outlined-basic"
-              label="Telepon"
-              variant="outlined"
-              value={teleponDealer}
-              onChange={(e) => setTeleponDealer(e.target.value)}
-            />
-            <TextField
-              error={error && PICDealer.length === 0 && true}
-              helperText={
-                error && PICDealer.length === 0 && "PIC Dealer harus diisi!"
-              }
-              id="outlined-basic"
-              label="PIC"
-              variant="outlined"
-              sx={spacingTop}
-              value={PICDealer}
-              onChange={(e) => setPICDealer(e.target.value)}
-            />
-          </Box>
+    <Box sx={container}>
+      <Typography color="#757575">Master</Typography>
+      <Typography variant="h4" sx={subTitleText}>
+        Ubah Dealer
+      </Typography>
+      <Divider sx={dividerStyle} />
+      <Box sx={showDataContainer}>
+        <Box sx={showDataWrapper}>
+          <TextField
+            error={error && kodeDealer.length === 0 && true}
+            helperText={error && kodeDealer.length === 0 && "Kode harus diisi!"}
+            id="outlined-basic"
+            label="Kode"
+            variant="outlined"
+            value={kodeDealer}
+            InputProps={{
+              readOnly: true
+            }}
+            onChange={(e) => setKodeDealer(e.target.value)}
+          />
+          <TextField
+            error={error && namaDealer.length === 0 && true}
+            helperText={
+              error && namaDealer.length === 0 && "Nama Dealer harus diisi!"
+            }
+            id="outlined-basic"
+            label="Nama Dealer"
+            variant="outlined"
+            sx={spacingTop}
+            value={namaDealer}
+            onChange={(e) => setNamaDealer(e.target.value)}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Alamat"
+            variant="outlined"
+            sx={spacingTop}
+            value={alamatDealer}
+            onChange={(e) => setAlamatDealer(e.target.value)}
+          />
         </Box>
-        <Box sx={spacingTop}>
-          <Button
-            variant="contained"
-            startIcon={<EditIcon />}
-            onClick={updateUser}
-          >
-            Ubah
-          </Button>
+        <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
+          <TextField
+            id="outlined-basic"
+            label="Telepon"
+            variant="outlined"
+            value={teleponDealer}
+            onChange={(e) => setTeleponDealer(e.target.value)}
+          />
+          <TextField
+            error={error && PICDealer.length === 0 && true}
+            helperText={
+              error && PICDealer.length === 0 && "PIC Dealer harus diisi!"
+            }
+            id="outlined-basic"
+            label="PIC"
+            variant="outlined"
+            sx={spacingTop}
+            value={PICDealer}
+            onChange={(e) => setPICDealer(e.target.value)}
+          />
         </Box>
-        <Divider sx={dividerStyle} />
-        {error && (
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error" sx={alertBox}>
-              Data belum terisi semua!
-            </Alert>
-          </Snackbar>
-        )}
       </Box>
-    </>
+      <Box sx={spacingTop}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          onClick={() => navigate("/dealer")}
+          sx={{ marginRight: 2 }}
+        >
+          {"< Kembali"}
+        </Button>
+        <Button
+          variant="contained"
+          startIcon={<EditIcon />}
+          onClick={updateUser}
+        >
+          Ubah
+        </Button>
+      </Box>
+      <Divider sx={dividerStyle} />
+      {error && (
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={alertBox}>
+            Data belum terisi semua!
+          </Alert>
+        </Snackbar>
+      )}
+    </Box>
   );
 };
 

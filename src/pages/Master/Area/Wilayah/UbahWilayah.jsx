@@ -11,8 +11,7 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert,
-  Breadcrumbs
+  Alert
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -74,73 +73,68 @@ const UbahWilayah = () => {
   }
 
   return (
-    <>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Typography
-          underline="hover"
-          color="inherit"
-          sx={beforeLink}
+    <Box sx={container}>
+      <Typography color="#757575">Master</Typography>
+      <Typography variant="h4" sx={subTitleText}>
+        Ubah Wilayah
+      </Typography>
+      <Divider sx={dividerStyle} />
+      <Box sx={showDataContainer}>
+        <Box sx={showDataWrapper}>
+          <TextField
+            error={error && kodeWilayah.length === 0 && true}
+            helperText={
+              error && kodeWilayah.length === 0 && "Kode harus diisi!"
+            }
+            id="outlined-basic"
+            label="Kode"
+            variant="outlined"
+            value={kodeWilayah}
+            InputProps={{
+              readOnly: true
+            }}
+            onChange={(e) => setKodeWilayah(e.target.value)}
+          />
+          <TextField
+            error={error && namaWilayah.length === 0 && true}
+            helperText={
+              error && namaWilayah.length === 0 && "Nama Wilayah harus diisi!"
+            }
+            id="outlined-basic"
+            label="Nama Wilayah"
+            variant="outlined"
+            sx={spacingTop}
+            value={namaWilayah}
+            onChange={(e) => setNamaWilayah(e.target.value)}
+          />
+        </Box>
+      </Box>
+      <Box sx={spacingTop}>
+        <Button
+          variant="outlined"
+          color="secondary"
           onClick={() => navigate("/wilayah")}
+          sx={{ marginRight: 2 }}
         >
-          Wilayah
-        </Typography>
-        <Typography color="text.primary">Ubah Wilayah</Typography>
-      </Breadcrumbs>
-      <Box sx={container}>
-        <Typography color="#757575">Master</Typography>
-        <Typography variant="h4" sx={subTitleText}>
-          Ubah Wilayah
-        </Typography>
-        <Divider sx={dividerStyle} />
-        <Box sx={showDataContainer}>
-          <Box sx={showDataWrapper}>
-            <TextField
-              error={error && kodeWilayah.length === 0 && true}
-              helperText={
-                error && kodeWilayah.length === 0 && "Kode harus diisi!"
-              }
-              id="outlined-basic"
-              label="Kode"
-              variant="outlined"
-              value={kodeWilayah}
-              InputProps={{
-                readOnly: true
-              }}
-              onChange={(e) => setKodeWilayah(e.target.value)}
-            />
-            <TextField
-              error={error && namaWilayah.length === 0 && true}
-              helperText={
-                error && namaWilayah.length === 0 && "Nama Wilayah harus diisi!"
-              }
-              id="outlined-basic"
-              label="Nama Wilayah"
-              variant="outlined"
-              sx={spacingTop}
-              value={namaWilayah}
-              onChange={(e) => setNamaWilayah(e.target.value)}
-            />
-          </Box>
-        </Box>
-        <Box sx={spacingTop}>
-          <Button
-            variant="contained"
-            startIcon={<EditIcon />}
-            onClick={updateUser}
-          >
-            Ubah
-          </Button>
-        </Box>
-        <Divider sx={dividerStyle} />
-        {error && (
-          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error" sx={alertBox}>
-              Data belum terisi semua!
-            </Alert>
-          </Snackbar>
-        )}
-      </Box>{" "}
-    </>
+          {"< Kembali"}
+        </Button>
+        <Button
+          variant="contained"
+          startIcon={<EditIcon />}
+          onClick={updateUser}
+        >
+          Ubah
+        </Button>
+      </Box>
+      <Divider sx={dividerStyle} />
+      {error && (
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={alertBox}>
+            Data belum terisi semua!
+          </Alert>
+        </Snackbar>
+      )}
+    </Box>
   );
 };
 
