@@ -1,16 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
-import {
-  Box,
-  TextField,
-  Typography,
-  Divider,
-  Pagination,
-  Card,
-  CardActionArea,
-  CardMedia
-} from "@mui/material";
+import { Box, TextField, Typography, Divider, Pagination } from "@mui/material";
 import { ShowTableCabang } from "../../../components/ShowTable";
 import {
   SearchBar,
@@ -18,35 +10,27 @@ import {
   usePagination,
   ButtonModifier
 } from "../../../components";
-import Carousel from "react-elastic-carousel";
 import { tempUrl } from "../../../contexts/ContextProvider";
 import { useStateContext } from "../../../contexts/ContextProvider";
-import { AuthContext } from "../../../contexts/AuthContext";
 
 const TampilCabang = () => {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const { screenSize } = useStateContext();
-  const [gambar, setGambar] = useState([]);
+
   const [kodeCabang, setKodeCabang] = useState("");
   const [namaCabang, setNamaCabang] = useState("");
   const [alamatCabang, setAlamatCabang] = useState("");
   const [teleponCabang, setTeleponCabang] = useState("");
+  const [picCabang, setPicCabang] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUser] = useState([]);
   const navigate = useNavigate();
 
-  const breakPoints = [
-    { width: 1, itemsToShow: 1 },
-    { width: 550, itemsToShow: 3 },
-    { width: 768, itemsToShow: 4 },
-    { width: 1200, itemsToShow: 5 }
-  ];
-
   const [loading, setLoading] = useState(false);
   let [page, setPage] = useState(1);
-  let PER_PAGE = 20;
+  const PER_PAGE = 20;
 
   // Get current posts
   const indexOfLastPost = page * PER_PAGE;
@@ -58,7 +42,8 @@ const TampilCabang = () => {
       val.kodeCabang.toUpperCase().includes(searchTerm.toUpperCase()) ||
       val.namaCabang.toUpperCase().includes(searchTerm.toUpperCase()) ||
       val.alamatCabang.toUpperCase().includes(searchTerm.toUpperCase()) ||
-      val.teleponCabang.toUpperCase().includes(searchTerm.toUpperCase())
+      val.teleponCabang.toUpperCase().includes(searchTerm.toUpperCase()) ||
+      val.picCabang.toUpperCase().includes(searchTerm.toUpperCase())
     ) {
       return val;
     }
@@ -80,7 +65,7 @@ const TampilCabang = () => {
 
   const getUsers = async () => {
     setLoading(true);
-    const response = await axios.post(`${tempUrl}/cabangForTable`, {
+    const response = await axios.post(`${tempUrl}/cabangs`, {
       id: user._id,
       token: user.token
     });
@@ -94,11 +79,11 @@ const TampilCabang = () => {
         id: user._id,
         token: user.token
       });
-      setGambar(response.data.gambar);
       setKodeCabang(response.data.kodeCabang);
       setNamaCabang(response.data.namaCabang);
       setAlamatCabang(response.data.alamatCabang);
       setTeleponCabang(response.data.teleponCabang);
+      setPicCabang(response.data.picCabang);
     }
   };
 
@@ -110,11 +95,11 @@ const TampilCabang = () => {
         token: user.token
       });
       getUsers();
-      setGambar([]);
       setKodeCabang("");
       setNamaCabang("");
       setAlamatCabang("");
       setTeleponCabang("");
+      setPicCabang("");
       setLoading(false);
       navigate("/cabang");
     } catch (error) {
@@ -142,30 +127,11 @@ const TampilCabang = () => {
         />
       </Box>
       <Divider sx={dividerStyle} />
-
-      {gambar.length !== 0 && (
-        <Carousel breakPoints={breakPoints} sx={carouselStyle}>
-          {gambar.length !== 0 &&
-            gambar.map((img) => (
-              <Card sx={carouselCard}>
-                <CardActionArea disableRipple>
-                  <CardMedia
-                    component="img"
-                    height="100%"
-                    src={img}
-                    alt={namaCabang}
-                  />
-                </CardActionArea>
-              </Card>
-            ))}
-        </Carousel>
-      )}
-
-      <Box sx={textFieldContainer}>
-        <Box sx={textFieldWrapper}>
+      <Box sx={showDataContainer}>
+        <Box sx={showDataWrapper}>
           <TextField
             id="outlined-basic"
-            label="Kode Cabang"
+            label="Kode"
             variant="filled"
             sx={textFieldStyle}
             InputProps={{
@@ -183,11 +149,9 @@ const TampilCabang = () => {
             }}
             value={namaCabang}
           />
-        </Box>
-        <Box sx={textFieldBox}>
           <TextField
             id="outlined-basic"
-            label="Alamat Cabang"
+            label="Alamat"
             variant="filled"
             sx={textFieldStyle}
             InputProps={{
@@ -195,15 +159,27 @@ const TampilCabang = () => {
             }}
             value={alamatCabang}
           />
+        </Box>
+        <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
           <TextField
             id="outlined-basic"
-            label="Telepon Cabang"
+            label="Telepon"
             variant="filled"
             sx={textFieldStyle}
             InputProps={{
               readOnly: true
             }}
             value={teleponCabang}
+          />
+          <TextField
+            id="outlined-basic"
+            label="PIC"
+            variant="filled"
+            sx={textFieldStyle}
+            InputProps={{
+              readOnly: true
+            }}
+            value={picCabang}
           />
         </Box>
       </Box>
@@ -248,48 +224,24 @@ const dividerStyle = {
   pt: 4
 };
 
-const carouselStyle = {
+const showDataContainer = {
+  mt: 4,
   display: "flex",
-  height: "200px"
+  flexWrap: "wrap"
 };
 
-const carouselCard = {
-  m: "auto",
-  mt: 2,
-  width: "200px",
-  height: "200px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center"
-};
-
-const textFieldContainer = {
-  display: "flex",
-  flexDirection: {
-    xs: "column",
-    sm: "row"
-  }
-};
-
-const textFieldWrapper = {
+const showDataWrapper = {
   display: "flex",
   flex: 1,
   flexDirection: "column",
-  mr: {
-    xs: 0,
-    sm: 10
+  maxWidth: {
+    md: "40vw"
   }
 };
 
 const textFieldStyle = {
   display: "flex",
   mt: 4
-};
-
-const textFieldBox = {
-  display: "flex",
-  flex: 1,
-  flexDirection: "column"
 };
 
 const searchBarContainer = {

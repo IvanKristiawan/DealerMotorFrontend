@@ -524,6 +524,7 @@ export function ShowTableCabang({ currentPosts, searchTerm }) {
             <TableCell sx={{ fontWeight: "bold" }}>Nama Cabang</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Alamat Cabang</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Telepon Cabang</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>PIC</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -543,7 +544,8 @@ export function ShowTableCabang({ currentPosts, searchTerm }) {
                   .includes(searchTerm.toUpperCase()) ||
                 val.teleponCabang
                   .toUpperCase()
-                  .includes(searchTerm.toUpperCase())
+                  .includes(searchTerm.toUpperCase()) ||
+                val.picCabang.toUpperCase().includes(searchTerm.toUpperCase())
               ) {
                 return val;
               }
@@ -566,6 +568,7 @@ export function ShowTableCabang({ currentPosts, searchTerm }) {
                 <TableCell>{user.namaCabang}</TableCell>
                 <TableCell>{user.alamatCabang}</TableCell>
                 <TableCell>{user.teleponCabang}</TableCell>
+                <TableCell>{user.picCabang}</TableCell>
               </TableRow>
             ))}
         </TableBody>

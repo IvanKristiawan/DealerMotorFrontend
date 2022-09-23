@@ -56,12 +56,7 @@ const UbahDealer = () => {
 
   const updateUser = async (e) => {
     e.preventDefault();
-    if (
-      namaDealer.length === 0 ||
-      alamatDealer.length === 0 ||
-      teleponDealer.length === 0 ||
-      PICDealer.length === 0
-    ) {
+    if (namaDealer.length === 0 || PICDealer.length === 0) {
       setError(true);
       setOpen(!open);
     } else {
@@ -149,9 +144,13 @@ const UbahDealer = () => {
               label="Telepon"
               variant="outlined"
               value={teleponDealer}
-              onChange={(e) => setAlamatDealer(e.target.value)}
+              onChange={(e) => setTeleponDealer(e.target.value)}
             />
             <TextField
+              error={error && PICDealer.length === 0 && true}
+              helperText={
+                error && PICDealer.length === 0 && "PIC Dealer harus diisi!"
+              }
               id="outlined-basic"
               label="PIC"
               variant="outlined"
