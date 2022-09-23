@@ -23,6 +23,9 @@ import { SearchBar, Loader, usePagination } from "../../../components";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import PrintIcon from "@mui/icons-material/Print";
 
 const DaftarUser = () => {
   const { user, dispatch } = useContext(AuthContext);
@@ -38,6 +41,14 @@ const DaftarUser = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUser] = useState([]);
   const navigate = useNavigate();
+
+  const columns = [
+    { title: "Username", field: "username" },
+    { title: "Tipe User", field: "tipeUser" },
+    { title: "Periode", field: "periode" },
+    { title: "Kode Kwitansi", field: "kodeKwitansi" },
+    { title: "No. Terakhir", field: "noTerakhir" }
+  ];
 
   const [open, setOpen] = useState(false);
 
@@ -131,6 +142,37 @@ const DaftarUser = () => {
     }
   };
 
+  const downloadPdf = () => {
+    var date = new Date();
+    var current_date =
+      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+    var current_time =
+      date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    const doc = new jsPDF();
+    doc.setFontSize(12);
+    doc.text(`MEGA MOTOR - JAKARTA`, 15, 10);
+    doc.text(`TANGERANG`, 15, 15);
+    doc.setFontSize(16);
+    doc.text(`Daftar User`, 90, 30);
+    doc.setFontSize(10);
+    doc.text(
+      `Dicetak Oleh: ${user.username} | Tanggal : ${current_date} | Jam : ${current_time}`,
+      15,
+      45
+    );
+    doc.setFontSize(12);
+    doc.autoTable({
+      margin: { top: 50 },
+      columns: columns.map((col) => ({ ...col, dataKey: col.field })),
+      body: users,
+      headStyles: {
+        fillColor: [117, 117, 117],
+        color: [0, 0, 0]
+      }
+    });
+    doc.save(`daftarUser.pdf`);
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -141,6 +183,16 @@ const DaftarUser = () => {
       <Typography variant="h4" sx={subTitleText}>
         Daftar User
       </Typography>
+      <Box sx={buttonModifierContainer}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          startIcon={<PrintIcon />}
+          onClick={() => downloadPdf()}
+        >
+          Cetak
+        </Button>
+      </Box>
       <Box sx={buttonModifierContainer}>
         <Button
           variant="contained"

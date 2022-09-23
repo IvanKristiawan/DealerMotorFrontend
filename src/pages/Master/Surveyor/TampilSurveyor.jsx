@@ -2,7 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Box, TextField, Typography, Divider, Pagination } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Typography,
+  Divider,
+  Pagination,
+  Button
+} from "@mui/material";
 import { ShowTableSurveyor } from "../../../components/ShowTable";
 import {
   SearchBar,
@@ -12,6 +19,9 @@ import {
 } from "../../../components";
 import { tempUrl } from "../../../contexts/ContextProvider";
 import { useStateContext } from "../../../contexts/ContextProvider";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import PrintIcon from "@mui/icons-material/Print";
 
 const TampilSurveyor = () => {
   const { user, dispatch } = useContext(AuthContext);
@@ -26,6 +36,13 @@ const TampilSurveyor = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUser] = useState([]);
   const navigate = useNavigate();
+
+  const columns = [
+    { title: "Kode", field: "kodeSurveyor" },
+    { title: "Nama Surveyor", field: "namaSurveyor" },
+    { title: "Jenis Surveyor", field: "jenisSurveyor" },
+    { title: "Telepon Surveyor", field: "teleponSurveyor" }
+  ];
 
   const [loading, setLoading] = useState(false);
   let [page, setPage] = useState(1);
@@ -103,6 +120,37 @@ const TampilSurveyor = () => {
     }
   };
 
+  const downloadPdf = () => {
+    var date = new Date();
+    var current_date =
+      date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+    var current_time =
+      date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    const doc = new jsPDF();
+    doc.setFontSize(12);
+    doc.text(`MEGA MOTOR - JAKARTA`, 15, 10);
+    doc.text(`TANGERANG`, 15, 15);
+    doc.setFontSize(16);
+    doc.text(`Daftar Surveyor`, 90, 30);
+    doc.setFontSize(10);
+    doc.text(
+      `Dicetak Oleh: ${user.username} | Tanggal : ${current_date} | Jam : ${current_time}`,
+      15,
+      45
+    );
+    doc.setFontSize(12);
+    doc.autoTable({
+      margin: { top: 50 },
+      columns: columns.map((col) => ({ ...col, dataKey: col.field })),
+      body: users,
+      headStyles: {
+        fillColor: [117, 117, 117],
+        color: [0, 0, 0]
+      }
+    });
+    doc.save(`daftarSurveyor.pdf`);
+  };
+
   if (loading) {
     return <Loader />;
   }
@@ -113,6 +161,16 @@ const TampilSurveyor = () => {
       <Typography variant="h4" sx={subTitleText}>
         Surveyor
       </Typography>
+      <Box sx={buttonModifierContainer}>
+        <Button
+          variant="outlined"
+          color="secondary"
+          startIcon={<PrintIcon />}
+          onClick={() => downloadPdf()}
+        >
+          Cetak
+        </Button>
+      </Box>
       <Box sx={buttonModifierContainer}>
         <ButtonModifier
           id={id}
