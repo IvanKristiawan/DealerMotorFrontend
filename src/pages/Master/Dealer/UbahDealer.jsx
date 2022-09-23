@@ -112,7 +112,7 @@ const UbahDealer = () => {
             variant="outlined"
             sx={spacingTop}
             value={namaDealer}
-            onChange={(e) => setNamaDealer(e.target.value)}
+            onChange={(e) => setNamaDealer(e.target.value.toUpperCase())}
           />
           <TextField
             id="outlined-basic"
@@ -120,7 +120,7 @@ const UbahDealer = () => {
             variant="outlined"
             sx={spacingTop}
             value={alamatDealer}
-            onChange={(e) => setAlamatDealer(e.target.value)}
+            onChange={(e) => setAlamatDealer(e.target.value.toUpperCase())}
           />
         </Box>
         <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
@@ -129,7 +129,7 @@ const UbahDealer = () => {
             label="Telepon"
             variant="outlined"
             value={teleponDealer}
-            onChange={(e) => setTeleponDealer(e.target.value)}
+            onChange={(e) => setTeleponDealer(e.target.value.toUpperCase())}
           />
           <TextField
             error={error && PICDealer.length === 0 && true}
@@ -141,7 +141,7 @@ const UbahDealer = () => {
             variant="outlined"
             sx={spacingTop}
             value={PICDealer}
-            onChange={(e) => setPICDealer(e.target.value)}
+            onChange={(e) => setPICDealer(e.target.value.toUpperCase())}
           />
         </Box>
       </Box>

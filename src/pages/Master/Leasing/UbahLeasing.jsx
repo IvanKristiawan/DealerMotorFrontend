@@ -114,7 +114,7 @@ const UbahLeasing = () => {
             variant="outlined"
             sx={spacingTop}
             value={namaLeasing}
-            onChange={(e) => setNamaLeasing(e.target.value)}
+            onChange={(e) => setNamaLeasing(e.target.value.toUpperCase())}
           />
           <TextField
             id="outlined-basic"
@@ -122,7 +122,7 @@ const UbahLeasing = () => {
             variant="outlined"
             sx={spacingTop}
             value={alamatLeasing}
-            onChange={(e) => setAlamatLeasing(e.target.value)}
+            onChange={(e) => setAlamatLeasing(e.target.value.toUpperCase())}
           />
         </Box>
         <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
@@ -131,7 +131,7 @@ const UbahLeasing = () => {
             label="Telepon"
             variant="outlined"
             value={teleponLeasing}
-            onChange={(e) => setTeleponLeasing(e.target.value)}
+            onChange={(e) => setTeleponLeasing(e.target.value.toUpperCase())}
           />
           <TextField
             error={error && picLeasing.length === 0 && true}
@@ -143,7 +143,7 @@ const UbahLeasing = () => {
             variant="outlined"
             sx={spacingTop}
             value={picLeasing}
-            onChange={(e) => setPicLeasing(e.target.value)}
+            onChange={(e) => setPicLeasing(e.target.value.toUpperCase())}
           />
         </Box>
       </Box>

@@ -79,7 +79,7 @@ const TambahCabang = () => {
             label="Nama Cabang"
             variant="outlined"
             value={namaCabang}
-            onChange={(e) => setNamaCabang(e.target.value)}
+            onChange={(e) => setNamaCabang(e.target.value.toUpperCase())}
           />
           <TextField
             id="outlined-basic"
@@ -87,7 +87,7 @@ const TambahCabang = () => {
             variant="outlined"
             value={alamatCabang}
             sx={spacingTop}
-            onChange={(e) => setAlamatCabang(e.target.value)}
+            onChange={(e) => setAlamatCabang(e.target.value.toUpperCase())}
           />
         </Box>
         <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
@@ -96,7 +96,7 @@ const TambahCabang = () => {
             label="Telepon"
             variant="outlined"
             value={teleponCabang}
-            onChange={(e) => setTeleponCabang(e.target.value)}
+            onChange={(e) => setTeleponCabang(e.target.value.toUpperCase())}
           />
           <TextField
             error={error && picCabang.length === 0 && true}
@@ -108,7 +108,7 @@ const TambahCabang = () => {
             variant="outlined"
             value={picCabang}
             sx={spacingTop}
-            onChange={(e) => setPicCabang(e.target.value)}
+            onChange={(e) => setPicCabang(e.target.value.toUpperCase())}
           />
         </Box>
       </Box>

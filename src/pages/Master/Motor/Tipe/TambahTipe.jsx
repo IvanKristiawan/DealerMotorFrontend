@@ -81,7 +81,7 @@ const TambahTipe = () => {
             label="Kode"
             variant="outlined"
             value={kodeTipe}
-            onChange={(e) => setKodeTipe(e.target.value)}
+            onChange={(e) => setKodeTipe(e.target.value.toUpperCase())}
           />
           <TextField
             error={error && namaTipe.length === 0 && true}
@@ -93,7 +93,7 @@ const TambahTipe = () => {
             variant="outlined"
             sx={spacingTop}
             value={namaTipe}
-            onChange={(e) => setNamaTipe(e.target.value)}
+            onChange={(e) => setNamaTipe(e.target.value.toUpperCase())}
           />
           <TextField
             id="outlined-basic"
@@ -101,7 +101,7 @@ const TambahTipe = () => {
             variant="outlined"
             sx={spacingTop}
             value={noRangka}
-            onChange={(e) => setNoRangka(e.target.value)}
+            onChange={(e) => setNoRangka(e.target.value.toUpperCase())}
           />
         </Box>
         <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
@@ -110,7 +110,7 @@ const TambahTipe = () => {
             label="No. Mesin"
             variant="outlined"
             value={noMesin}
-            onChange={(e) => setNoMesin(e.target.value)}
+            onChange={(e) => setNoMesin(e.target.value.toUpperCase())}
           />
           <TextField
             id="outlined-basic"
@@ -118,7 +118,7 @@ const TambahTipe = () => {
             variant="outlined"
             sx={spacingTop}
             value={isi}
-            onChange={(e) => setIsi(e.target.value)}
+            onChange={(e) => setIsi(e.target.value.toUpperCase())}
           />
           <TextField
             error={error && merk.length === 0 && true}
@@ -128,7 +128,7 @@ const TambahTipe = () => {
             variant="outlined"
             sx={spacingTop}
             value={merk}
-            onChange={(e) => setMerk(e.target.value)}
+            onChange={(e) => setMerk(e.target.value.toUpperCase())}
           />
         </Box>
       </Box>

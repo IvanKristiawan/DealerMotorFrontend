@@ -89,7 +89,7 @@ const UbahWarna = () => {
             variant="outlined"
             sx={spacingTop}
             value={namaWarna}
-            onChange={(e) => setNamaWarna(e.target.value)}
+            onChange={(e) => setNamaWarna(e.target.value.toUpperCase())}
           />
         </Box>
       </Box>

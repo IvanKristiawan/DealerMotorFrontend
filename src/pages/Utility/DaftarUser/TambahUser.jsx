@@ -84,7 +84,7 @@ const TambahUser = () => {
             label="Username"
             variant="outlined"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value.toUpperCase())}
           />
           <TextField
             error={error && tipeUser.length === 0 && true}
@@ -96,7 +96,7 @@ const TambahUser = () => {
             variant="outlined"
             sx={spacingTop}
             value={tipeUser}
-            onChange={(e) => setTipeUser(e.target.value)}
+            onChange={(e) => setTipeUser(e.target.value.toUpperCase())}
           />
           <TextField
             error={error && periode.length === 0 && true}
@@ -106,7 +106,7 @@ const TambahUser = () => {
             variant="outlined"
             sx={spacingTop}
             value={periode}
-            onChange={(e) => setPeriode(e.target.value)}
+            onChange={(e) => setPeriode(e.target.value.toUpperCase())}
           />
         </Box>
         <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
@@ -119,7 +119,7 @@ const TambahUser = () => {
             label="Kode Kwitansi"
             variant="outlined"
             value={kodeKwitansi}
-            onChange={(e) => setKodeKwitansi(e.target.value)}
+            onChange={(e) => setKodeKwitansi(e.target.value.toUpperCase())}
           />
           <TextField
             id="outlined-basic"
@@ -127,7 +127,7 @@ const TambahUser = () => {
             variant="outlined"
             sx={spacingTop}
             value={noTerakhir}
-            onChange={(e) => setKodeKwitansi(e.target.value)}
+            onChange={(e) => setNoTerakhir(e.target.value.toUpperCase())}
           />
           <TextField
             error={error && password.length === 0 && true}

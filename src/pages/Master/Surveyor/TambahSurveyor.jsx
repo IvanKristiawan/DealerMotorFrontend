@@ -84,7 +84,7 @@ const TambahSurveyor = () => {
             label="Nama Surveyor"
             variant="outlined"
             value={namaSurveyor}
-            onChange={(e) => setNamaSurveyor(e.target.value)}
+            onChange={(e) => setNamaSurveyor(e.target.value.toUpperCase())}
           />
           <TextField
             error={error && teleponSurveyor.length === 0 && true}
@@ -98,7 +98,7 @@ const TambahSurveyor = () => {
             variant="outlined"
             value={teleponSurveyor}
             sx={spacingTop}
-            onChange={(e) => setTeleponSurveyor(e.target.value)}
+            onChange={(e) => setTeleponSurveyor(e.target.value.toUpperCase())}
           />
         </Box>
         <Box sx={[showDataWrapper, { marginLeft: 4 }]}>

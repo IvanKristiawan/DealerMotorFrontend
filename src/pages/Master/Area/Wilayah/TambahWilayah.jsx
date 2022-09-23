@@ -73,7 +73,7 @@ const TambahWilayah = () => {
             label="Nama Wilayah"
             variant="outlined"
             value={namaWilayah}
-            onChange={(e) => setNamaWilayah(e.target.value)}
+            onChange={(e) => setNamaWilayah(e.target.value.toUpperCase())}
           />
         </Box>
       </Box>

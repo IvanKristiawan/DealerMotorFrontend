@@ -136,7 +136,7 @@ const UbahKecamatan = () => {
             variant="outlined"
             sx={spacingTop}
             value={namaKecamatan}
-            onChange={(e) => setNamaKecamatan(e.target.value)}
+            onChange={(e) => setNamaKecamatan(e.target.value.toUpperCase())}
           />
         </Box>
       </Box>

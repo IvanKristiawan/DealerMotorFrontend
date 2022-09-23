@@ -77,7 +77,7 @@ const TambahMarketing = () => {
             label="Nama Marketing"
             variant="outlined"
             value={namaMarketing}
-            onChange={(e) => setNamaMarketing(e.target.value)}
+            onChange={(e) => setNamaMarketing(e.target.value.toUpperCase())}
           />
           <TextField
             error={error && teleponMarketing.length === 0 && true}
@@ -91,7 +91,7 @@ const TambahMarketing = () => {
             variant="outlined"
             value={teleponMarketing}
             sx={spacingTop}
-            onChange={(e) => setTeleponMarketing(e.target.value)}
+            onChange={(e) => setTeleponMarketing(e.target.value.toUpperCase())}
           />
         </Box>
       </Box>

@@ -118,7 +118,7 @@ const UbahSurveyor = () => {
             variant="outlined"
             sx={spacingTop}
             value={namaSurveyor}
-            onChange={(e) => setNamaSurveyor(e.target.value)}
+            onChange={(e) => setNamaSurveyor(e.target.value.toUpperCase())}
           />
         </Box>
         <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
@@ -133,7 +133,7 @@ const UbahSurveyor = () => {
             label="Telepon Surveyor"
             variant="outlined"
             value={teleponSurveyor}
-            onChange={(e) => setTeleponSurveyor(e.target.value)}
+            onChange={(e) => setTeleponSurveyor(e.target.value.toUpperCase())}
           />
           <Autocomplete
             disablePortal

@@ -112,7 +112,7 @@ const TambahWarna = () => {
             label="Nama Warna"
             variant="outlined"
             value={namaWarna}
-            onChange={(e) => setNamaWarna(e.target.value)}
+            onChange={(e) => setNamaWarna(e.target.value.toUpperCase())}
           />
         </Box>
       </Box>
