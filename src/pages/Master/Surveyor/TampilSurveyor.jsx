@@ -120,6 +120,7 @@ const TampilSurveyor = () => {
           addLink={`/surveyor/tambahSurveyor`}
           editLink={`/surveyor/${id}/edit`}
           deleteUser={deleteUser}
+          nameUser={kodeSurveyor}
         />
       </Box>
       <Divider sx={dividerStyle} />

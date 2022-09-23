@@ -116,6 +116,7 @@ const TampilMarketing = () => {
           addLink={`/marketing/tambahMarketing`}
           editLink={`/marketing/${id}/edit`}
           deleteUser={deleteUser}
+          nameUser={kodeMarketing}
         />
       </Box>
       <Divider sx={dividerStyle} />

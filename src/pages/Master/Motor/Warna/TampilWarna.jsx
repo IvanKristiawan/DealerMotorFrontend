@@ -106,6 +106,7 @@ const TampilWarna = () => {
           addLink={`/warna/tambahWarna`}
           editLink={`/warna/${id}/edit`}
           deleteUser={deleteUser}
+          nameUser={namaWarna}
         />
       </Box>
       <Divider sx={dividerStyle} />

@@ -124,6 +124,7 @@ const TampilLeasing = () => {
           addLink={`/leasing/tambahLeasing`}
           editLink={`/leasing/${id}/edit`}
           deleteUser={deleteUser}
+          nameUser={kodeLeasing}
         />
       </Box>
       <Divider sx={dividerStyle} />

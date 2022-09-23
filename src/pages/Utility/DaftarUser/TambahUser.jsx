@@ -172,7 +172,7 @@ const TambahUser = () => {
 export default TambahUser;
 
 const container = {
-  pt: 10
+  pt: 4
 };
 
 const subTitleText = {

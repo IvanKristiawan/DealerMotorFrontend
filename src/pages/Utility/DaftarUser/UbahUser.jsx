@@ -203,7 +203,7 @@ const UbahUser = () => {
 export default UbahUser;
 
 const container = {
-  pt: 10
+  pt: 4
 };
 
 const subTitleText = {

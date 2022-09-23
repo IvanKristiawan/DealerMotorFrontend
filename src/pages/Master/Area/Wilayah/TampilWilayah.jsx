@@ -112,6 +112,7 @@ const TampilWilayah = () => {
           addLink={`/wilayah/tambahWilayah`}
           editLink={`/wilayah/${id}/edit`}
           deleteUser={deleteUser}
+          nameUser={kodeWilayah}
         />
       </Box>
       <Divider sx={dividerStyle} />

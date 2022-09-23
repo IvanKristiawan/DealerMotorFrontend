@@ -128,6 +128,7 @@ const TampilTipe = () => {
           addLink={`/tipe/tambahTipe`}
           editLink={`/tipe/${id}/edit`}
           deleteUser={deleteUser}
+          nameUser={kodeTipe}
         />
       </Box>
       <Divider sx={dividerStyle} />

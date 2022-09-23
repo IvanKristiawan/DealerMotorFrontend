@@ -120,6 +120,7 @@ const TampilKecamatan = () => {
           addLink={`/kecamatan/tambahKecamatan`}
           editLink={`/kecamatan/${id}/edit`}
           deleteUser={deleteUser}
+          nameUser={kodeKecamatan}
         />
       </Box>
       <Divider sx={dividerStyle} />

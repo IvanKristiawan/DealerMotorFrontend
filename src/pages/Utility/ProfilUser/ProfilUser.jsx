@@ -99,7 +99,7 @@ const ProfilUser = () => {
 export default ProfilUser;
 
 const container = {
-  pt: 10
+  pt: 4
 };
 
 const subTitleText = {

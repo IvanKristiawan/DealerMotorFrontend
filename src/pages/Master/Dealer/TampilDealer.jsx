@@ -124,6 +124,7 @@ const TampilDealer = () => {
           addLink={`/dealer/tambahDealer`}
           editLink={`/dealer/${id}/edit`}
           deleteUser={deleteUser}
+          nameUser={kodeDealer}
         />
       </Box>
       <Divider sx={dividerStyle} />

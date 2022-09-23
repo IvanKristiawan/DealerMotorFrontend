@@ -9,7 +9,12 @@ import {
   Divider,
   Pagination,
   Button,
-  ButtonGroup
+  ButtonGroup,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions
 } from "@mui/material";
 import { ShowTableUser } from "../../../components/ShowTable";
 import { tempUrl } from "../../../contexts/ContextProvider";
@@ -33,6 +38,16 @@ const DaftarUser = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUser] = useState([]);
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const [loading, setLoading] = useState(false);
   let [page, setPage] = useState(1);
@@ -156,11 +171,28 @@ const DaftarUser = () => {
                 color="error"
                 startIcon={<DeleteOutlineIcon />}
                 sx={{ textTransform: "none" }}
-                onClick={() => deleteUser(id)}
+                onClick={handleClickOpen}
               >
                 Hapus
               </Button>
             </ButtonGroup>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">{`Hapus Data`}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-slide-description">
+                  {`Yakin ingin menghapus data ${username}?`}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={() => deleteUser(id)}>Ok</Button>
+                <Button onClick={handleClose}>Cancel</Button>
+              </DialogActions>
+            </Dialog>
           </>
         )}
       </Box>
@@ -244,7 +276,7 @@ const DaftarUser = () => {
 export default DaftarUser;
 
 const container = {
-  pt: 10
+  pt: 4
 };
 
 const subTitleText = {

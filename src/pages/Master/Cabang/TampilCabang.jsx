@@ -124,6 +124,7 @@ const TampilCabang = () => {
           addLink={`/cabang/tambahCabang`}
           editLink={`/cabang/${id}/edit`}
           deleteUser={deleteUser}
+          nameUser={kodeCabang}
         />
       </Box>
       <Divider sx={dividerStyle} />
