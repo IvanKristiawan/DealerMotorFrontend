@@ -11,7 +11,12 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert
+  Alert,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -22,6 +27,15 @@ const TambahWarna = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [openAlert, setOpenAlert] = React.useState(false);
+
+  const handleClickOpenAlert = () => {
+    setOpenAlert(true);
+  };
+
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
+  };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -37,14 +51,23 @@ const TambahWarna = () => {
       setOpen(!open);
     } else {
       try {
-        setLoading(true);
-        await axios.post(`${tempUrl}/saveWarna`, {
+        let tempNamaWarna = await axios.post(`${tempUrl}/getNamaWarna`, {
           namaWarna,
           id: user._id,
           token: user.token
         });
-        setLoading(false);
-        navigate("/warna");
+        if (tempNamaWarna.data.length > 0) {
+          handleClickOpenAlert();
+        } else {
+          setLoading(true);
+          await axios.post(`${tempUrl}/saveWarna`, {
+            namaWarna,
+            id: user._id,
+            token: user.token
+          });
+          setLoading(false);
+          navigate("/warna");
+        }
       } catch (error) {
         console.log(error);
       }
@@ -61,6 +84,22 @@ const TambahWarna = () => {
       <Typography variant="h4" sx={subTitleText}>
         Tambah Warna
       </Typography>
+      <Dialog
+        open={openAlert}
+        onClose={handleCloseAlert}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{`Data Nama Sama`}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            {`Nama Warna ${namaWarna} sudah ada, ganti Nama Warna!`}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseAlert}>Ok</Button>
+        </DialogActions>
+      </Dialog>
       <Divider sx={dividerStyle} />
       <Box sx={showDataContainer}>
         <Box sx={showDataWrapper}>
