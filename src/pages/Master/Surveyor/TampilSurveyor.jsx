@@ -22,6 +22,7 @@ const TampilSurveyor = () => {
   const [kodeSurveyor, setKodeSurveyor] = useState("");
   const [namaSurveyor, setNamaSurveyor] = useState("");
   const [jenisSurveyor, setJenisSurveyor] = useState("");
+  const [teleponSurveyor, setTeleponSurveyor] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUser] = useState([]);
   const navigate = useNavigate();
@@ -39,7 +40,8 @@ const TampilSurveyor = () => {
     } else if (
       val.kodeSurveyor.toUpperCase().includes(searchTerm.toUpperCase()) ||
       val.namaSurveyor.toUpperCase().includes(searchTerm.toUpperCase()) ||
-      val.jenisSurveyor.toUpperCase().includes(searchTerm.toUpperCase())
+      val.jenisSurveyor.toUpperCase().includes(searchTerm.toUpperCase()) ||
+      val.teleponSurveyor.toUpperCase().includes(searchTerm.toUpperCase())
     ) {
       return val;
     }
@@ -78,6 +80,7 @@ const TampilSurveyor = () => {
       setKodeSurveyor(response.data.kodeSurveyor);
       setNamaSurveyor(response.data.namaSurveyor);
       setJenisSurveyor(response.data.jenisSurveyor);
+      setTeleponSurveyor(response.data.teleponSurveyor);
     }
   };
 
@@ -92,6 +95,7 @@ const TampilSurveyor = () => {
       setKodeSurveyor("");
       setNamaSurveyor("");
       setJenisSurveyor("");
+      setTeleponSurveyor("");
       setLoading(false);
       navigate("/surveyor");
     } catch (error) {
@@ -140,6 +144,18 @@ const TampilSurveyor = () => {
               readOnly: true
             }}
             value={namaSurveyor}
+          />
+        </Box>
+        <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
+          <TextField
+            id="outlined-basic"
+            label="Telepon Surveyor"
+            variant="filled"
+            sx={textFieldStyle}
+            InputProps={{
+              readOnly: true
+            }}
+            value={teleponSurveyor}
           />
           <TextField
             id="outlined-basic"

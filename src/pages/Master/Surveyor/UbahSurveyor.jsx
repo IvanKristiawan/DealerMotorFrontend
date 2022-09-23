@@ -23,6 +23,7 @@ const UbahSurveyor = () => {
   const [kodeSurveyor, setKodeSurveyor] = useState("");
   const [namaSurveyor, setNamaSurveyor] = useState("");
   const [jenisSurveyor, setJenisSurveyor] = useState("");
+  const [teleponSurveyor, setTeleponSurveyor] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -48,12 +49,17 @@ const UbahSurveyor = () => {
     setKodeSurveyor(response.data.kodeSurveyor);
     setNamaSurveyor(response.data.namaSurveyor);
     setJenisSurveyor(response.data.jenisSurveyor);
+    setTeleponSurveyor(response.data.teleponSurveyor);
     setLoading(false);
   };
 
   const updateUser = async (e) => {
     e.preventDefault();
-    if (namaSurveyor.length === 0 || jenisSurveyor.length === 0) {
+    if (
+      namaSurveyor.length === 0 ||
+      jenisSurveyor.length === 0 ||
+      teleponSurveyor.length === 0
+    ) {
       setError(true);
       setOpen(!open);
     } else {
@@ -62,6 +68,7 @@ const UbahSurveyor = () => {
         await axios.post(`${tempUrl}/updateSurveyor/${id}`, {
           namaSurveyor,
           jenisSurveyor,
+          teleponSurveyor,
           id: user._id,
           token: user.token
         });
@@ -127,6 +134,21 @@ const UbahSurveyor = () => {
               sx={spacingTop}
               value={namaSurveyor}
               onChange={(e) => setNamaSurveyor(e.target.value)}
+            />
+          </Box>
+          <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
+            <TextField
+              error={error && teleponSurveyor.length === 0 && true}
+              helperText={
+                error &&
+                teleponSurveyor.length === 0 &&
+                "Telepon Surveyor harus diisi!"
+              }
+              id="outlined-basic"
+              label="Telepon Surveyor"
+              variant="outlined"
+              value={teleponSurveyor}
+              onChange={(e) => setTeleponSurveyor(e.target.value)}
             />
             <Autocomplete
               disablePortal

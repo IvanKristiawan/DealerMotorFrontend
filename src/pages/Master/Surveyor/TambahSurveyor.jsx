@@ -22,6 +22,7 @@ const TambahSurveyor = () => {
   const [open, setOpen] = useState(false);
   const [namaSurveyor, setNamaSurveyor] = useState("");
   const [jenisSurveyor, setJenisSurveyor] = useState("");
+  const [teleponSurveyor, setTeleponSurveyor] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -35,7 +36,11 @@ const TambahSurveyor = () => {
 
   const saveUser = async (e) => {
     e.preventDefault();
-    if (namaSurveyor.length === 0 || jenisSurveyor.length === 0) {
+    if (
+      namaSurveyor.length === 0 ||
+      jenisSurveyor.length === 0 ||
+      teleponSurveyor.length === 0
+    ) {
       setError(true);
       setOpen(!open);
     } else {
@@ -44,6 +49,7 @@ const TambahSurveyor = () => {
         await axios.post(`${tempUrl}/saveSurveyor`, {
           namaSurveyor,
           jenisSurveyor,
+          teleponSurveyor,
           id: user._id,
           token: user.token
         });
@@ -95,6 +101,22 @@ const TambahSurveyor = () => {
               value={namaSurveyor}
               onChange={(e) => setNamaSurveyor(e.target.value)}
             />
+            <TextField
+              error={error && teleponSurveyor.length === 0 && true}
+              helperText={
+                error &&
+                teleponSurveyor.length === 0 &&
+                "Telepon Surveyor harus diisi!"
+              }
+              id="outlined-basic"
+              label="Telepon Surveyor"
+              variant="outlined"
+              value={teleponSurveyor}
+              sx={spacingTop}
+              onChange={(e) => setTeleponSurveyor(e.target.value)}
+            />
+          </Box>
+          <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
             <Autocomplete
               disablePortal
               id="combo-box-demo"
@@ -109,7 +131,6 @@ const TambahSurveyor = () => {
                   label="Jenis Surveyor"
                 />
               )}
-              sx={spacingTop}
               onInputChange={(e, value) =>
                 setJenisSurveyor(value.split(" ", 1)[0])
               }
