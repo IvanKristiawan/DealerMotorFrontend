@@ -21,6 +21,7 @@ const TampilMarketing = () => {
 
   const [kodeMarketing, setKodeMarketing] = useState("");
   const [namaMarketing, setNamaMarketing] = useState("");
+  const [teleponMarketing, setTeleponMarketing] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUser] = useState([]);
   const navigate = useNavigate();
@@ -37,7 +38,8 @@ const TampilMarketing = () => {
       return val;
     } else if (
       val.kodeMarketing.toUpperCase().includes(searchTerm.toUpperCase()) ||
-      val.namaMarketing.toUpperCase().includes(searchTerm.toUpperCase())
+      val.namaMarketing.toUpperCase().includes(searchTerm.toUpperCase()) ||
+      val.teleponMarketing.toUpperCase().includes(searchTerm.toUpperCase())
     ) {
       return val;
     }
@@ -75,6 +77,7 @@ const TampilMarketing = () => {
       });
       setKodeMarketing(response.data.kodeMarketing);
       setNamaMarketing(response.data.namaMarketing);
+      setTeleponMarketing(response.data.teleponMarketing);
     }
   };
 
@@ -88,6 +91,7 @@ const TampilMarketing = () => {
       getUsers();
       setKodeMarketing("");
       setNamaMarketing("");
+      setTeleponMarketing("");
       setLoading(false);
       navigate("/marketing");
     } catch (error) {
@@ -136,6 +140,18 @@ const TampilMarketing = () => {
               readOnly: true
             }}
             value={namaMarketing}
+          />
+        </Box>
+        <Box sx={[showDataWrapper, { marginLeft: 4 }]}>
+          <TextField
+            id="outlined-basic"
+            label="Telepon Marketing"
+            variant="filled"
+            sx={textFieldStyle}
+            InputProps={{
+              readOnly: true
+            }}
+            value={teleponMarketing}
           />
         </Box>
       </Box>

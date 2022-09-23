@@ -341,6 +341,7 @@ export function ShowTableMarketing({ currentPosts, searchTerm }) {
           <TableRow>
             <TableCell sx={{ fontWeight: "bold" }}>Kode</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Nama Marketing</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Telepon Marketing</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -353,6 +354,9 @@ export function ShowTableMarketing({ currentPosts, searchTerm }) {
                   .toUpperCase()
                   .includes(searchTerm.toUpperCase()) ||
                 val.namaMarketing
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.teleponMarketing
                   .toUpperCase()
                   .includes(searchTerm.toUpperCase())
               ) {
@@ -375,6 +379,7 @@ export function ShowTableMarketing({ currentPosts, searchTerm }) {
                   {user.kodeMarketing}
                 </TableCell>
                 <TableCell>{user.namaMarketing}</TableCell>
+                <TableCell>{user.teleponMarketing}</TableCell>
               </TableRow>
             ))}
         </TableBody>
@@ -392,6 +397,7 @@ export function ShowTableSurveyor({ currentPosts, searchTerm }) {
           <TableRow>
             <TableCell sx={{ fontWeight: "bold" }}>Kode</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Nama Surveyor</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Telepon Surveyor</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Jenis Surveyor</TableCell>
           </TableRow>
         </TableHead>
@@ -405,6 +411,9 @@ export function ShowTableSurveyor({ currentPosts, searchTerm }) {
                   .toUpperCase()
                   .includes(searchTerm.toUpperCase()) ||
                 val.namaSurveyor
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.teleponSurveyor
                   .toUpperCase()
                   .includes(searchTerm.toUpperCase()) ||
                 val.jenisSurveyor
@@ -430,6 +439,7 @@ export function ShowTableSurveyor({ currentPosts, searchTerm }) {
                   {user.kodeSurveyor}
                 </TableCell>
                 <TableCell>{user.namaSurveyor}</TableCell>
+                <TableCell>{user.teleponSurveyor}</TableCell>
                 <TableCell>
                   {user.jenisSurveyor === "C"
                     ? "C - CMO"

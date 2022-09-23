@@ -20,6 +20,7 @@ const TambahMarketing = () => {
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const [namaMarketing, setNamaMarketing] = useState("");
+  const [teleponMarketing, setTeleponMarketing] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,7 @@ const TambahMarketing = () => {
 
   const saveUser = async (e) => {
     e.preventDefault();
-    if (namaMarketing.length === 0) {
+    if (namaMarketing.length === 0 || teleponMarketing.length === 0) {
       setError(true);
       setOpen(!open);
     } else {
@@ -41,6 +42,7 @@ const TambahMarketing = () => {
         setLoading(true);
         await axios.post(`${tempUrl}/saveMarketing`, {
           namaMarketing,
+          teleponMarketing,
           id: user._id,
           token: user.token
         });
@@ -89,6 +91,20 @@ const TambahMarketing = () => {
               variant="outlined"
               value={namaMarketing}
               onChange={(e) => setNamaMarketing(e.target.value)}
+            />
+            <TextField
+              error={error && teleponMarketing.length === 0 && true}
+              helperText={
+                error &&
+                teleponMarketing.length === 0 &&
+                "Telepon Marketing harus diisi!"
+              }
+              id="outlined-basic"
+              label="Telepon Marketing"
+              variant="outlined"
+              value={teleponMarketing}
+              sx={spacingTop}
+              onChange={(e) => setTeleponMarketing(e.target.value)}
             />
           </Box>
         </Box>
