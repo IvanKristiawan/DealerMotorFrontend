@@ -637,3 +637,132 @@ export function ShowTableLeasing({ currentPosts, searchTerm }) {
     </TableContainer>
   );
 }
+
+export function ShowTableRegister({ currentPosts, searchTerm }) {
+  let navigate = useNavigate();
+  return (
+    <TableContainer component={Paper} sx={{ width: "100%" }}>
+      <Table aria-label="simple table" sx={{ width: "3000px" }}>
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: "bold" }}>No</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Tanggal</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Nama</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Alamat</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Telepon</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>No. KTP</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Alamat KTP</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>No KK</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Nama Penjamin</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Alamat Penjamin</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Telepon Penjamin</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Hubungan Penjamin</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>No. KTP Penjamin</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Nama Penjamin</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>
+              Pekerjaan Penjamin
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Nama Referensi</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Alamat Referensi</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Telepon Referensi</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {currentPosts
+            .filter((val) => {
+              if (searchTerm === "") {
+                return val;
+              } else if (
+                val.noRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.tanggalRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.namaRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.almRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.tlpRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.noKtpRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.almKtpRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.noKKRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.namaPjmRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.almPjmRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.tlpPjmRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.hubunganRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.noKtpPjmRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.pkjRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.namaRefRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.almRefRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.tlpRefRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase())
+              ) {
+                return val;
+              }
+            })
+            .map((user, index) => (
+              <TableRow
+                key={user._id}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  "&:hover": { bgcolor: "#eeeeee" },
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  navigate(`/register/${user._id}`);
+                }}
+              >
+                <TableCell component="th" scope="row">
+                  {user.noRegister}
+                </TableCell>
+                <TableCell>{user.tanggalRegister}</TableCell>
+                <TableCell>{user.namaRegister}</TableCell>
+                <TableCell>{user.almRegister}</TableCell>
+                <TableCell>{user.tlpRegister}</TableCell>
+                <TableCell>{user.noKtpRegister}</TableCell>
+                <TableCell>{user.almKtpRegister}</TableCell>
+                <TableCell>{user.noKKRegister}</TableCell>
+                <TableCell>{user.namaPjmRegister}</TableCell>
+                <TableCell>{user.almPjmRegister}</TableCell>
+                <TableCell>{user.tlpPjmRegister}</TableCell>
+                <TableCell>{user.hubunganRegister}</TableCell>
+                <TableCell>{user.noKtpPjmRegister}</TableCell>
+                <TableCell>{user.pkjRegister}</TableCell>
+                <TableCell>{user.namaRefRegister}</TableCell>
+                <TableCell>{user.almRefRegister}</TableCell>
+                <TableCell>{user.tlpRefRegister}</TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}

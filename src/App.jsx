@@ -34,7 +34,10 @@ import {
   UbahProfilUser,
   DaftarUser,
   TambahUser,
-  UbahUser
+  UbahUser,
+  TampilRegister,
+  TambahRegister,
+  UbahRegister
 } from "./pages/index";
 import { AuthContext } from "./contexts/AuthContext";
 
@@ -410,6 +413,40 @@ const App = () => {
               <MGRRoute>
                 <TambahUser />
               </MGRRoute>
+            }
+          />
+          {/* PENJUALAN */}
+          {/* Register */}
+          <Route
+            path="/register"
+            element={
+              <USERRoute>
+                <TampilRegister />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/register/:id"
+            element={
+              <USERRoute>
+                <TampilRegister />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/register/tambahRegister"
+            element={
+              <USERRoute>
+                <TambahRegister />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/register/:id/edit"
+            element={
+              <USERRoute>
+                <UbahRegister />
+              </USERRoute>
             }
           />
           <Route path="*" element={<p>Halaman tidak ditemukan!</p>} />

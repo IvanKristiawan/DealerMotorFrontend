@@ -54,6 +54,16 @@ export const menuItems = [
     ]
   },
   {
+    title: "Penjualan",
+    url: "/",
+    submenu: [
+      {
+        title: "Register",
+        url: "register"
+      },
+    ]
+  },
+  {
     title: "Utility",
     url: "/",
     submenu: [
@@ -66,5 +76,5 @@ export const menuItems = [
         url: "daftarUser"
       }
     ]
-  }
+  },
 ];

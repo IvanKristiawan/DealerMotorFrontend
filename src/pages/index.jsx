@@ -1,5 +1,6 @@
 // Login Page
 export { default as Login } from "./Login/Login";
+// MASTER
 // Tipe Page
 export { default as TampilTipe } from "./Master/Motor/Tipe/TampilTipe";
 export { default as TambahTipe } from "./Master/Motor/Tipe/TambahTipe";
@@ -43,3 +44,8 @@ export { default as UbahCabang } from "./Master/Cabang/UbahCabang";
 export { default as TampilLeasing } from "./Master/Leasing/TampilLeasing";
 export { default as TambahLeasing } from "./Master/Leasing/TambahLeasing";
 export { default as UbahLeasing } from "./Master/Leasing/UbahLeasing";
+// PENJUALAN
+// Register Page
+export { default as TampilRegister } from "./Penjualan/Register/TampilRegister";
+export { default as TambahRegister } from "./Penjualan/Register/TambahRegister";
+export { default as UbahRegister } from "./Penjualan/Register/UbahRegister";
