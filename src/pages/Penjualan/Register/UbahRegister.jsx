@@ -278,7 +278,7 @@ const UbahRegister = () => {
         <Button
           variant="outlined"
           color="secondary"
-          onClick={() => navigate("/marketing")}
+          onClick={() => navigate("/register")}
           sx={{ marginRight: 2 }}
         >
           {"< Kembali"}

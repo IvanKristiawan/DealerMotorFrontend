@@ -10,7 +10,6 @@ import {
   Pagination,
   Button
 } from "@mui/material";
-import { ShowTableRegister } from "../../../components/ShowTable";
 import {
   SearchBar,
   Loader,
@@ -21,6 +20,7 @@ import { tempUrl } from "../../../contexts/ContextProvider";
 import { useStateContext } from "../../../contexts/ContextProvider";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import html2canvas from "html2canvas";
 import PrintIcon from "@mui/icons-material/Print";
 
 const TampilRegister = () => {
@@ -49,30 +49,6 @@ const TampilRegister = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUser] = useState([]);
   const navigate = useNavigate();
-
-  const columns = [
-    { title: "No", field: "noRegister" },
-    { title: "Tgl", field: "tanggalRegister" },
-    { title: "Nama", field: "namaRegister" },
-    { title: "Alamat", field: "almRegister" },
-    { title: "Tlp", field: "tlpRegister" },
-    { title: "No. KTP", field: "noKtpRegister" },
-    { title: "Alm. KTP", field: "almKtpRegister" },
-    { title: "No. KK", field: "noKKRegister" }
-  ];
-
-  const columns2 = [
-    { title: "No", field: "noRegister" },
-    { title: "Nama Pjm", field: "namaPjmRegister" },
-    { title: "Alm. Pjm", field: "almPjmRegister" },
-    { title: "Tlp. Pjm", field: "tlpPjmRegisterer" },
-    { title: "Hubungan", field: "hubunganRegister" },
-    { title: "No. KTP Pjm", field: "noKtpPjmRegister" },
-    { title: "Pekerjaan Pjm", field: "pkjRegister" },
-    { title: "Nama Ref", field: "namaRefRegister" },
-    { title: "Alm. Ref", field: "almRefRegister" },
-    { title: "Tlp. Ref", field: "tlpRefRegister" }
-  ];
 
   const [loading, setLoading] = useState(false);
   let [page, setPage] = useState(1);
@@ -189,44 +165,31 @@ const TampilRegister = () => {
     }
   };
 
-  const downloadPdf = () => {
+  const generatePDF = () => {
     var date = new Date();
     var current_date =
       date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
     var current_time =
       date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    const doc = new jsPDF("l", "mm", [297, 210]);
-    doc.setFontSize(12);
-    doc.text(`MEGA MOTOR - JAKARTA`, 15, 10);
-    doc.text(`TANGERANG`, 15, 15);
-    doc.setFontSize(16);
-    doc.text(`Daftar Register Penjualan`, 90, 30);
-    doc.setFontSize(10);
-    doc.text(
-      `Dicetak Oleh: ${user.username} | Tanggal : ${current_date} | Jam : ${current_time}`,
-      15,
-      280
+    const quality = 1; // Higher the better but larger file
+    html2canvas(document.querySelector("#content"), { scale: quality }).then(
+      (canvas) => {
+        const pdf = new jsPDF("p", "mm", "a4");
+        pdf.setFontSize(12);
+        pdf.text(`MEGA MOTOR - JAKARTA`, 15, 10);
+        pdf.text(`TANGERANG`, 15, 15);
+        pdf.setFontSize(16);
+        pdf.text(`Daftar Register Penjualan`, 80, 30);
+        pdf.addImage(canvas.toDataURL("image/png"), "PNG", 10, 40, 190, 90);
+        pdf.setFontSize(10);
+        pdf.text(
+          `Dicetak Oleh: ${user.username} | Tanggal : ${current_date} | Jam : ${current_time}`,
+          15,
+          280
+        );
+        pdf.save("daftarRegisterPenjualan.pdf");
+      }
     );
-    doc.setFontSize(12);
-    doc.autoTable({
-      margin: { top: 45 },
-      columns: columns.map((col) => ({ ...col, dataKey: col.field })),
-      body: users,
-      headStyles: {
-        fillColor: [117, 117, 117],
-        color: [0, 0, 0]
-      }
-    });
-    doc.autoTable({
-      margin: { top: 45 },
-      columns: columns2.map((col) => ({ ...col, dataKey: col.field })),
-      body: users,
-      headStyles: {
-        fillColor: [117, 117, 117],
-        color: [0, 0, 0]
-      }
-    });
-    doc.save(`daftarRegisterPenjualan.pdf`);
   };
 
   if (loading) {
@@ -244,7 +207,7 @@ const TampilRegister = () => {
           variant="outlined"
           color="secondary"
           startIcon={<PrintIcon />}
-          onClick={() => downloadPdf()}
+          onClick={() => generatePDF()}
         >
           Cetak
         </Button>
@@ -445,10 +408,134 @@ const TampilRegister = () => {
         <SearchBar setSearchTerm={setSearchTerm} />
       </Box>
       <Box sx={tableContainer}>
-        <ShowTableRegister
-          currentPosts={currentPosts}
-          searchTerm={searchTerm}
-        />
+        <table id="content">
+          <tr>
+            <th style={thTable}>No</th>
+            <th style={thTable}>Tanggal</th>
+            <th style={thTable}>Nama</th>
+            <th style={thTable}>Alamat</th>
+            <th style={thTable}>Telepon</th>
+            <th style={thTable}>No. KTP</th>
+            <th style={thTable}>Alm. KTP</th>
+            <th style={thTable}>No. KK</th>
+            <th style={thTable}>Nama Penjamin</th>
+          </tr>
+          <tr>
+            <th style={thTable}></th>
+            <th style={thTable}>Alm. Penjamin</th>
+            <th style={thTable}>Tlp. Penjamin</th>
+            <th style={thTable}>Hubungan</th>
+            <th style={thTable}>No. KTP Penjamin</th>
+            <th style={thTable}>Pekerjaan Penjamin</th>
+            <th style={thTable}>Nama Ref.</th>
+            <th style={thTable}>Alm. Ref.</th>
+            <th style={thTable}>Tlp. Ref.</th>
+          </tr>
+          {currentPosts
+            .filter((val) => {
+              if (searchTerm === "") {
+                return val;
+              } else if (
+                val.noRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.tanggalRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.namaRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.almRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.tlpRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.noKtpRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.almKtpRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.noKKRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.namaPjmRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.almPjmRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.tlpPjmRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.hubunganRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.noKtpPjmRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.pkjRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.namaRefRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.almRefRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.tlpRefRegister
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase())
+              ) {
+                return val;
+              }
+            })
+            .map((user, index) => (
+              <>
+                <tr
+                  style={{
+                    cursor: "pointer",
+                    height: "100px",
+                    backgroundColor: index % 2 === 0 && "#dddddd"
+                  }}
+                  onClick={() => {
+                    navigate(`/register/${user._id}`);
+                  }}
+                >
+                  <td style={tdTable}>{user.noRegister}</td>
+                  <td style={tdTable}>{user.tanggalRegister}</td>
+                  <td style={tdTable}>{user.namaRegister}</td>
+                  <td style={tdTable}>{user.almRegister}</td>
+                  <td style={tdTable}>{user.tlpRegister}</td>
+                  <td style={tdTable}>{user.noKtpRegister}</td>
+                  <td style={tdTable}>{user.almKtpRegister}</td>
+                  <td style={tdTable}>{user.noKKRegister}</td>
+                  <td style={tdTable}>{user.namaPjmRegister}</td>
+                </tr>
+                <tr
+                  style={{
+                    cursor: "pointer",
+                    height: "100px",
+                    backgroundColor: index % 2 === 0 && "#dddddd"
+                  }}
+                  onClick={() => {
+                    navigate(`/register/${user._id}`);
+                  }}
+                >
+                  <td style={tdTable}></td>
+                  <td style={tdTable}>{user.almPjmRegister}</td>
+                  <td style={tdTable}>{user.tlpPjmRegister}</td>
+                  <td style={tdTable}>{user.hubunganRegister}</td>
+                  <td style={tdTable}>{user.noKtpPjmRegister}</td>
+                  <td style={tdTable}>{user.pkjRegister}</td>
+                  <td style={tdTable}>{user.namaRefRegister}</td>
+                  <td style={tdTable}>{user.almRefRegister}</td>
+                  <td style={tdTable}>{user.tlpRefRegister}</td>
+                </tr>
+              </>
+            ))}
+        </table>
       </Box>
       <Box sx={tableContainer}>
         <Pagination
@@ -516,7 +603,16 @@ const tableContainer = {
   justifyContent: "center"
 };
 
-const newTableContainer = {
-  borderCollapse: "collapse",
-  width: "100%"
+const tdTable = {
+  border: "1px solid #dddddd",
+  textAlign: "left",
+  padding: "8px"
+};
+
+const thTable = {
+  border: "1px solid #dddddd",
+  textAlign: "left",
+  padding: "8px",
+  backgroundColor: "gray",
+  color: "white"
 };
