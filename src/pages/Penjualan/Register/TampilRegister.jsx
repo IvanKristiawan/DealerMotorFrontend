@@ -51,30 +51,18 @@ const TampilRegister = () => {
   const navigate = useNavigate();
 
   const columns = [
-    [
-      { title: "No", field: "noRegister" },
-      { title: "Tgl", field: "tanggalRegister" },
-      { title: "Nama", field: "namaRegister" },
-      { title: "Alamat", field: "almRegister" },
-      { title: "Tlp", field: "tlpRegister" },
-      { title: "No. KTP", field: "noKtpRegister" },
-      { title: "Alm. KTP", field: "almKtpRegister" },
-      { title: "No. KK", field: "noKKRegister" }
-    ],
-    [
-      { title: "Nama Pjm", field: "namaPjmRegister" },
-      { title: "Alm. Pjm", field: "almPjmRegister" },
-      { title: "Tlp. Pjm", field: "tlpPjmRegisterer" },
-      { title: "Hubungan", field: "hubunganRegister" },
-      { title: "No. KTP Pjm", field: "noKtpPjmRegister" },
-      { title: "Pekerjaan Pjm", field: "pkjRegister" },
-      { title: "Nama Ref", field: "namaRefRegister" },
-      { title: "Alm. Ref", field: "almRefRegister" },
-      { title: "Tlp. Ref", field: "tlpRefRegister" }
-    ]
+    { title: "No", field: "noRegister" },
+    { title: "Tgl", field: "tanggalRegister" },
+    { title: "Nama", field: "namaRegister" },
+    { title: "Alamat", field: "almRegister" },
+    { title: "Tlp", field: "tlpRegister" },
+    { title: "No. KTP", field: "noKtpRegister" },
+    { title: "Alm. KTP", field: "almKtpRegister" },
+    { title: "No. KK", field: "noKKRegister" }
   ];
 
   const columns2 = [
+    { title: "No", field: "noRegister" },
     { title: "Nama Pjm", field: "namaPjmRegister" },
     { title: "Alm. Pjm", field: "almPjmRegister" },
     { title: "Tlp. Pjm", field: "tlpPjmRegisterer" },
@@ -526,4 +514,9 @@ const tableContainer = {
   pt: 4,
   display: "flex",
   justifyContent: "center"
+};
+
+const newTableContainer = {
+  borderCollapse: "collapse",
+  width: "100%"
 };
