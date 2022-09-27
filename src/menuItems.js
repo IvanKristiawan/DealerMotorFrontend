@@ -50,6 +50,10 @@ export const menuItems = [
       {
         title: "Leasing",
         url: "leasing"
+      },
+      {
+        title: "Supplier",
+        url: "supplier"
       }
     ]
   },
@@ -60,7 +64,7 @@ export const menuItems = [
       {
         title: "Register",
         url: "register"
-      },
+      }
     ]
   },
   {
@@ -76,5 +80,5 @@ export const menuItems = [
         url: "daftarUser"
       }
     ]
-  },
+  }
 ];

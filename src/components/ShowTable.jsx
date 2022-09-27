@@ -651,3 +651,79 @@ export function ShowTableLeasing({ currentPosts, searchTerm }) {
     </TableContainer>
   );
 }
+
+export function ShowTableSupplier({ currentPosts, searchTerm }) {
+  let navigate = useNavigate();
+  return (
+    <TableContainer component={Paper} sx={{ width: "100%" }}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: "bold" }}>Kode</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Nama Supplier</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Alamat</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Kota</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Telepon</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>PIC</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>NPWP</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {currentPosts
+            .filter((val) => {
+              if (searchTerm === "") {
+                return val;
+              } else if (
+                val.kodeSupplier
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.namaSupplier
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.alamatSupplier
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.kotaSupplier
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.teleponSupplier
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.picSupplier
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.npwpSupplier
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase())
+              ) {
+                return val;
+              }
+            })
+            .map((user, index) => (
+              <TableRow
+                key={user._id}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  "&:hover": { bgcolor: "#eeeeee" },
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  navigate(`/supplier/${user._id}`);
+                }}
+              >
+                <TableCell component="th" scope="row">
+                  {user.kodeSupplier}
+                </TableCell>
+                <TableCell>{user.namaSupplier}</TableCell>
+                <TableCell>{user.alamatSupplier}</TableCell>
+                <TableCell>{user.kotaSupplier}</TableCell>
+                <TableCell>{user.teleponSupplier}</TableCell>
+                <TableCell>{user.picSupplier}</TableCell>
+                <TableCell>{user.npwpSupplier}</TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}

@@ -44,6 +44,10 @@ export { default as UbahCabang } from "./Master/Cabang/UbahCabang";
 export { default as TampilLeasing } from "./Master/Leasing/TampilLeasing";
 export { default as TambahLeasing } from "./Master/Leasing/TambahLeasing";
 export { default as UbahLeasing } from "./Master/Leasing/UbahLeasing";
+// Supplier Page
+export { default as TampilSupplier } from "./Master/Supplier/TampilSupplier";
+export { default as TambahSupplier } from "./Master/Supplier/TambahSupplier";
+export { default as UbahSupplier } from "./Master/Supplier/UbahSupplier";
 // PENJUALAN
 // Register Page
 export { default as TampilRegister } from "./Penjualan/Register/TampilRegister";

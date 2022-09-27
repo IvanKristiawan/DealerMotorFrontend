@@ -37,7 +37,10 @@ import {
   UbahUser,
   TampilRegister,
   TambahRegister,
-  UbahRegister
+  UbahRegister,
+  TampilSupplier,
+  TambahSupplier,
+  UbahSupplier
 } from "./pages/index";
 import { AuthContext } from "./contexts/AuthContext";
 
@@ -362,6 +365,39 @@ const App = () => {
             element={
               <USERRoute>
                 <UbahLeasing />
+              </USERRoute>
+            }
+          />
+          {/* Supplier */}
+          <Route
+            path="/supplier"
+            element={
+              <USERRoute>
+                <TampilSupplier />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/supplier/:id"
+            element={
+              <USERRoute>
+                <TampilSupplier />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/supplier/tambahSupplier"
+            element={
+              <USERRoute>
+                <TambahSupplier />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/supplier/:id/edit"
+            element={
+              <USERRoute>
+                <UbahSupplier />
               </USERRoute>
             }
           />
