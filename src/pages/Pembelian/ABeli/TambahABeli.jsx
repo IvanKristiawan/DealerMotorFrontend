@@ -88,7 +88,16 @@ const TambahABeli = () => {
 
   const saveUser = async (e) => {
     e.preventDefault();
-    if (kodeTipe.length === 0) {
+    if (
+      kodeTipe.length === 0 ||
+      tahun.length === 0 ||
+      namaWarna.length === 0 ||
+      noRangka.length === 0 ||
+      noMesin.length === 0 ||
+      nopol.length === 0 ||
+      namaStnk.length === 0 ||
+      tglStnk.length === 0
+    ) {
       setError(true);
       setOpen(!open);
     } else {
@@ -148,61 +157,90 @@ const TambahABeli = () => {
             sx={textFieldStyle}
           />
           <TextField
+            error={error && tahun.length === 0 && true}
+            helperText={error && tahun.length === 0 && "Tahun harus diisi!"}
             id="outlined-basic"
             label="Tahun"
             variant="outlined"
             value={tahun}
-            onChange={(e) => setTahun(e.target.value)}
+            onChange={(e) => setTahun(e.target.value.toUpperCase())}
             sx={textFieldStyle}
           />
           <Autocomplete
             disablePortal
             id="combo-box-demo"
             options={warnaOptions}
-            renderInput={(params) => <TextField {...params} label="Warna" />}
+            renderInput={(params) => (
+              <TextField
+                error={error && namaWarna.length === 0 && true}
+                helperText={
+                  error && namaWarna.length === 0 && "Nama Warna harus diisi!"
+                }
+                {...params}
+                label="Warna"
+              />
+            )}
             onInputChange={(e, value) => setNamaWarna(value)}
             sx={textFieldStyle}
           />
           <TextField
+            error={error && noRangka.length === 0 && true}
+            helperText={
+              error && noRangka.length === 0 && "No. Rangka harus diisi!"
+            }
             id="outlined-basic"
             label="No Rangka"
             variant="outlined"
             value={noRangka}
-            onChange={(e) => setNoRangka(e.target.value)}
+            onChange={(e) => setNoRangka(e.target.value.toUpperCase())}
             sx={textFieldStyle}
           />
         </Box>
         <Box sx={[textFieldWrapper, { marginLeft: 4 }]}>
           <TextField
+            error={error && noMesin.length === 0 && true}
+            helperText={
+              error && noMesin.length === 0 && "No. Mesin harus diisi!"
+            }
             id="outlined-basic"
             label="No Mesin"
             variant="outlined"
             value={noMesin}
-            onChange={(e) => setNoMesin(e.target.value)}
+            onChange={(e) => setNoMesin(e.target.value.toUpperCase())}
             sx={textFieldStyle}
           />
           <TextField
+            error={error && nopol.length === 0 && true}
+            helperText={error && nopol.length === 0 && "Nopol harus diisi!"}
             id="outlined-basic"
             label="Nopol"
             variant="outlined"
             value={nopol}
-            onChange={(e) => setNopol(e.target.value)}
+            onChange={(e) => setNopol(e.target.value.toUpperCase())}
             sx={textFieldStyle}
           />
           <TextField
+            error={error && namaStnk.length === 0 && true}
+            helperText={
+              error && namaStnk.length === 0 && "Nama Stnk harus diisi!"
+            }
             id="outlined-basic"
             label="Nama Stnk"
             variant="outlined"
             value={namaStnk}
-            onChange={(e) => setNamaStnk(e.target.value)}
+            onChange={(e) => setNamaStnk(e.target.value.toUpperCase())}
             sx={textFieldStyle}
           />
           <TextField
+            error={error && tglStnk.length === 0 && true}
+            helperText={
+              error && tglStnk.length === 0 && "Tanggal Stnk harus diisi!"
+            }
             id="outlined-basic"
             label="Tanggal Stnk"
             variant="outlined"
             value={tglStnk}
-            onChange={(e) => setTglStnk(e.target.value)}
+            onChange={(e) => setTglStnk(e.target.value.toUpperCase())}
             sx={textFieldStyle}
           />
         </Box>

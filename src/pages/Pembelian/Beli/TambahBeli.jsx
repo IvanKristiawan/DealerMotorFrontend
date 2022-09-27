@@ -72,8 +72,7 @@ const TambahBeli = () => {
     if (
       tanggalBeli.length === 0 ||
       kodeSupplier.length === 0 ||
-      jumlahBeli.length === 0 ||
-      ppnBeli.length === 0
+      jumlahBeli.length === 0
     ) {
       setError(true);
       setOpen(!open);
@@ -84,7 +83,7 @@ const TambahBeli = () => {
           tanggalBeli,
           kodeSupplier,
           jumlahBeli,
-          ppnBeli,
+          ppnBeli: ppnBeli ? ppnBeli : 0,
           id: user._id,
           token: user.token
         });
@@ -119,7 +118,7 @@ const TambahBeli = () => {
             variant="outlined"
             sx={textFieldStyle}
             value={tanggalBeli}
-            onChange={(e) => setTanggalBeli(e.target.value)}
+            onChange={(e) => setTanggalBeli(e.target.value.toUpperCase())}
           />
           <Autocomplete
             disablePortal
@@ -161,14 +160,12 @@ const TambahBeli = () => {
             />
           </Box>
           <TextField
-            error={error && ppnBeli.length === 0 && true}
-            helperText={error && ppnBeli.length === 0 && "PPN harus diisi!"}
             id="outlined-basic"
             label="PPN"
             variant="outlined"
             sx={textFieldStyle}
             value={ppnBeli}
-            onChange={(e) => setPpnBeli(e.target.value)}
+            onChange={(e) => setPpnBeli(e.target.value.toUpperCase())}
           />
         </Box>
       </Box>
