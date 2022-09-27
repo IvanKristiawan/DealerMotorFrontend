@@ -727,3 +727,127 @@ export function ShowTableSupplier({ currentPosts, searchTerm }) {
     </TableContainer>
   );
 }
+
+export function ShowTableDaftarBeli({ currentPosts, searchTerm, suppliers }) {
+  let navigate = useNavigate();
+  return (
+    <TableContainer component={Paper} sx={{ width: "100%" }}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: "bold" }}>No. Beli</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Tanggal</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Kode Supplier</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Jumlah</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>PPN</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {currentPosts
+            .filter((val) => {
+              if (searchTerm === "") {
+                return val;
+              } else if (
+                val.noBeli.includes(searchTerm) ||
+                val.tanggalBeli
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.kodeSupplier
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.jumlahBeli.toString().includes(searchTerm) ||
+                val.ppnBeli
+                  .toString()
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase())
+              ) {
+                return val;
+              }
+            })
+            .map((user, index) => (
+              <TableRow
+                key={user._id}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  "&:hover": { bgcolor: "#eeeeee" },
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  navigate(`/daftarBeli/beli/${user._id}`);
+                }}
+              >
+                <TableCell component="th" scope="row">
+                  {user.noBeli}
+                </TableCell>
+                <TableCell>{user.tanggalBeli}</TableCell>
+                <TableCell>
+                  {user.kodeSupplier} -
+                  {suppliers
+                    .filter(
+                      (supplier) => supplier.kodeSupplier === user.kodeSupplier
+                    )
+                    .map((sup) => ` ${sup.namaSupplier}`)}
+                </TableCell>
+                <TableCell>{user.jumlahBeli.toLocaleString()}</TableCell>
+                <TableCell>{user.ppnBeli.toLocaleString()}%</TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
+
+export function ShowTableBeli({ id, currentPosts, nomorNota }) {
+  let navigate = useNavigate();
+  return (
+    <TableContainer component={Paper} sx={{ width: "100%" }}>
+      <Table aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: "bold" }}>Kode Tipe</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Tahun</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Warna</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>No. Rangka</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>No. Mesin</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Nopol</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Nama STNK</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Tgl. STNK</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {currentPosts
+            .filter((val) => {
+              if (val.noBeli === nomorNota) {
+                return val;
+              }
+            })
+            .map((aBeli, index) => (
+              <TableRow
+                key={aBeli.kodeStok}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  "&:hover": { bgcolor: "#eeeeee" },
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  navigate(`/daftarBeli/beli/${id}/${aBeli._id}`);
+                }}
+              >
+                <TableCell component="th" scope="row">
+                  {aBeli.kodeTipe}
+                </TableCell>
+                <TableCell>{aBeli.tahun}</TableCell>
+                <TableCell>{aBeli.namaWarna}</TableCell>
+                <TableCell>{aBeli.noRangka}</TableCell>
+                <TableCell>{aBeli.noMesin}</TableCell>
+                <TableCell>{aBeli.nopol}</TableCell>
+                <TableCell>{aBeli.namaStnk}</TableCell>
+                <TableCell>{aBeli.tglStnk}</TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}

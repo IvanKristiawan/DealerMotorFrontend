@@ -40,7 +40,13 @@ import {
   UbahRegister,
   TampilSupplier,
   TambahSupplier,
-  UbahSupplier
+  UbahSupplier,
+  TampilDaftarBeli,
+  TambahBeli,
+  TampilBeli,
+  UbahBeli,
+  TampilABeli,
+  TambahABeli
 } from "./pages/index";
 import { AuthContext } from "./contexts/AuthContext";
 
@@ -398,6 +404,57 @@ const App = () => {
             element={
               <USERRoute>
                 <UbahSupplier />
+              </USERRoute>
+            }
+          />
+          {/* PEMBELIAN */}
+          {/* Beli */}
+          <Route
+            path="/daftarBeli"
+            element={
+              <USERRoute>
+                <TampilDaftarBeli />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/daftarBeli/beli/tambahBeli"
+            element={
+              <USERRoute>
+                <TambahBeli />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/daftarBeli/beli/:id"
+            element={
+              <USERRoute>
+                <TampilBeli />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/daftarBeli/beli/:id/edit"
+            element={
+              <USERRoute>
+                <UbahBeli />
+              </USERRoute>
+            }
+          />
+          {/* A Beli */}
+          <Route
+            path="/daftarBeli/beli/:id/tambahABeli"
+            element={
+              <USERRoute>
+                <TambahABeli />
+              </USERRoute>
+            }
+          />
+          <Route
+            path="/daftarBeli/beli/:id/:idABeli"
+            element={
+              <USERRoute>
+                <TampilABeli />
               </USERRoute>
             }
           />

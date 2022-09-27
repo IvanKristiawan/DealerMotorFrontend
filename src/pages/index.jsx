@@ -53,3 +53,12 @@ export { default as UbahSupplier } from "./Master/Supplier/UbahSupplier";
 export { default as TampilRegister } from "./Penjualan/Register/TampilRegister";
 export { default as TambahRegister } from "./Penjualan/Register/TambahRegister";
 export { default as UbahRegister } from "./Penjualan/Register/UbahRegister";
+// PEMBELIAN
+// Beli Page
+export { default as TampilDaftarBeli } from "./Pembelian/Beli/TampilDaftarBeli";
+export { default as TambahBeli } from "./Pembelian/Beli/TambahBeli";
+export { default as TampilBeli } from "./Pembelian/Beli/TampilBeli";
+export { default as UbahBeli } from "./Pembelian/Beli/UbahBeli";
+// A Beli Page
+export { default as TampilABeli } from "./Pembelian/ABeli/TampilABeli";
+export { default as TambahABeli } from "./Pembelian/ABeli/TambahABeli";

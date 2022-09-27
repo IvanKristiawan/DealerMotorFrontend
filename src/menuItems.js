@@ -68,6 +68,16 @@ export const menuItems = [
     ]
   },
   {
+    title: "Pembelian",
+    url: "/",
+    submenu: [
+      {
+        title: "Beli",
+        url: "daftarBeli"
+      }
+    ]
+  },
+  {
     title: "Utility",
     url: "/",
     submenu: [
