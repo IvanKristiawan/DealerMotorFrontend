@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
+import {
+  namaPerusahaan,
+  lokasiPerusahaan,
+  kotaPerusahaan
+} from "../../../constants/GeneralSetting";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Box,
@@ -176,8 +181,8 @@ const TampilRegister = () => {
       (canvas) => {
         const pdf = new jsPDF("p", "mm", "a4");
         pdf.setFontSize(12);
-        pdf.text(`MEGA MOTOR - JAKARTA`, 15, 10);
-        pdf.text(`TANGERANG`, 15, 15);
+        pdf.text(`${namaPerusahaan} - ${kotaPerusahaan}`, 15, 10);
+        pdf.text(`${lokasiPerusahaan}`, 15, 15);
         pdf.setFontSize(16);
         pdf.text(`Daftar Register Penjualan`, 80, 30);
         pdf.addImage(canvas.toDataURL("image/png"), "PNG", 10, 40, 190, 90);

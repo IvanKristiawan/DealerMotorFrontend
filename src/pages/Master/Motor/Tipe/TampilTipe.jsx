@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import {
+  namaPerusahaan,
+  lokasiPerusahaan,
+  kotaPerusahaan
+} from "../../../../constants/GeneralSetting";
 import { AuthContext } from "../../../../contexts/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
@@ -138,8 +143,8 @@ const TampilTipe = () => {
       date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     const doc = new jsPDF();
     doc.setFontSize(12);
-    doc.text(`MEGA MOTOR - JAKARTA`, 15, 10);
-    doc.text(`TANGERANG`, 15, 15);
+    doc.text(`${namaPerusahaan} - ${kotaPerusahaan}`, 15, 10);
+    doc.text(`${lokasiPerusahaan}`, 15, 15);
     doc.setFontSize(16);
     doc.text(`Daftar Tipe`, 90, 30);
     doc.setFontSize(10);

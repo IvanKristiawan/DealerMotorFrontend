@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
+import {
+  namaPerusahaan,
+  lokasiPerusahaan,
+  kotaPerusahaan
+} from "../../../constants/GeneralSetting";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Box,
@@ -128,8 +133,8 @@ const TampilSurveyor = () => {
       date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     const doc = new jsPDF();
     doc.setFontSize(12);
-    doc.text(`MEGA MOTOR - JAKARTA`, 15, 10);
-    doc.text(`TANGERANG`, 15, 15);
+    doc.text(`${namaPerusahaan} - ${kotaPerusahaan}`, 15, 10);
+    doc.text(`${lokasiPerusahaan}`, 15, 15);
     doc.setFontSize(16);
     doc.text(`Daftar Surveyor`, 90, 30);
     doc.setFontSize(10);

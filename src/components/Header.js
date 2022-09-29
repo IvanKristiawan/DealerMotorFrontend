@@ -6,6 +6,7 @@ import { Box, Button, Typography, Stack, Avatar, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { namaProgram } from "../constants/GeneralSetting";
 
 const Header = () => {
   const { user, dispatch } = useContext(AuthContext);
@@ -26,7 +27,7 @@ const Header = () => {
       <div className="nav-area" style={container}>
         <Box sx={wrapper}>
           <Link to="/" className="logo">
-            MEGA
+            {namaProgram}
           </Link>
           <Navbar />
         </Box>
