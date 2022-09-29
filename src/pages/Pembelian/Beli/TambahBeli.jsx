@@ -21,8 +21,12 @@ const TambahBeli = () => {
   const [open, setOpen] = useState(false);
   const [kodeBeli, setKodeBeli] = useState("");
   const [kodeSupplier, setKodeSupplier] = useState("");
-  const [jumlahBeli, setJumlahBeli] = useState("");
-  const [ppnBeli, setPpnBeli] = useState("");
+  const [jumlahBeli, setJumlahBeli] = useState(0);
+  const [ppnBeli, setPpnBeli] = useState(0);
+  const [potongan, setPotongan] = useState(0);
+  const [lama, setLama] = useState("");
+  const [jenisBeli, setJenisBeli] = useState("");
+  const [jatuhTempo, setJatuhTempo] = useState("");
   const [error, setError] = useState(false);
   const [suppliers, setSuppliers] = useState([]);
   const navigate = useNavigate();
@@ -33,18 +37,20 @@ const TambahBeli = () => {
       minimumIntegerDigits: 2,
       useGrouping: false
     }) +
-    "/" +
+    "-" +
     (date.getMonth() + 1).toLocaleString("en-US", {
       minimumIntegerDigits: 2,
       useGrouping: false
     }) +
-    "/" +
+    "-" +
     date.getFullYear();
   const [tanggalBeli, setTanggalBeli] = useState(`${now_date}`);
 
   const supplierOptions = suppliers.map((supplier) => ({
     label: `${supplier.kodeSupplier} - ${supplier.namaSupplier}`
   }));
+
+  const jenisBeliOption = [{ label: "BARU" }, { label: "BEKAS" }];
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -81,21 +87,21 @@ const TambahBeli = () => {
   const saveUser = async (e) => {
     e.preventDefault();
 
-    if (
-      tanggalBeli.length === 0 ||
-      kodeSupplier.length === 0 ||
-      jumlahBeli.length === 0
-    ) {
+    if (tanggalBeli.length === 0 || kodeSupplier.length === 0) {
       setError(true);
       setOpen(!open);
     } else {
       try {
         setLoading(true);
         await axios.post(`${tempUrl}/saveBeli`, {
-          tanggalBeli,
           kodeSupplier,
+          tanggalBeli,
           jumlahBeli,
-          ppnBeli: ppnBeli ? ppnBeli : 0,
+          ppnBeli,
+          potongan,
+          lama,
+          jenisBeli,
+          jatuhTempo,
           id: user._id,
           token: user.token
         });
@@ -125,9 +131,7 @@ const TambahBeli = () => {
             label="Kode Beli"
             variant="outlined"
             value={kodeBeli}
-            InputProps={{
-              readOnly: true
-            }}
+            disabled
           />
           <TextField
             error={error && tanggalBeli.length === 0 && true}
@@ -162,31 +166,109 @@ const TambahBeli = () => {
             }
             sx={textFieldStyle}
           />
-          <Box sx={jumlahContainer}>
-            <Typography sx={jumlahText}>
-              Jumlah
-              {jumlahBeli !== 0 &&
-                !isNaN(parseInt(jumlahBeli)) &&
-                ` : Rp ${parseInt(jumlahBeli).toLocaleString()}`}
-            </Typography>
-            <TextField
-              error={error && jumlahBeli.length === 0 && true}
-              helperText={
-                error && jumlahBeli.length === 0 && "Jumlah harus diisi!"
-              }
-              id="outlined-basic"
-              variant="outlined"
-              value={jumlahBeli}
-              onChange={(e) => setJumlahBeli(e.target.value)}
-            />
-          </Box>
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={jenisBeliOption}
+            renderInput={(params) => (
+              <TextField
+                error={error && jenisBeli.length === 0 && true}
+                helperText={
+                  error && jenisBeli.length === 0 && "Jenis harus diisi!"
+                }
+                {...params}
+                label="Jenis Surveyor"
+              />
+            )}
+            onInputChange={(e, value) => setJenisBeli(value)}
+            sx={textFieldStyle}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Jumlah"
+            variant="outlined"
+            sx={textFieldStyle}
+            value={jumlahBeli}
+            disabled
+            onChange={(e) => setJumlahBeli(e.target.value.toUpperCase())}
+          />
           <TextField
             id="outlined-basic"
             label="PPN"
             variant="outlined"
             sx={textFieldStyle}
             value={ppnBeli}
+            disabled
             onChange={(e) => setPpnBeli(e.target.value.toUpperCase())}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Potongan"
+            variant="outlined"
+            sx={textFieldStyle}
+            value={potongan}
+            disabled
+            onChange={(e) => setPotongan(e.target.value.toUpperCase())}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Lama (Hari)"
+            variant="outlined"
+            sx={textFieldStyle}
+            value={lama}
+            onChange={(e, value) => {
+              var tempShit1 = tanggalBeli.toString().split("-", 1)[0];
+              var tempShit2 = tanggalBeli.toString().split("-")[1];
+              var tempShit3 = tanggalBeli.toString().split("-")[2];
+              var combineShit = `${tempShit3}-${tempShit2}-${tempShit1}`;
+              var someDate = new Date(combineShit);
+              var numberOfDaysToAdd =
+                e.target.value !== "" ? parseInt(e.target.value) : 0;
+              var result = someDate.setDate(
+                someDate.getDate() + numberOfDaysToAdd
+              );
+              var finalize = new Date(result);
+              var now_final =
+                finalize.getDate().toLocaleString("en-US", {
+                  minimumIntegerDigits: 2,
+                  useGrouping: false
+                }) +
+                "-" +
+                (finalize.getMonth() + 1).toLocaleString("en-US", {
+                  minimumIntegerDigits: 2,
+                  useGrouping: false
+                }) +
+                "-" +
+                finalize.getFullYear();
+              setJatuhTempo(now_final);
+              setLama(e.target.value.toUpperCase());
+            }}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Jatuh Tempo"
+            variant="outlined"
+            sx={textFieldStyle}
+            value={jatuhTempo}
+            onChange={(e) => {
+              var tempTanggalBeli1 = tanggalBeli.toString().split("-", 1)[0];
+              var tempTanggalBeli2 = tanggalBeli.toString().split("-")[1];
+              var tempTanggalBeli3 = tanggalBeli.toString().split("-")[2];
+              var combineTanggalBeli = `${tempTanggalBeli3}-${tempTanggalBeli2}-${tempTanggalBeli1}`;
+              var tempTanggalBeli = new Date(combineTanggalBeli);
+              var tempJatuhTempo1 = e.target.value.toString().split("-", 1)[0];
+              var tempJatuhTempo2 = e.target.value.toString().split("-")[1];
+              var tempJatuhTempo3 = e.target.value.toString().split("-")[2];
+              var combineJatuhTempo = `${tempJatuhTempo3}-${tempJatuhTempo2}-${tempJatuhTempo1}`;
+              var tempJatuhTempo = new Date(combineJatuhTempo);
+              // alert(combineJatuhTempo);
+
+              const diffTime = Math.abs(tempJatuhTempo - tempTanggalBeli);
+              const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+              setLama(diffDays);
+              setJatuhTempo(e.target.value.toUpperCase());
+            }}
           />
         </Box>
       </Box>

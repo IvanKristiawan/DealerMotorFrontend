@@ -229,13 +229,7 @@ const TampilSurveyor = () => {
             InputProps={{
               readOnly: true
             }}
-            value={
-              jenisSurveyor === "C"
-                ? "C - CMO"
-                : jenisSurveyor === "S"
-                ? "S - Surveyor"
-                : ""
-            }
+            value={jenisSurveyor}
           />
         </Box>
       </Box>

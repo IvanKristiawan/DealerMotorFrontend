@@ -454,13 +454,7 @@ export function ShowTableSurveyor({ currentPosts, searchTerm }) {
                 </TableCell>
                 <TableCell>{user.namaSurveyor}</TableCell>
                 <TableCell>{user.teleponSurveyor}</TableCell>
-                <TableCell>
-                  {user.jenisSurveyor === "C"
-                    ? "C - CMO"
-                    : user.jenisSurveyor === "S"
-                    ? "S - Surveyor"
-                    : ""}
-                </TableCell>
+                <TableCell>{user.jenisSurveyor}</TableCell>
               </TableRow>
             ))}
         </TableBody>
@@ -736,10 +730,13 @@ export function ShowTableDaftarBeli({ currentPosts, searchTerm, suppliers }) {
         <TableHead>
           <TableRow>
             <TableCell sx={{ fontWeight: "bold" }}>No. Beli</TableCell>
-            <TableCell sx={{ fontWeight: "bold" }}>Tanggal</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Kode Supplier</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Jumlah</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>PPN</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Potongan</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Lama</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Tanggal</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Jatuh Tempo</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -759,7 +756,19 @@ export function ShowTableDaftarBeli({ currentPosts, searchTerm, suppliers }) {
                 val.ppnBeli
                   .toString()
                   .toUpperCase()
-                  .includes(searchTerm.toUpperCase())
+                  .includes(searchTerm.toUpperCase()) ||
+                val.potongan
+                  .toString()
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.lama
+                  .toString()
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.jenisBeli
+                  .toUpperCase()
+                  .includes(searchTerm.toUpperCase()) ||
+                val.jatuhTempo.toUpperCase().includes(searchTerm.toUpperCase())
               ) {
                 return val;
               }
@@ -779,7 +788,6 @@ export function ShowTableDaftarBeli({ currentPosts, searchTerm, suppliers }) {
                 <TableCell component="th" scope="row">
                   {user.noBeli}
                 </TableCell>
-                <TableCell>{user.tanggalBeli}</TableCell>
                 <TableCell>
                   {user.kodeSupplier} -
                   {suppliers
@@ -789,7 +797,11 @@ export function ShowTableDaftarBeli({ currentPosts, searchTerm, suppliers }) {
                     .map((sup) => ` ${sup.namaSupplier}`)}
                 </TableCell>
                 <TableCell>{user.jumlahBeli.toLocaleString()}</TableCell>
-                <TableCell>{user.ppnBeli.toLocaleString()}%</TableCell>
+                <TableCell>{user.ppnBeli.toLocaleString()}</TableCell>
+                <TableCell>{user.potongan.toLocaleString()}</TableCell>
+                <TableCell>{user.lama.toLocaleString()}</TableCell>
+                <TableCell>{user.tanggalBeli}</TableCell>
+                <TableCell>{user.jatuhTempo}</TableCell>
               </TableRow>
             ))}
         </TableBody>

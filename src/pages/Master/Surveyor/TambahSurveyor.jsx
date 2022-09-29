@@ -75,7 +75,7 @@ const TambahSurveyor = () => {
     }
   };
 
-  const jenisSurveyorOption = [{ label: "C - CMO" }, { label: "S - Surveyor" }];
+  const jenisSurveyorOption = [{ label: "CMO" }, { label: "SURVEYOR" }];
 
   if (loading) {
     return <Loader />;
@@ -141,9 +141,7 @@ const TambahSurveyor = () => {
                 label="Jenis Surveyor"
               />
             )}
-            onInputChange={(e, value) =>
-              setJenisSurveyor(value.split(" ", 1)[0])
-            }
+            onInputChange={(e, value) => setJenisSurveyor(value)}
           />
         </Box>
       </Box>
