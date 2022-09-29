@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ import SaveIcon from "@mui/icons-material/Save";
 const TambahRegister = () => {
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [kodeRegister, setKodeRegister] = useState("");
   const [namaRegister, setNamaRegister] = useState("");
   const [almRegister, setAlmRegister] = useState("");
   const [tlpRegister, setTlpRegister] = useState("");
@@ -42,6 +43,20 @@ const TambahRegister = () => {
       return;
     }
     setOpen(false);
+  };
+
+  useEffect(() => {
+    getNextLength();
+  }, []);
+
+  const getNextLength = async () => {
+    setLoading(true);
+    const response = await axios.post(`${tempUrl}/registersNextLength`, {
+      id: user._id,
+      token: user.token
+    });
+    setKodeRegister(response.data);
+    setLoading(false);
   };
 
   const saveUser = async (e) => {
@@ -100,6 +115,15 @@ const TambahRegister = () => {
       <Box sx={showDataContainer}>
         <Box sx={showDataWrapper}>
           <TextField
+            id="outlined-basic"
+            label="Kode Register"
+            variant="outlined"
+            value={kodeRegister}
+            InputProps={{
+              readOnly: true
+            }}
+          />
+          <TextField
             error={error && namaRegister.length === 0 && true}
             helperText={
               error && namaRegister.length === 0 && "Nama harus diisi!"
@@ -108,6 +132,7 @@ const TambahRegister = () => {
             label="Nama"
             variant="outlined"
             value={namaRegister}
+            sx={spacingTop}
             onChange={(e) => setNamaRegister(e.target.value.toUpperCase())}
           />
           <TextField

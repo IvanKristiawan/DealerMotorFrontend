@@ -19,6 +19,7 @@ import SaveIcon from "@mui/icons-material/Save";
 const TambahBeli = () => {
   const { user, dispatch } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [kodeBeli, setKodeBeli] = useState("");
   const [kodeSupplier, setKodeSupplier] = useState("");
   const [jumlahBeli, setJumlahBeli] = useState("");
   const [ppnBeli, setPpnBeli] = useState("");
@@ -54,7 +55,18 @@ const TambahBeli = () => {
 
   useEffect(() => {
     getSupplier();
+    getNextLength();
   }, []);
+
+  const getNextLength = async () => {
+    setLoading(true);
+    const response = await axios.post(`${tempUrl}/belisNextLength`, {
+      id: user._id,
+      token: user.token
+    });
+    setKodeBeli(response.data);
+    setLoading(false);
+  };
 
   const getSupplier = async () => {
     setLoading(true);
@@ -108,6 +120,15 @@ const TambahBeli = () => {
       <Divider sx={dividerStyle} />
       <Box sx={textFieldContainer}>
         <Box sx={textFieldWrapper}>
+          <TextField
+            id="outlined-basic"
+            label="Kode Beli"
+            variant="outlined"
+            value={kodeBeli}
+            InputProps={{
+              readOnly: true
+            }}
+          />
           <TextField
             error={error && tanggalBeli.length === 0 && true}
             helperText={

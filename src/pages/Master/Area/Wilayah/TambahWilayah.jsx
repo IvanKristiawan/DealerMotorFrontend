@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ import SaveIcon from "@mui/icons-material/Save";
 const TambahWilayah = () => {
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [kodeWilayah, setKodeWilayah] = useState("");
   const [namaWilayah, setNamaWilayah] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -28,6 +29,20 @@ const TambahWilayah = () => {
       return;
     }
     setOpen(false);
+  };
+
+  useEffect(() => {
+    getNextLength();
+  }, []);
+
+  const getNextLength = async () => {
+    setLoading(true);
+    const response = await axios.post(`${tempUrl}/wilayahsNextLength`, {
+      id: user._id,
+      token: user.token
+    });
+    setKodeWilayah(response.data);
+    setLoading(false);
   };
 
   const saveUser = async (e) => {
@@ -65,6 +80,15 @@ const TambahWilayah = () => {
       <Box sx={showDataContainer}>
         <Box sx={showDataWrapper}>
           <TextField
+            id="outlined-basic"
+            label="Kode Wilayah"
+            variant="outlined"
+            value={kodeWilayah}
+            InputProps={{
+              readOnly: true
+            }}
+          />
+          <TextField
             error={error && namaWilayah.length === 0 && true}
             helperText={
               error && namaWilayah.length === 0 && "Nama Wilayah harus diisi!"
@@ -73,6 +97,7 @@ const TambahWilayah = () => {
             label="Nama Wilayah"
             variant="outlined"
             value={namaWilayah}
+            sx={spacingTop}
             onChange={(e) => setNamaWilayah(e.target.value.toUpperCase())}
           />
         </Box>

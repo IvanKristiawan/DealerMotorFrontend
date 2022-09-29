@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ import SaveIcon from "@mui/icons-material/Save";
 const TambahDealer = () => {
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [kodeDealer, setKodeDealer] = useState("");
   const [namaDealer, setNamaDealer] = useState("");
   const [alamatDealer, setAlamatDealer] = useState("");
   const [teleponDealer, setTeleponDealer] = useState("");
@@ -31,6 +32,20 @@ const TambahDealer = () => {
       return;
     }
     setOpen(false);
+  };
+
+  useEffect(() => {
+    getNextLength();
+  }, []);
+
+  const getNextLength = async () => {
+    setLoading(true);
+    const response = await axios.post(`${tempUrl}/dealersNextLength`, {
+      id: user._id,
+      token: user.token
+    });
+    setKodeDealer(response.data);
+    setLoading(false);
   };
 
   const saveUser = async (e) => {
@@ -71,6 +86,15 @@ const TambahDealer = () => {
       <Box sx={showDataContainer}>
         <Box sx={showDataWrapper}>
           <TextField
+            id="outlined-basic"
+            label="Kode Dealer"
+            variant="outlined"
+            value={kodeDealer}
+            InputProps={{
+              readOnly: true
+            }}
+          />
+          <TextField
             error={error && namaDealer.length === 0 && true}
             helperText={
               error && namaDealer.length === 0 && "Nama Dealer harus diisi!"
@@ -79,6 +103,7 @@ const TambahDealer = () => {
             label="Nama Dealer"
             variant="outlined"
             value={namaDealer}
+            sx={spacingTop}
             onChange={(e) => setNamaDealer(e.target.value.toUpperCase())}
           />
           <TextField

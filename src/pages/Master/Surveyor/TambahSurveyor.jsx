@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +19,7 @@ import SaveIcon from "@mui/icons-material/Save";
 const TambahSurveyor = () => {
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [kodeSurveyor, setKodeSurveyor] = useState("");
   const [namaSurveyor, setNamaSurveyor] = useState("");
   const [jenisSurveyor, setJenisSurveyor] = useState("");
   const [teleponSurveyor, setTeleponSurveyor] = useState("");
@@ -31,6 +32,20 @@ const TambahSurveyor = () => {
       return;
     }
     setOpen(false);
+  };
+
+  useEffect(() => {
+    getNextLength();
+  }, []);
+
+  const getNextLength = async () => {
+    setLoading(true);
+    const response = await axios.post(`${tempUrl}/surveyorsNextLength`, {
+      id: user._id,
+      token: user.token
+    });
+    setKodeSurveyor(response.data);
+    setLoading(false);
   };
 
   const saveUser = async (e) => {
@@ -76,6 +91,15 @@ const TambahSurveyor = () => {
       <Box sx={showDataContainer}>
         <Box sx={showDataWrapper}>
           <TextField
+            id="outlined-basic"
+            label="Kode Surveyor"
+            variant="outlined"
+            value={kodeSurveyor}
+            InputProps={{
+              readOnly: true
+            }}
+          />
+          <TextField
             error={error && namaSurveyor.length === 0 && true}
             helperText={
               error && namaSurveyor.length === 0 && "Nama Surveyor harus diisi!"
@@ -84,6 +108,7 @@ const TambahSurveyor = () => {
             label="Nama Surveyor"
             variant="outlined"
             value={namaSurveyor}
+            sx={spacingTop}
             onChange={(e) => setNamaSurveyor(e.target.value.toUpperCase())}
           />
           <TextField

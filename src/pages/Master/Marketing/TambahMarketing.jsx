@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ import SaveIcon from "@mui/icons-material/Save";
 const TambahMarketing = () => {
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [kodeMarketing, setKodeMarketing] = useState("");
   const [namaMarketing, setNamaMarketing] = useState("");
   const [teleponMarketing, setTeleponMarketing] = useState("");
   const [error, setError] = useState(false);
@@ -29,6 +30,20 @@ const TambahMarketing = () => {
       return;
     }
     setOpen(false);
+  };
+
+  useEffect(() => {
+    getNextLength();
+  }, []);
+
+  const getNextLength = async () => {
+    setLoading(true);
+    const response = await axios.post(`${tempUrl}/marketingsNextLength`, {
+      id: user._id,
+      token: user.token
+    });
+    setKodeMarketing(response.data);
+    setLoading(false);
   };
 
   const saveUser = async (e) => {
@@ -67,6 +82,15 @@ const TambahMarketing = () => {
       <Box sx={showDataContainer}>
         <Box sx={showDataWrapper}>
           <TextField
+            id="outlined-basic"
+            label="Kode Marketing"
+            variant="outlined"
+            value={kodeMarketing}
+            InputProps={{
+              readOnly: true
+            }}
+          />
+          <TextField
             error={error && namaMarketing.length === 0 && true}
             helperText={
               error &&
@@ -77,6 +101,7 @@ const TambahMarketing = () => {
             label="Nama Marketing"
             variant="outlined"
             value={namaMarketing}
+            sx={spacingTop}
             onChange={(e) => setNamaMarketing(e.target.value.toUpperCase())}
           />
           <TextField

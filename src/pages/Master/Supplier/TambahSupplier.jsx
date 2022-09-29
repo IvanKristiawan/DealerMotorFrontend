@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ import SaveIcon from "@mui/icons-material/Save";
 const TambahSupplier = () => {
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [kodeSupplier, setKodeSupplier] = useState("");
   const [namaSupplier, setNamaSupplier] = useState("");
   const [alamatSupplier, setAlamatSupplier] = useState("");
   const [kotaSupplier, setKotaSupplier] = useState("");
@@ -33,6 +34,20 @@ const TambahSupplier = () => {
       return;
     }
     setOpen(false);
+  };
+
+  useEffect(() => {
+    getNextLength();
+  }, []);
+
+  const getNextLength = async () => {
+    setLoading(true);
+    const response = await axios.post(`${tempUrl}/suppliersNextLength`, {
+      id: user._id,
+      token: user.token
+    });
+    setKodeSupplier(response.data);
+    setLoading(false);
   };
 
   const saveUser = async (e) => {
@@ -75,6 +90,15 @@ const TambahSupplier = () => {
       <Box sx={showDataContainer}>
         <Box sx={showDataWrapper}>
           <TextField
+            id="outlined-basic"
+            label="Kode Supplier"
+            variant="outlined"
+            value={kodeSupplier}
+            InputProps={{
+              readOnly: true
+            }}
+          />
+          <TextField
             error={error && namaSupplier.length === 0 && true}
             helperText={
               error && namaSupplier.length === 0 && "Nama Supplier harus diisi!"
@@ -83,6 +107,7 @@ const TambahSupplier = () => {
             label="Nama Supplier"
             variant="outlined"
             value={namaSupplier}
+            sx={spacingTop}
             onChange={(e) => setNamaSupplier(e.target.value.toUpperCase())}
           />
           <TextField

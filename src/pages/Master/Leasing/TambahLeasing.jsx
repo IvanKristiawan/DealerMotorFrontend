@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ import SaveIcon from "@mui/icons-material/Save";
 const TambahLeasing = () => {
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [kodeLeasing, setKodeLeasing] = useState("");
   const [namaLeasing, setNamaLeasing] = useState("");
   const [alamatLeasing, setAlamatLeasing] = useState("");
   const [teleponLeasing, setTeleponLeasing] = useState("");
@@ -31,6 +32,20 @@ const TambahLeasing = () => {
       return;
     }
     setOpen(false);
+  };
+
+  useEffect(() => {
+    getNextLength();
+  }, []);
+
+  const getNextLength = async () => {
+    setLoading(true);
+    const response = await axios.post(`${tempUrl}/leasingsNextLength`, {
+      id: user._id,
+      token: user.token
+    });
+    setKodeLeasing(response.data);
+    setLoading(false);
   };
 
   const saveUser = async (e) => {
@@ -71,6 +86,15 @@ const TambahLeasing = () => {
       <Box sx={showDataContainer}>
         <Box sx={showDataWrapper}>
           <TextField
+            id="outlined-basic"
+            label="Kode Leasing"
+            variant="outlined"
+            value={kodeLeasing}
+            InputProps={{
+              readOnly: true
+            }}
+          />
+          <TextField
             error={error && namaLeasing.length === 0 && true}
             helperText={
               error && namaLeasing.length === 0 && "Nama Leasing harus diisi!"
@@ -79,6 +103,7 @@ const TambahLeasing = () => {
             label="Nama Leasing"
             variant="outlined"
             value={namaLeasing}
+            sx={spacingTop}
             onChange={(e) => setNamaLeasing(e.target.value.toUpperCase())}
           />
           <TextField

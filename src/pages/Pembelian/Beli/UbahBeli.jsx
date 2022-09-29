@@ -19,6 +19,7 @@ import EditIcon from "@mui/icons-material/Edit";
 const UbahBeli = () => {
   const { user, dispatch } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [kodeBeli, setKodeBeli] = useState("");
   const [tanggalBeli, setTanggalBeli] = useState("");
   const [kodeSupplier, setKodeSupplier] = useState("");
   const [jumlahBeli, setJumlahBeli] = useState("");
@@ -61,6 +62,7 @@ const UbahBeli = () => {
       id: user._id,
       token: user.token
     });
+    setKodeBeli(response.data.noBeli);
     setTanggalBeli(response.data.tanggalBeli);
     setJumlahBeli(response.data.jumlahBeli);
     setKodeSupplier(response.data.kodeSupplier);
@@ -110,6 +112,15 @@ const UbahBeli = () => {
       <Divider sx={dividerStyle} />
       <Box sx={textFieldContainer}>
         <Box sx={textFieldWrapper}>
+          <TextField
+            id="outlined-basic"
+            label="Kode Beli"
+            variant="outlined"
+            value={kodeBeli}
+            InputProps={{
+              readOnly: true
+            }}
+          />
           <TextField
             error={error && tanggalBeli.length === 0 && true}
             helperText={

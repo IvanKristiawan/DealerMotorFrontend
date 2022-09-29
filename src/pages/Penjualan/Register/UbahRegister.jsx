@@ -18,6 +18,7 @@ import EditIcon from "@mui/icons-material/Edit";
 const UbahRegister = () => {
   const { user } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const [kodeRegister, setKodeRegister] = useState("");
   const [namaRegister, setNamaRegister] = useState("");
   const [almRegister, setAlmRegister] = useState("");
   const [tlpRegister, setTlpRegister] = useState("");
@@ -55,6 +56,7 @@ const UbahRegister = () => {
       id: user._id,
       token: user.token
     });
+    setKodeRegister(response.data.noRegister);
     setNamaRegister(response.data.namaRegister);
     setAlmRegister(response.data.almRegister);
     setTlpRegister(response.data.tlpRegister);
@@ -129,6 +131,15 @@ const UbahRegister = () => {
       <Box sx={showDataContainer}>
         <Box sx={showDataWrapper}>
           <TextField
+            id="outlined-basic"
+            label="Kode Register"
+            variant="outlined"
+            value={kodeRegister}
+            InputProps={{
+              readOnly: true
+            }}
+          />
+          <TextField
             error={error && namaRegister.length === 0 && true}
             helperText={
               error && namaRegister.length === 0 && "Nama harus diisi!"
@@ -137,6 +148,7 @@ const UbahRegister = () => {
             label="Nama"
             variant="outlined"
             value={namaRegister}
+            sx={spacingTop}
             onChange={(e) => setNamaRegister(e.target.value.toUpperCase())}
           />
           <TextField
