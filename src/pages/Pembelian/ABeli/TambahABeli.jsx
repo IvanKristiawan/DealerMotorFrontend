@@ -421,7 +421,6 @@ const TambahABeli = () => {
                 variant="outlined"
                 value={nopol}
                 onChange={(e) => setNopol(e.target.value.toUpperCase())}
-                sx={textFieldStyle}
               />
               <TextField
                 id="outlined-basic"
