@@ -420,6 +420,7 @@ const TambahABeli = () => {
                 label="Nopol"
                 variant="outlined"
                 value={nopol}
+                disabled
                 onChange={(e) => setNopol(e.target.value.toUpperCase())}
               />
               <TextField
