@@ -737,6 +737,7 @@ export function ShowTableDaftarBeli({ currentPosts, searchTerm, suppliers }) {
             <TableCell sx={{ fontWeight: "bold" }}>Lama</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Tanggal</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Jatuh Tempo</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Jenis</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -802,6 +803,7 @@ export function ShowTableDaftarBeli({ currentPosts, searchTerm, suppliers }) {
                 <TableCell>{user.lama.toLocaleString()}</TableCell>
                 <TableCell>{user.tanggalBeli}</TableCell>
                 <TableCell>{user.jatuhTempo}</TableCell>
+                <TableCell>{user.jenisBeli}</TableCell>
               </TableRow>
             ))}
         </TableBody>
@@ -825,6 +827,11 @@ export function ShowTableBeli({ id, currentPosts, nomorNota }) {
             <TableCell sx={{ fontWeight: "bold" }}>Nopol</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Nama STNK</TableCell>
             <TableCell sx={{ fontWeight: "bold" }}>Tgl. STNK</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Jenis</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Harga Satuan</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>PPN</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>Tanggal Jual</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }}>No. Jual</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -856,6 +863,11 @@ export function ShowTableBeli({ id, currentPosts, nomorNota }) {
                 <TableCell>{aBeli.nopol}</TableCell>
                 <TableCell>{aBeli.namaStnk}</TableCell>
                 <TableCell>{aBeli.tglStnk}</TableCell>
+                <TableCell>{aBeli.jenisABeli}</TableCell>
+                <TableCell>{aBeli.hargaSatuan.toLocaleString()}</TableCell>
+                <TableCell>{aBeli.ppnABeli.toLocaleString()}</TableCell>
+                <TableCell>{aBeli.tanggalJual}</TableCell>
+                <TableCell>{aBeli.noJual}</TableCell>
               </TableRow>
             ))}
         </TableBody>

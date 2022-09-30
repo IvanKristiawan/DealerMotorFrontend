@@ -8,7 +8,10 @@ import {
   Typography,
   Divider,
   Pagination,
-  Button
+  Button,
+  FormGroup,
+  FormControlLabel,
+  Checkbox
 } from "@mui/material";
 import { ShowTableBeli } from "../../../components/ShowTable";
 import { Loader, usePagination, ButtonModifier } from "../../../components";
@@ -23,8 +26,13 @@ const TampilBeli = () => {
   const [noBeli, setNoBeli] = useState("");
   const [tanggalBeli, setTanggalBeli] = useState("");
   const [kodeSupplier, setKodeSupplier] = useState("");
-  const [jumlahBeli, setJumlahBeli] = useState("");
-  const [ppnBeli, setPpnBeli] = useState("");
+  const [jumlahBeli, setJumlahBeli] = useState(0);
+  const [ppnBeli, setPpnBeli] = useState(0);
+  const [isPpnBeli, setIsPpnBeli] = useState();
+  const [potongan, setPotongan] = useState(0);
+  const [lama, setLama] = useState("");
+  const [jenisBeli, setJenisBeli] = useState("");
+  const [jatuhTempo, setJatuhTempo] = useState("");
   const [aBelis, setABelis] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const navigate = useNavigate();
@@ -50,7 +58,7 @@ const TampilBeli = () => {
     getSupplier();
     getAPembelianStoks();
     id && getUserById();
-  }, [id]);
+  }, [id, isPpnBeli]);
 
   const getSupplier = async () => {
     setLoading(true);
@@ -83,6 +91,11 @@ const TampilBeli = () => {
       setJumlahBeli(response.data.jumlahBeli);
       setKodeSupplier(response.data.kodeSupplier);
       setPpnBeli(response.data.ppnBeli);
+      setIsPpnBeli(response.data.isPpnBeli);
+      setPotongan(response.data.potongan);
+      setLama(response.data.lama);
+      setJenisBeli(response.data.jenisBeli);
+      setJatuhTempo(response.data.jatuhTempo);
     }
   };
 
@@ -106,6 +119,15 @@ const TampilBeli = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const changeIsPpn = async () => {
+    setIsPpnBeli(!isPpnBeli);
+    await axios.post(`${tempUrl}/updateBeli/${id}`, {
+      isPpnBeli: !isPpnBeli,
+      id: user._id,
+      token: user.token
+    });
   };
 
   if (loading) {
@@ -139,6 +161,15 @@ const TampilBeli = () => {
         </Box>
         <Divider sx={dividerStyle} />
         <Box sx={textFieldContainer}>
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox checked={isPpnBeli} />}
+              label="PPN"
+              onChange={() => changeIsPpn()}
+            />
+          </FormGroup>
+        </Box>
+        <Box sx={textFieldContainer}>
           <Box sx={textFieldWrapper}>
             <TextField
               id="outlined-basic"
@@ -152,13 +183,13 @@ const TampilBeli = () => {
             />
             <TextField
               id="outlined-basic"
-              label="Tanggal"
+              label="Jenis Motor"
               variant="filled"
               sx={textFieldStyle}
               InputProps={{
                 readOnly: true
               }}
-              value={tanggalBeli}
+              value={jenisBeli.toLocaleString()}
             />
             <TextField
               id="outlined-basic"
@@ -172,8 +203,6 @@ const TampilBeli = () => {
                 .filter((supplier) => supplier.kodeSupplier === kodeSupplier)
                 .map((sup) => ` ${sup.namaSupplier}`)}`}
             />
-          </Box>
-          <Box sx={[textFieldWrapper, { marginLeft: 4 }]}>
             <TextField
               id="outlined-basic"
               label="Jumlah"
@@ -184,15 +213,59 @@ const TampilBeli = () => {
               }}
               value={jumlahBeli.toLocaleString()}
             />
+            {isPpnBeli && (
+              <TextField
+                id="outlined-basic"
+                label="PPN"
+                variant="filled"
+                sx={textFieldStyle}
+                InputProps={{
+                  readOnly: true
+                }}
+                value={ppnBeli.toLocaleString()}
+              />
+            )}
+          </Box>
+          <Box sx={[textFieldWrapper, { marginLeft: 4 }]}>
             <TextField
               id="outlined-basic"
-              label="PPN"
+              label="Potongan"
               variant="filled"
               sx={textFieldStyle}
               InputProps={{
                 readOnly: true
               }}
-              value={ppnBeli.toLocaleString()}
+              value={potongan.toLocaleString()}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Lama"
+              variant="filled"
+              sx={textFieldStyle}
+              InputProps={{
+                readOnly: true
+              }}
+              value={`${lama.toLocaleString()} hari`}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Tanggal"
+              variant="filled"
+              sx={textFieldStyle}
+              InputProps={{
+                readOnly: true
+              }}
+              value={tanggalBeli}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Jatuh Tempo"
+              variant="filled"
+              sx={textFieldStyle}
+              InputProps={{
+                readOnly: true
+              }}
+              value={jatuhTempo.toLocaleString()}
             />
           </Box>
         </Box>

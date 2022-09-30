@@ -151,7 +151,7 @@ const UbahSurveyor = () => {
             )}
             sx={spacingTop}
             onInputChange={(e, value) => setJenisSurveyor(value)}
-            defaultValue={{ label: jenisSurveyor }}
+            value={{ label: jenisSurveyor }}
           />
         </Box>
       </Box>

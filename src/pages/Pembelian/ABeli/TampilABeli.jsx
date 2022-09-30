@@ -31,6 +31,11 @@ const TampilABeli = () => {
   const [nopol, setNopol] = useState("");
   const [namaStnk, setNamaStnk] = useState("");
   const [tglStnk, setTglStnk] = useState("");
+  const [jenisABeli, setJenisABeli] = useState("");
+  const [hargaSatuan, setHargaSatuan] = useState("");
+  const [ppnABeli, setPpnABeli] = useState("");
+  const [tanggalJual, setTanggalJual] = useState("");
+  const [noJual, setNoJual] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
 
@@ -61,12 +66,29 @@ const TampilABeli = () => {
       setNopol(response.data.nopol);
       setNamaStnk(response.data.namaStnk);
       setTglStnk(response.data.tglStnk);
+      setJenisABeli(response.data.jenisABeli);
+      setHargaSatuan(response.data.hargaSatuan);
+      setPpnABeli(response.data.ppnABeli);
+      setTanggalJual(response.data.tanggalJual);
+      setNoJual(response.data.noJual);
     }
   };
 
   const deleteUser = async (id) => {
     try {
       setLoading(true);
+      // Get Beli
+      const getBeli = await axios.post(`${tempUrl}/belis/${id}`, {
+        id: user._id,
+        token: user.token
+      });
+      // Update Beli
+      await axios.post(`${tempUrl}/updateBeli/${id}`, {
+        jumlahBeli: parseInt(getBeli.data.jumlahBeli) - parseInt(hargaSatuan),
+        id: user._id,
+        token: user.token
+      });
+      // Delete A Beli
       await axios.post(`${tempUrl}/deleteABeli/${idABeli}`, {
         id: user._id,
         token: user.token
@@ -80,6 +102,11 @@ const TampilABeli = () => {
       setNopol("");
       setNamaStnk("");
       setTglStnk("");
+      setJenisABeli("");
+      setHargaSatuan("");
+      setPpnABeli("");
+      setTanggalJual("");
+      setNoJual("");
       setLoading(false);
       navigate(`/daftarBeli/beli/${id}`);
     } catch (error) {
@@ -187,8 +214,6 @@ const TampilABeli = () => {
               }}
               value={noRangka}
             />
-          </Box>
-          <Box sx={[textFieldWrapper, { marginLeft: 4 }]}>
             <TextField
               id="outlined-basic"
               label="No Mesin"
@@ -209,6 +234,8 @@ const TampilABeli = () => {
               }}
               value={nopol}
             />
+          </Box>
+          <Box sx={[textFieldWrapper, { marginLeft: 4 }]}>
             <TextField
               id="outlined-basic"
               label="Nama Stnk"
@@ -228,6 +255,56 @@ const TampilABeli = () => {
                 readOnly: true
               }}
               value={tglStnk}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Jenis"
+              variant="filled"
+              sx={textFieldStyle}
+              InputProps={{
+                readOnly: true
+              }}
+              value={jenisABeli}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Harga Satuan"
+              variant="filled"
+              sx={textFieldStyle}
+              InputProps={{
+                readOnly: true
+              }}
+              value={hargaSatuan.toLocaleString()}
+            />
+            <TextField
+              id="outlined-basic"
+              label="PPN"
+              variant="filled"
+              sx={textFieldStyle}
+              InputProps={{
+                readOnly: true
+              }}
+              value={ppnABeli.toLocaleString()}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Tanggal Jual"
+              variant="filled"
+              sx={textFieldStyle}
+              InputProps={{
+                readOnly: true
+              }}
+              value={tanggalJual}
+            />
+            <TextField
+              id="outlined-basic"
+              label="No. Jual"
+              variant="filled"
+              sx={textFieldStyle}
+              InputProps={{
+                readOnly: true
+              }}
+              value={noJual}
             />
           </Box>
         </Box>

@@ -122,7 +122,7 @@ const UbahKecamatan = () => {
               setKodeWilayah(value.split(" ", 1)[0]);
               setNamaWilayah(value.split("- ")[1]);
             }}
-            defaultValue={{ label: kodeWilayah }}
+            value={{ label: kodeWilayah }}
           />
           <TextField
             error={error && namaKecamatan.length === 0 && true}

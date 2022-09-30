@@ -139,7 +139,7 @@ const TambahBeli = () => {
               error && tanggalBeli.length === 0 && "Tanggal harus diisi!"
             }
             id="outlined-basic"
-            label="Tanggal"
+            label="Tanggal (hari-bulan-tahun)"
             variant="outlined"
             sx={textFieldStyle}
             value={tanggalBeli}
@@ -192,11 +192,12 @@ const TambahBeli = () => {
             disabled
             onChange={(e) => setJumlahBeli(e.target.value.toUpperCase())}
           />
+        </Box>
+        <Box sx={[textFieldWrapper, { marginLeft: 4 }]}>
           <TextField
             id="outlined-basic"
             label="PPN"
             variant="outlined"
-            sx={textFieldStyle}
             value={ppnBeli}
             disabled
             onChange={(e) => setPpnBeli(e.target.value.toUpperCase())}
@@ -246,7 +247,7 @@ const TambahBeli = () => {
           />
           <TextField
             id="outlined-basic"
-            label="Jatuh Tempo"
+            label="Jatuh Tempo (hari-bulan-tahun)"
             variant="outlined"
             sx={textFieldStyle}
             value={jatuhTempo}
@@ -261,7 +262,6 @@ const TambahBeli = () => {
               var tempJatuhTempo3 = e.target.value.toString().split("-")[2];
               var combineJatuhTempo = `${tempJatuhTempo3}-${tempJatuhTempo2}-${tempJatuhTempo1}`;
               var tempJatuhTempo = new Date(combineJatuhTempo);
-              // alert(combineJatuhTempo);
 
               const diffTime = Math.abs(tempJatuhTempo - tempTanggalBeli);
               const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -335,15 +335,4 @@ const textFieldStyle = {
 
 const alertBox = {
   width: "100%"
-};
-
-const jumlahContainer = {
-  marginTop: 2.5,
-  display: "flex",
-  flexDirection: "column"
-};
-
-const jumlahText = {
-  fontWeight: "500",
-  color: "gray"
 };
