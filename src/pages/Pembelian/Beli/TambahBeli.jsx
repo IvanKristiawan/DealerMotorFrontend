@@ -174,10 +174,10 @@ const TambahBeli = () => {
               <TextField
                 error={error && jenisBeli.length === 0 && true}
                 helperText={
-                  error && jenisBeli.length === 0 && "Jenis harus diisi!"
+                  error && jenisBeli.length === 0 && "Jenis Motor harus diisi!"
                 }
                 {...params}
-                label="Jenis Surveyor"
+                label="Jenis Motor"
               />
             )}
             onInputChange={(e, value) => setJenisBeli(value)}

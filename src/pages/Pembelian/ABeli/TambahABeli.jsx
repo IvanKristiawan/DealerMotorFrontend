@@ -34,8 +34,6 @@ const TambahABeli = () => {
   const [jenisABeli, setJenisABeli] = useState("");
   const [hargaSatuan, setHargaSatuan] = useState("");
   const [ppnABeli, setPpnABeli] = useState("");
-  const [tanggalJual, setTanggalJual] = useState("");
-  const [noJual, setNoJual] = useState("");
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const [tipes, setTipes] = useState([]);
@@ -132,9 +130,7 @@ const TambahABeli = () => {
         noRangka2.length === 0 ||
         noMesin.length === 0 ||
         noMesin2.length === 0 ||
-        hargaSatuan.length === 0 ||
-        tanggalJual.length === 0 ||
-        noJual.length === 0
+        hargaSatuan.length === 0
       ) {
         setError(true);
         setOpen(!open);
@@ -167,8 +163,6 @@ const TambahABeli = () => {
             jenisABeli,
             hargaSatuan,
             ppnABeli,
-            tanggalJual,
-            noJual,
             id: user._id,
             token: user.token
           });
@@ -190,9 +184,7 @@ const TambahABeli = () => {
         nopol.length === 0 ||
         namaStnk.length === 0 ||
         tglStnk.length === 0 ||
-        hargaSatuan.length === 0 ||
-        tanggalJual.length === 0 ||
-        noJual.length === 0
+        hargaSatuan.length === 0
       ) {
         setError(true);
         setOpen(!open);
@@ -208,7 +200,6 @@ const TambahABeli = () => {
           await axios.post(`${tempUrl}/updateBeli/${id}`, {
             jumlahBeli:
               parseInt(getBeli.data.jumlahBeli) + parseInt(hargaSatuan),
-            ppnBeli: parseInt(getBeli.data.ppnBeli) + parseInt(ppnABeli),
             id: user._id,
             token: user.token
           });
@@ -226,8 +217,6 @@ const TambahABeli = () => {
             jenisABeli,
             hargaSatuan,
             ppnABeli,
-            tanggalJual,
-            noJual,
             id: user._id,
             token: user.token
           });
@@ -485,28 +474,6 @@ const TambahABeli = () => {
               onChange={(e) => setPpnABeli(e.target.value.toUpperCase())}
             />
           </Box>
-          <TextField
-            error={error && tanggalJual.length === 0 && true}
-            helperText={
-              error && tanggalJual.length === 0 && "Tanggal Jual harus diisi!"
-            }
-            id="outlined-basic"
-            label="Tanggal Jual (hari-bulan-tahun)"
-            variant="outlined"
-            value={tanggalJual}
-            onChange={(e) => setTanggalJual(e.target.value.toUpperCase())}
-            sx={textFieldStyle}
-          />
-          <TextField
-            error={error && noJual.length === 0 && true}
-            helperText={error && noJual.length === 0 && "No. Jual harus diisi!"}
-            id="outlined-basic"
-            label="No. Jual"
-            variant="outlined"
-            value={noJual}
-            onChange={(e) => setNoJual(e.target.value.toUpperCase())}
-            sx={textFieldStyle}
-          />
         </Box>
       </Box>
       <Box sx={textFieldStyle}>
