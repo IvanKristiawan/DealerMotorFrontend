@@ -11,7 +11,8 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert
+  Alert,
+  Paper
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -73,7 +74,7 @@ const TambahMarketing = () => {
   }
 
   return (
-    <Box sx={container}>
+    <Paper sx={container} elevation={3}>
       <Typography color="#757575">Master</Typography>
       <Typography variant="h4" sx={subTitleText}>
         Tambah Marketing
@@ -141,14 +142,16 @@ const TambahMarketing = () => {
           </Alert>
         </Snackbar>
       )}
-    </Box>
+    </Paper>
   );
 };
 
 export default TambahMarketing;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {

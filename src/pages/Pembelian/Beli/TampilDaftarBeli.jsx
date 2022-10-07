@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../contexts/AuthContext";
-import { Box, Typography, Divider, Pagination } from "@mui/material";
+import { Box, Typography, Divider, Pagination, Paper } from "@mui/material";
 import { ShowTableDaftarBeli } from "../../../components/ShowTable";
 import {
   SearchBar,
@@ -80,7 +80,7 @@ const TampilDaftarBeli = () => {
   }
 
   return (
-    <Box sx={container}>
+    <Paper sx={container} elevation={3}>
       <Typography color="#757575">Pembelian</Typography>
       <Typography variant="h4" sx={subTitleText}>
         Daftar Beli
@@ -114,14 +114,16 @@ const TampilDaftarBeli = () => {
           size={screenSize <= 600 ? "small" : "large"}
         />
       </Box>
-    </Box>
+    </Paper>
   );
 };
 
 export default TampilDaftarBeli;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {

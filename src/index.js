@@ -14,7 +14,9 @@ root.render(
     <BrowserRouter>
       <AuthContextProvider>
         <ContextProvider>
-          <App />
+          <div style={{ backgroundColor: "#e0e0e0", minHeight: "100vh" }}>
+            <App />
+          </div>
         </ContextProvider>
       </AuthContextProvider>
     </BrowserRouter>

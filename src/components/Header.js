@@ -23,10 +23,10 @@ const Header = () => {
   };
 
   return (
-    <header>
+    <header style={{ backgroundColor: "black" }}>
       <div className="nav-area" style={container}>
         <Box sx={wrapper}>
-          <Link to="/" className="logo">
+          <Link to="/" className="logo" style={{ color: "white" }}>
             {namaProgram}
           </Link>
           <Navbar />

@@ -13,7 +13,8 @@ import {
   Divider,
   Autocomplete,
   Snackbar,
-  Alert
+  Alert,
+  Paper
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -119,7 +120,7 @@ const UbahBeli = () => {
   }
 
   return (
-    <Box sx={container}>
+    <Paper sx={container} elevation={3}>
       <Typography color="#757575">Pembelian</Typography>
       <Typography variant="h4" sx={subTitleText}>
         Ubah Beli
@@ -324,14 +325,16 @@ const UbahBeli = () => {
           </Alert>
         </Snackbar>
       )}
-    </Box>
+    </Paper>
   );
 };
 
 export default UbahBeli;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {

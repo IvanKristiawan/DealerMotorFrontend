@@ -11,7 +11,8 @@ import {
   Button,
   Divider,
   Snackbar,
-  Alert
+  Alert,
+  Paper
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -86,7 +87,7 @@ const UbahTipe = () => {
   }
 
   return (
-    <Box sx={container}>
+    <Paper sx={container} elevation={3}>
       <Typography color="#757575">Master</Typography>
       <Typography variant="h4" sx={subTitleText}>
         Ubah Tipe
@@ -177,14 +178,16 @@ const UbahTipe = () => {
           </Alert>
         </Snackbar>
       )}
-    </Box>
+    </Paper>
   );
 };
 
 export default UbahTipe;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {

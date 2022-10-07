@@ -12,7 +12,8 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
+  DialogActions,
+  Paper
 } from "@mui/material";
 import { Loader } from "../../../components";
 import { tempUrl } from "../../../contexts/ContextProvider";
@@ -124,11 +125,11 @@ const TampilABeli = () => {
         variant="outlined"
         color="secondary"
         onClick={() => navigate(`/daftarBeli/beli/${id}`)}
-        sx={{ marginRight: 2 }}
+        sx={{ marginRight: 2, marginBottom: 4 }}
       >
         {"< Kembali"}
       </Button>
-      <Box sx={container}>
+      <Paper sx={container} elevation={3}>
         <Typography color="#757575">Pembelian</Typography>
         <Typography variant="h4" sx={subTitleText}>
           Barang Beli
@@ -308,7 +309,7 @@ const TampilABeli = () => {
             />
           </Box>
         </Box>
-      </Box>
+      </Paper>
     </>
   );
 };
@@ -316,7 +317,9 @@ const TampilABeli = () => {
 export default TampilABeli;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {

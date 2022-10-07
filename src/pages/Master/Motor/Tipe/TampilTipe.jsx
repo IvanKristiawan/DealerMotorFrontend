@@ -13,7 +13,8 @@ import {
   Typography,
   Divider,
   Pagination,
-  Button
+  Button,
+  Paper
 } from "@mui/material";
 import { ShowTableTipe } from "../../../../components/ShowTable";
 import {
@@ -171,7 +172,7 @@ const TampilTipe = () => {
   }
 
   return (
-    <Box sx={container}>
+    <Paper sx={container} elevation={3}>
       <Typography color="#757575">Master</Typography>
       <Typography variant="h4" sx={subTitleText}>
         Tipe/Merk
@@ -279,14 +280,16 @@ const TampilTipe = () => {
           size={screenSize <= 600 ? "small" : "large"}
         />
       </Box>
-    </Box>
+    </Paper>
   );
 };
 
 export default TampilTipe;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {

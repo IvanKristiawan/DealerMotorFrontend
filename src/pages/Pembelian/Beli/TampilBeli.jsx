@@ -11,7 +11,8 @@ import {
   Button,
   FormGroup,
   FormControlLabel,
-  Checkbox
+  Checkbox,
+  Paper
 } from "@mui/material";
 import { ShowTableBeli } from "../../../components/ShowTable";
 import { Loader, usePagination, ButtonModifier } from "../../../components";
@@ -140,11 +141,11 @@ const TampilBeli = () => {
         variant="outlined"
         color="secondary"
         onClick={() => navigate("/daftarBeli")}
-        sx={{ marginRight: 2 }}
+        sx={{ marginRight: 2, marginBottom: 4 }}
       >
         {"< Kembali"}
       </Button>
-      <Box sx={container}>
+      <Paper sx={container} elevation={3}>
         <Typography color="#757575">Pembelian</Typography>
         <Typography variant="h4" sx={subTitleText}>
           Beli
@@ -286,7 +287,7 @@ const TampilBeli = () => {
             size={screenSize <= 600 ? "small" : "large"}
           />
         </Box>
-      </Box>
+      </Paper>
     </>
   );
 };
@@ -294,7 +295,9 @@ const TampilBeli = () => {
 export default TampilBeli;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {

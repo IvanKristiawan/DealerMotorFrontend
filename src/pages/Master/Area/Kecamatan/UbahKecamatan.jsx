@@ -12,7 +12,8 @@ import {
   Divider,
   Snackbar,
   Alert,
-  Autocomplete
+  Autocomplete,
+  Paper
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -94,7 +95,7 @@ const UbahKecamatan = () => {
   }
 
   return (
-    <Box sx={container}>
+    <Paper sx={container} elevation={3}>
       <Typography color="#757575">Master</Typography>
       <Typography variant="h4" sx={subTitleText}>
         Ubah Kecamatan
@@ -165,14 +166,16 @@ const UbahKecamatan = () => {
           </Alert>
         </Snackbar>
       )}
-    </Box>
+    </Paper>
   );
 };
 
 export default UbahKecamatan;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {

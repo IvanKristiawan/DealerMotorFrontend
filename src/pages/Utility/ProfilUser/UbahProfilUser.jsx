@@ -4,7 +4,14 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { tempUrl } from "../../../contexts/ContextProvider";
 import { Loader } from "../../../components";
-import { Box, Typography, TextField, Button, Divider } from "@mui/material";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Divider,
+  Paper
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
 const UbahProfilUser = () => {
@@ -67,7 +74,7 @@ const UbahProfilUser = () => {
   }
 
   return (
-    <Box sx={container}>
+    <Paper sx={container} elevation={3}>
       <Typography color="#757575">User</Typography>
       <Typography variant="h4" sx={subTitleText}>
         Ubah Password User
@@ -162,14 +169,16 @@ const UbahProfilUser = () => {
         </Button>
       </Box>
       <Divider sx={dividerStyle} />
-    </Box>
+    </Paper>
   );
 };
 
 export default UbahProfilUser;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {

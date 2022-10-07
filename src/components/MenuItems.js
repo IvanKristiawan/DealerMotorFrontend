@@ -54,11 +54,17 @@ const MenuItems = ({ items, depthLevel }) => {
                 aria-haspopup="menu"
                 aria-expanded={dropdown ? "true" : "false"}
                 onClick={() => setDropdown((prev) => !prev)}
+                style={{
+                  color: "white",
+                  backgroundColor: "black"
+                }}
               >
                 {window.innerWidth < 960 && depthLevel === 0 ? (
                   items.title
                 ) : (
-                  <Link to={items.url}>{items.title}</Link>
+                  <Link to={items.url} style={{ backgroundColor: "black" }}>
+                    {items.title}
+                  </Link>
                 )}
 
                 {depthLevel > 0 && window.innerWidth < 960 ? null : depthLevel >
@@ -94,7 +100,9 @@ const MenuItems = ({ items, depthLevel }) => {
           />
         </>
       ) : (
-        <Link to={items.url}>{items.title}</Link>
+        <Link style={{ color: "black" }} to={items.url}>
+          {items.title}
+        </Link>
       )}
     </li>
   );

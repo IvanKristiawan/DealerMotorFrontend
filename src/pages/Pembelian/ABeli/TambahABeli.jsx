@@ -13,7 +13,8 @@ import {
   Divider,
   Autocomplete,
   Snackbar,
-  Alert
+  Alert,
+  Paper
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 
@@ -234,7 +235,7 @@ const TambahABeli = () => {
   }
 
   return (
-    <Box sx={container}>
+    <Paper sx={container} elevation={3}>
       <Typography color="#757575">Pembelian</Typography>
       <Typography variant="h4" sx={subTitleText}>
         Tambah Barang Beli
@@ -497,14 +498,16 @@ const TambahABeli = () => {
           </Alert>
         </Snackbar>
       )}
-    </Box>
+    </Paper>
   );
 };
 
 export default TambahABeli;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {

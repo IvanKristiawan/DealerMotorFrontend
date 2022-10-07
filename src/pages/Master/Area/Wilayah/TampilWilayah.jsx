@@ -13,7 +13,8 @@ import {
   Typography,
   Divider,
   Pagination,
-  Button
+  Button,
+  Paper
 } from "@mui/material";
 import { ShowTableWilayah } from "../../../../components/ShowTable";
 import {
@@ -151,7 +152,7 @@ const TampilWilayah = () => {
   }
 
   return (
-    <Box sx={container}>
+    <Paper sx={container} elevation={3}>
       <Typography color="#757575">Master</Typography>
       <Typography variant="h4" sx={subTitleText}>
         Wilayah
@@ -217,14 +218,16 @@ const TampilWilayah = () => {
           size={screenSize <= 600 ? "small" : "large"}
         />
       </Box>
-    </Box>
+    </Paper>
   );
 };
 
 export default TampilWilayah;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {

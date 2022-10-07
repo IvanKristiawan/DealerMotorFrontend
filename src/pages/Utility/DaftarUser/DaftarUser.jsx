@@ -19,7 +19,8 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
+  DialogActions,
+  Paper
 } from "@mui/material";
 import { ShowTableUser } from "../../../components/ShowTable";
 import { tempUrl } from "../../../contexts/ContextProvider";
@@ -183,7 +184,7 @@ const DaftarUser = () => {
   }
 
   return (
-    <Box sx={container}>
+    <Paper sx={container} elevation={3}>
       <Typography color="#757575">User</Typography>
       <Typography variant="h4" sx={subTitleText}>
         Daftar User
@@ -326,14 +327,16 @@ const DaftarUser = () => {
           size={screenSize <= 600 ? "small" : "large"}
         />
       </Box>
-    </Box>
+    </Paper>
   );
 };
 
 export default DaftarUser;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {

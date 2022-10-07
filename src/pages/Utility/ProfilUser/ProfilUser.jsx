@@ -7,7 +7,8 @@ import {
   Typography,
   Divider,
   Button,
-  ButtonGroup
+  ButtonGroup,
+  Paper
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -16,7 +17,7 @@ const ProfilUser = () => {
   const navigate = useNavigate();
 
   return (
-    <Box sx={container}>
+    <Paper sx={container} elevation={3}>
       <Typography color="#757575">Utility</Typography>
       <Typography variant="h4" sx={subTitleText}>
         Profil User
@@ -92,14 +93,16 @@ const ProfilUser = () => {
           />
         </Box>
       </Box>
-    </Box>
+    </Paper>
   );
 };
 
 export default ProfilUser;
 
 const container = {
-  pt: 4
+  p: 4,
+  backgroundColor: "white",
+  borderRadius: "20px"
 };
 
 const subTitleText = {
